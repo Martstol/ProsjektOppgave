@@ -36,16 +36,51 @@ Note: Question marks indicate chapters that I aren't sure if I should / have the
 \section*{Partial Differential Equations}
 
 A Partial Differential Equation (PDE) is a differential equation with multiple 
-unknown variables and their partial derivatives. 
+unknown variables and their partial derivatives. PDEs can be used to model physical 
+processes in multiple dimensions. 
 
 \subsection*{Poisson Equation}
 
-Describe the Poisson Equation and computational fluid dynamics(?)
+In general, the Poisson Equation is defined as 
+
+$\Delta \varphi = f$
+
+where $\Delta$ is the Laplace operator and $\varphi$ and $f$ are real or complex 
+functions. In three-dimensional Cartesian coordinates, the Poisson Equation can 
+be written as 
+
+$(\pTwo{x} + \pTwo{y} + \pTwo{z}) \varphi (x, y, z) = f(x, y, z)$
+
 
 \section*{Finite Difference Method}
 
-Describe how the Finite Difference Method creates a linear system for a PDE. \\
-Example with the Poisson Equation.
+The Finite Difference Method (FDM) is a numerical method used to find an approximate 
+solution to differential equations. It works by creating a discrete approximation 
+of the derivative and using this approximation to write the differential equation 
+as a system of linear equations.
+
+There are different versions of the Finite Difference Method.
+\begin{itemize}
+	\item Forward difference, $\Delta_hf(x) = f(x+h) - f(x)$
+	\item Backward difference, $\nabla_hf(x) = f(x) - f(x - h)$
+	\item Central difference, $\delta_hf(x) = f(x + \frac{1}{2}h) - f(x - \frac{1}{2}h)$
+\end{itemize}
+
+It is easy to see the connection of the Forward difference and the definition of 
+the derivative.
+
+$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$
+
+We then give $h$ a fixed, non-zero, value instead of having $h$ approach 0. Therefore 
+the forward difference divided by $h$ approximates the derivative when $h$ is small.
+
+The second order derivative can be approximated using the following central differences formula:
+
+$f''(x) \approx \frac{\delta_h^2f(x)}{h^2} = \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$
+
+\subsection*{Discrete Poisson Equation}
+
+Describe how the discrete Poisson Equation looks when using the second-order central difference approximation.
 
 \section*{Linear Solvers}
 
