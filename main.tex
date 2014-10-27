@@ -4,6 +4,8 @@
 \usepackage{titling}
 \usepackage{graphicx}
 \usepackage{url}
+\usepackage{appendix}
+\usepackage{tocloft}
 
 \begin{document}
 
@@ -17,6 +19,15 @@
 \clearpage
 
 \input{acknowledgements.tex}
+\clearpage
+
+\tableofcontents
+\clearpage
+
+\listoftables
+\clearpage
+
+\listoffigures
 \clearpage
 
 \input{introduction.tex}
@@ -41,6 +52,9 @@
 \clearpage
 
 \input{futurework.tex}
+\clearpage
+
+\input{appendix/appendix.tex}
 \clearpage
 
 \bibliography{bibliography}
