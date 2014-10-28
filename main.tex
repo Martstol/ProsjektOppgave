@@ -1,4 +1,5 @@
 \documentclass[12pt,a4paper]{report}
+\bibliographystyle{plain}
 
 \usepackage[utf8]{inputenc}
 \usepackage{titling}
@@ -7,6 +8,8 @@
 \usepackage{appendix}
 \usepackage[parfill]{parskip}
 \usepackage{mathtools}
+\usepackage{cite}
+\usepackage[nottoc]{tocbibind}
 
 \newcommand{\pTwo}[1]{\frac{\partial^2}{\partial^2 #1}}
 \newcommand{\inv}[1]{{#1}^{-1}}
@@ -43,7 +46,7 @@
 \input{previouswork.tex}
 \clearpage
 
-%My work
+\input{implementation.tex}
 \clearpage
 
 \input{results.tex}
