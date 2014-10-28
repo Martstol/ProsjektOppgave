@@ -12,8 +12,27 @@ $x = \inv{A}b$
 
 \subsection*{Direct Methods}
 
-It would probably be a good idea to describe direct methods for solving linear equations to contrast with the iterative methods. \\
-Briefly outline Gauss-Jordan elimination and LU-factorization. 
+Direct methods work by directly solving the system of linear equations. In other 
+words, they compute $\inv{A}$. There are different methods for finding the inverse
+of $A$, two of the most well known are Gaussian elimination, also known as Gauss-
+Jordan elimination, and LU decomposition.
+
+\subsubsection*{Gaussian elimination}
+
+Gaussian elimination solves the system by performing row operations on the matrix 
+$A$, to turn $A$ into the identity matrix. If these row operations are also performed 
+on the vector $b$ then $b$ will be the solution vector when the Gaussian elimination 
+is complete.
+
+This method does not require you directly find $\inv{A}$, but finds the inverse 
+indirectly. The combination of performing all the row operations is the same as 
+multiplying with $\inv{A}$.
+
+Gaussian elimination has O($n^3$) computational complexity, which means using 
+Gaussian elimination is not feasible for solving equations with more than a few 
+thousand unknowns with today's computing power.
+
+\subsubsection*{LU decomposition}
 
 \subsection*{Iterative Methods}
 

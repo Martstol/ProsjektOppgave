@@ -38,12 +38,13 @@ $(\pTwo{x} + \pTwo{y} + \pTwo{z}) f (x, y, z) = \frac{\partial^2 f(x, y, z)}{\pa
 $(\pTwo{x} + \pTwo{y} + \pTwo{z}) f (x, y, z) \approx \frac{f(x+h, y, z) + f(x, y+h, z) + f(x, y, z+h) 
 - 6f(x, y, z) + f(x-h, y, z) + f(x, y-h, z) + f(x, y, z+h)}{h^2}$
 
-This is also known as the 7-point stencil.
+This is also known as the 7-point stencil as illustrated in figure \ref{7ps}.
 
 \begin{figure}[h]
 	\center
 	\includegraphics[width=0.5\textwidth]{images/7_point_stencil}
 	\caption{7-point stencil}
+	\label{7ps}
 \end{figure}
 
 %7 point stencil graphic
@@ -51,4 +52,5 @@ This is also known as the 7-point stencil.
 \subsection*{Discrete Poisson Equation}
 
 Describe how the discrete Poisson Equation looks when using the second-order central 
-difference approximation.
+difference approximation in three dimensions(?).
+
