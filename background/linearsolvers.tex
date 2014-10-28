@@ -15,7 +15,7 @@ $x = \inv{A}b$
 Direct methods work by directly solving the system of linear equations. In other 
 words, they compute $\inv{A}$. There are different methods for finding the inverse
 of $A$, two of the most well known are Gaussian elimination, also known as Gauss-
-Jordan elimination, and LU decomposition.
+Jordan elimination, and LU decomposition, also known as LU factorization.
 
 \subsubsection*{Gaussian elimination}
 
@@ -32,7 +32,34 @@ Gaussian elimination has O($n^3$) computational complexity, which means using
 Gaussian elimination is not feasible for solving equations with more than a few 
 thousand unknowns with today's computing power.
 
+Another problem with Gaussian elimination is that it is numerically unstable. 
+When eliminating non-zero elements the algorithm may have to divide all the elements 
+in a row with the value of the first coefficient on that row. If this number is 
+close to zero any rounding error would be amplified.
+
 \subsubsection*{LU decomposition}
+
+The LU in LU decomposition stands for "Lower Upper". It works by factoring the 
+matrix into the product of a lower and an upper triangular matrix. 
+
+$A = LU$
+
+To solve the linear system 
+
+$LUx = b$
+
+We first solve 
+
+$Ly = b$
+
+for $y$ by forward substitution. Then we solve 
+
+$Ux = y$
+
+for $x$ by backward substitution.
+
+LU decomposition also has computational complexity O($n^3$). However LU decomposition 
+is numerically stable, making it more suitable for a computer.
 
 \subsection*{Iterative Methods}
 
