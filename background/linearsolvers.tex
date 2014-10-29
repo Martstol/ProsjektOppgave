@@ -78,20 +78,39 @@ Iterative methods stop when a stopping criteria is met, normally when the differ
 between the right-hand side and the left-hand side or the change in the approximate 
 solution is below a tolerance level given by the user. 
 
+Another advantage of iterative methods is that we don't have to store the matrix 
+$A$ because iterative methods don't depend on computing $\inv{A}$. We can instead 
+write a specialized functions for each specific problem. This lowers the number of 
+memory accesses that has to be performed. 
+
 \subsubsection*{Jacobi Method}
 
 The Jacobi method works by decomposing the matrix $A$ into a diagonal matrix $D$ 
-and the matices $L$ and $U$. 
+and the lower and upper triangular matrices $L$ and $U$. 
 
 $$A = L+D+U$$
 
-The matrix $D$ is diagonal and contains all the elements on $A$'s diagonal. $L$ is lower triangular and contains all the elements from $A$ below the diagonal. $U$ is upper triangular and contains all the elements from $A$ above the diagonal.
+The matrix $D$ is diagonal and contains all the elements on $A$'s diagonal. $L$ 
+is lower triangular and contains all the elements from $A$ below the diagonal. 
+$U$ is upper triangular and contains all the elements from $A$ above the diagonal.
 
-$$ big( L+D+U big) x = b $$
+$$(L+D+U)x = b$$
 
-The system is then solved iteratively by computing 
+The equation is then rearranged 
+
+$$Dx = (b - (L+U)x)$$
+$$x = \inv{D}(b - (L+U)x)$$
+
+and the system is then solved iteratively by computing 
 
 $$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
+
+When parallelizing the Jacobi method we first write the element-based version:
+
+$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq j} a_{ij} x_i^{(k)} \Big), i = 1, 2, \ldots, n $$
+
+Because the new value of each $x_i$ is independent of all the other values in the 
+$x$ vector, the Jacobi method is trivially parallel.
 
 To converge this method requires the system to be strictly diagonally dominant[source],
 meaning that for each row, the absolute value of the diagonal element must be
@@ -100,11 +119,30 @@ elements on that row.
 
 $$|a_{ii}| > \sum_{j \neq i} |a_{ij}|$$
 
-TODO: Parallelization
+The Jacobi method may converge even if this criteria is not satisfied, which is the case with the Poisson equation.
 
 \subsubsection*{Gauss-Seidel Method}
 
-Gauss-Seidel works similarly to the Jacobi method. The main difference is how the matrix $A$ is decomposed and the consequences of this. Gauss-Seidel decompose $A$ into a matrix 
+Gauss-Seidel works similarly to the Jacobi method, by decomposing $A$ into $D$, 
+$L$ and $U$. The main difference is how the equation is rearranged and the consequences 
+when parallelizing the iterative solver. 
+
+$$(L+D)x = (b - Ux)$$
+$$x = \inv{(L+D)}(b - Ux)$$
+
+$$x^{(k+1)} = \inv{(L+D)}(b - Ux^{(k)})$$
+
+The value of $x^{(k+1)}$ has to be computed sequentially using forward substitution. 
+There is no room for parallelization. Written in element-based form:
+
+$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j < i} a_{ij} x_j^{(k+1)} - \sum_{j > i} a_{ij} x_j^{(k)} \Big),  i = 1, 2, \ldots, n $$
+
+As we see from the first sum, the new value of $x_i$ depends on the new value of 
+all previous elements in the $x$ vector.
+
+TODO: Red-Black Ordering
+
+The convergence of the Gauss-Seidel method requires the matrix $A$ to be either symmetric positive definite, or strictly diagonal dominant[SOURCE]. This method converges faster than the Jacobi method, because it uses the new estimates for $x$ found so far, in updating the value of the next element in the $x$ vector.
 
 \subsubsection*{Successive Over-relaxation}
 
