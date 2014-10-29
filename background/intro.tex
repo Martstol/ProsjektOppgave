@@ -1,30 +1,17 @@
-Topics in this chapter:
+This chapter will cover the mathematical background material for my problem. The
+first section will briefly cover partial differential equations, boundary value
+problems and computational fluid dynamics, then go into further details about
+the Poisson equation.
 
-\begin{itemize}
-	\item PDE
-	\begin{itemize}
-		\item Computational Fluid Dynamics
-		\item Poisson Equation
-		\item Boundary value problem
-	\end{itemize}
-	\item Numerical approximations to PDEs
-	\begin{itemize}	
-		\item Finite difference method
-	\end{itemize}
-	\item Linear Solvers
-	\begin{itemize}
-		\item Direct methods
-		\item Iterative methods
-		\begin{itemize}
-			\item Jacobi method
-			\item Gauss-Seidel method
-			\item SOR
-		\end{itemize}
-	\end{itemize}
-	\item Petsc
-	\begin{itemize}
-		\item MPI
-		\item Blas, lapack
-	\end{itemize}
-\end{itemize}
+The second section covers the finite difference method for creating systems of
+linear equations approximating partial differential equations and will go into
+details about the central difference and the discretized Poisson equation.
 
+The third section covers the topic of linear solvers, explaining both direct
+methods and iterative methods. This section goes into details about two direct
+methods for solving systems of linear equations, Gaussian elimination and LU
+decomposition and three iterative methods, the Jacobi method, Gauss-Seidel and
+successive over-relaxation.
+
+The fourth and final section will cover the Portable, Extensible Toolkit for
+Scientific Computation, PETSc, which was used in the implementation.

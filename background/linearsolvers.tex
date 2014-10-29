@@ -1,18 +1,15 @@
 \section*{Linear Solvers}
 
-TODO: Rewrite this section
-
 A system of linear equations with $N$ unknowns can be written as 
 
 $$Ax = b$$
 
 where $A$ is a $N \times N$ matrix, and $x$ and $b$ are column vectors with $N$ 
-elements each. We want to solve the system either directly by find an expression 
-for $x$ by calculating $\inv{A}$. The solution is written as 
+elements each. $A$ and $b$ are known before hand, and we want to solve for $x$.
 
-$$x = \inv{A}b$$
-
-Or indirectly through some other method.
+This can either be done with direct methods which compute the solution in a finite 
+number of steps or by using an iterative method which iteratively improves an initial 
+guess until we are satisfied. 
 
 \subsection*{Direct Methods}
 
@@ -79,13 +76,12 @@ between the right-hand side and the left-hand side or the change in the approxim
 solution is below a tolerance level given by the user. 
 
 Another advantage of iterative methods is that we don't have to store the matrix 
-$A$ because iterative methods don't depend on computing $\inv{A}$. We can instead 
-write a specialized functions for each specific problem. This lowers the number of 
-memory accesses that has to be performed. 
+$A$ because iterative methods don't depend on computing $\inv{A}$. This lowers 
+the number of memory accesses that has to be performed. 
 
 \subsubsection*{Jacobi Method}
 
-The Jacobi method works by decomposing the matrix $A$ into a diagonal matrix $D$ 
+The Jacobi method works by splitting the matrix $A$ into a diagonal matrix $D$ 
 and the lower and upper triangular matrices $L$ and $U$. 
 
 $$A = L+D+U$$
@@ -109,8 +105,8 @@ When parallelizing the Jacobi method we first write the element-based version:
 
 $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq j} a_{ij} x_i^{(k)} \Big), i = 1, 2, \ldots, n $$
 
-Because the new value of each $x_i$ is independent of all the other values in the 
-$x$ vector, the Jacobi method is trivially parallel.
+Because the new value of each $x_i$ is independent of the new value for all the 
+other elements in the $x$ vector, the Jacobi method is trivially parallel.
 
 To converge this method requires the system to be strictly diagonally dominant[source],
 meaning that for each row, the absolute value of the diagonal element must be
@@ -119,15 +115,16 @@ elements on that row.
 
 $$|a_{ii}| > \sum_{j \neq i} |a_{ij}|$$
 
-The Jacobi method may converge even if this criteria is not satisfied, which is the case with the Poisson equation.
+The Jacobi method may converge even if this criteria is not satisfied, which is
+the case with the Poisson equation.
 
 \subsubsection*{Gauss-Seidel Method}
 
-Gauss-Seidel works similarly to the Jacobi method, by decomposing $A$ into $D$, 
+Gauss-Seidel works similarly to the Jacobi method, by splitting $A$ into $D$, 
 $L$ and $U$. The main difference is how the equation is rearranged and the consequences 
 when parallelizing the iterative solver. 
 
-$$(L+D)x = (b - Ux)$$
+$$(L+D)x = b - Ux$$
 $$x = \inv{(L+D)}(b - Ux)$$
 
 $$x^{(k+1)} = \inv{(L+D)}(b - Ux^{(k)})$$
@@ -135,15 +132,31 @@ $$x^{(k+1)} = \inv{(L+D)}(b - Ux^{(k)})$$
 The value of $x^{(k+1)}$ has to be computed sequentially using forward substitution. 
 There is no room for parallelization. Written in element-based form:
 
-$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j < i} a_{ij} x_j^{(k+1)} - \sum_{j > i} a_{ij} x_j^{(k)} \Big),  i = 1, 2, \ldots, n $$
+$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j < i} a_{ij} x_j^{(k+1)} 
+- \sum_{j > i} a_{ij} x_j^{(k)} \Big),  i = 1, 2, \ldots, n $$
 
 As we see from the first sum, the new value of $x_i$ depends on the new value of 
 all previous elements in the $x$ vector.
 
-TODO: Red-Black Ordering
+It is possible to create a parallel implementation of Gauss-Seidel by changing
+the order in which you calculate new $x$ values. This is known as Red-Black
+ordering. The new ordering depends on the linear system you want to solve.
 
-The convergence of the Gauss-Seidel method requires the matrix $A$ to be either symmetric positive definite, or strictly diagonal dominant[SOURCE]. This method converges faster than the Jacobi method, because it uses the new estimates for $x$ found so far, in updating the value of the next element in the $x$ vector.
+The convergence of the Gauss-Seidel method requires the matrix $A$ to be either
+symmetric positive definite, or strictly diagonal dominant[SOURCE]. This method
+converges faster than the Jacobi method, because it uses the new estimates for
+$x$ found so far, in updating the value of the next element in the $x$ vector.
 
 \subsubsection*{Successive Over-relaxation}
 
-Describe successive over-relaxation
+Successive Over-relaxation is a modified version of Gauss-Seidel which gives
+faster convergence. This method differs from Gauss-Seidel by introducing a
+constant $\omega > 1$, which is called \emph{relaxation factor}. The system of
+linear equations can be written as
+
+$$ (D + \omega L)x = \omega b - \big( \omega U + (\omega - 1)D \big)x $$
+
+$$ x = \inv{(D + \omega L)} \Big( \omega b - \big( \omega U + (\omega - 1)D \big)x \Big) $$
+
+TODO: How to select a value for $\omega$ \\
+TODO: Convergence
