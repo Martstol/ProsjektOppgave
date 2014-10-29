@@ -1,21 +1,26 @@
 \section*{Linear Solvers}
 
+TODO: Rewrite this section
+
 A system of linear equations with $N$ unknowns can be written as 
 
-$Ax = b$
+$$Ax = b$$
 
 where $A$ is a $N \times N$ matrix, and $x$ and $b$ are column vectors with $N$ 
-elements each. We want to solve the system and find an expression for $x$ by calculating
-$\inv{A}$. The solution is written as 
+elements each. We want to solve the system either directly by find an expression 
+for $x$ by calculating $\inv{A}$. The solution is written as 
 
-$x = \inv{A}b$
+$$x = \inv{A}b$$
+
+Or indirectly through some other method.
 
 \subsection*{Direct Methods}
 
-Direct methods work by directly solving the system of linear equations. In other 
-words, they compute $\inv{A}$. There are different methods for finding the inverse
-of $A$, two of the most well known are Gaussian elimination, also known as Gauss-
-Jordan elimination, and LU decomposition, also known as LU factorization.
+Direct methods are methods that solve the system of linear equations in a finite
+number of steps. The conceptually simplest direct method is to find $\inv{A}$. 
+There are different methods for finding the inverse of $A$, two of the most 
+well known are Gaussian elimination, also known as Gauss-Jordan elimination, 
+and LU decomposition, also known as LU factorization.
 
 \subsubsection*{Gaussian elimination}
 
@@ -42,36 +47,59 @@ close to zero any rounding error would be amplified.
 The LU in LU decomposition stands for "Lower Upper". It works by factoring the 
 matrix into the product of a lower and an upper triangular matrix. 
 
-$A = LU$
+$$A = LU$$
 
 To solve the linear system 
 
-$LUx = b$
+$$LUx = b$$
 
 We first solve 
 
-$Ly = b$
+$$Ly = b$$
 
 for $y$ by forward substitution. Then we solve 
 
-$Ux = y$
+$$Ux = y$$
 
 for $x$ by backward substitution.
 
 LU decomposition also has computational complexity O($n^3$). However LU decomposition 
-is numerically stable, making it more suitable for a computer.
+is numerically stable, making it more suitable for a computer implementation.
 
 \subsection*{Iterative Methods}
 
-Describe iterative methods
+Iterative methods often start with a guess as to what the correct solution is, 
+with the zero vector being a common choice for initial solution. Then they improve 
+this solution by repeating a procedure multiple times, with each step 
+giving an improved approximation to the solution of the problem. Iterative methods 
+are not guaranteed to produce a correct solution in a given amount of steps. 
+
+Iterative methods stop when a stopping criteria is met, normally when the difference 
+between the right-hand side and the left-hand side or the change in the approximate 
+solution is below a tolerance level given by the user. 
 
 \subsubsection*{Jacobi Method}
 
-Describe the Jacobi method
+The Jacobi method works by splitting the matrix $A$ into a diagonal matrix $D$ 
+and the remainder $R$. 
+
+$$A = D+R$$
+
+where $D$ contains all the diagonal elements of $A$ and $R$ contains the remaining 
+elements. The system is then solved iteratively by computing 
+
+$$x^{(k+1)} = \inv{D}(b - Rx^{(k)})$$
+
+To converge this method requires the system to be strictly diagonally dominant[source],
+meaning that for each row, the absolute value of the diagonal element must be
+greater than or equal to the sum of the absolute value of the rest of the
+elements on that row.
+
+$$|a_{ii}| > \sum_{j \neq i} |a_{ij}|$$
 
 \subsubsection*{Gauss-Seidel Method}
 
-Describe Gauss-Seidel method
+
 
 \subsubsection*{Successive Over-relaxation}
 
