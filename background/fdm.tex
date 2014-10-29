@@ -22,11 +22,15 @@ the forward difference divided by $h$ approximates the derivative when $h$ is sm
 
 $$f'(x) \approx \frac{f(x+h) - f(x)}{h}$$
 
-The second order derivative can be approximated using the following central difference formula:
+TODO: Write about the error in the approximation
+
+The second order derivative can be approximated by applying a finite difference 
+approximation to the finite difference approximation. The following is the result 
+for the central difference:
 
 $$f''(x) \approx \frac{\delta_h^2f(x)}{h^2} = \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$$
 
-In three-dimensions the approximation looks like this:
+When applied to higher dimensions, it is necessary to choose a value for h in each dimension. However we can simplify the problem by choosing the same h. In three-dimensions the approximation looks like this:
 
 $$(\pTwo{x} + \pTwo{y} + \pTwo{z}) f (x, y, z) = \frac{\partial^2 f(x, y, z)}{\partial^2 x} 
 + \frac{\partial^2 f(x, y, z)}{\partial^2 y} + \frac{\partial^2 f(x, y, z)}{\partial^2 z}$$
@@ -50,6 +54,22 @@ This is also known as the 7-point stencil as illustrated in figure \ref{7ps}.
 
 \subsection*{Discrete Poisson Equation}
 
-Describe how the discrete Poisson Equation looks when using the second-order central 
-difference approximation in three dimensions(?).
+When we want to apply the finite difference method to the Poisson equation in,
+we have to sample the problem domain in a finite number of points. The distance
+between the sample points, $h$, is the same as the fixed $h$ in the finite
+differences method. Lets consider the two-dimensional Poisson equation $\Delta
+u(x, y) = f(x, y)$. We use the central difference approximation to sample
+$\Delta u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
+direction. We assume the dimensions of the domain goes from $0$ to $1$.
+
+$$h = \frac{1}{n}$$
+$$x_i = ih, ~~~~ i = 0, 1, \dots, n$$
+$$y_j = jh, ~~~~ j = 0, 1, \dots, n$$
+
+We then denote the approximation of the value of $u(x_i, y_j)$ by $u_{i,j}$ and 
+$f(x_i, y_j)$ by $f_{i,j}$
+
+$$ (\Delta u)_{ij} \approx \frac{u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1}}{h^2} = f_{i,j} $$
+$$ u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1} = h^2 f_{i,j} $$
+
 
