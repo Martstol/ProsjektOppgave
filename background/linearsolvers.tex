@@ -80,15 +80,18 @@ solution is below a tolerance level given by the user.
 
 \subsubsection*{Jacobi Method}
 
-The Jacobi method works by splitting the matrix $A$ into a diagonal matrix $D$ 
-and the remainder $R$. 
+The Jacobi method works by decomposing the matrix $A$ into a diagonal matrix $D$ 
+and the matices $L$ and $U$. 
 
-$$A = D+R$$
+$$A = L+D+U$$
 
-where $D$ contains all the diagonal elements of $A$ and $R$ contains the remaining 
-elements. The system is then solved iteratively by computing 
+The matrix $D$ is diagonal and contains all the elements on $A$'s diagonal. $L$ is lower triangular and contains all the elements from $A$ below the diagonal. $U$ is upper triangular and contains all the elements from $A$ above the diagonal.
 
-$$x^{(k+1)} = \inv{D}(b - Rx^{(k)})$$
+$$ big( L+D+U big) x = b $$
+
+The system is then solved iteratively by computing 
+
+$$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
 
 To converge this method requires the system to be strictly diagonally dominant[source],
 meaning that for each row, the absolute value of the diagonal element must be
@@ -97,9 +100,11 @@ elements on that row.
 
 $$|a_{ii}| > \sum_{j \neq i} |a_{ij}|$$
 
+TODO: Parallelization
+
 \subsubsection*{Gauss-Seidel Method}
 
-
+Gauss-Seidel works similarly to the Jacobi method. The main difference is how the matrix $A$ is decomposed and the consequences of this. Gauss-Seidel decompose $A$ into a matrix 
 
 \subsubsection*{Successive Over-relaxation}
 
