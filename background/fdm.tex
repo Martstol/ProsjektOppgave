@@ -1,4 +1,4 @@
-\section*{Finite Difference Method}
+\section{Finite Difference Method}
 
 The finite difference method (FDM) is a numerical method used to find an approximate 
 solution to differential equations. It works by creating a discrete approximation 
@@ -41,18 +41,16 @@ $$\frac{\partial^2 f(x, y, z)}{\partial^2 y} \approx \frac{f(x, y+h, z) - 2f(x, 
 
 $$\frac{\partial^2 f(x, y, z)}{\partial^2 z} \approx \frac{f(x, y, z+h) - 2f(x, y, z) + f(x, y, z-h)}{h^2}$$
 
-This is also known as the 7-point stencil as illustrated in figure \ref{7ps}.
+This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}.
 
 \begin{figure}[ht]
 	\center
 	\includegraphics[width=0.5\textwidth]{images/7_point_stencil}
 	\caption{7-point stencil}
-	\label{7ps}
+	\label{fig:7ps}
 \end{figure}
 
-%7 point stencil graphic
-
-\subsection*{Discrete Poisson Equation}
+\subsection{Discrete Poisson Equation}
 
 When we want to apply the finite difference method to the Poisson equation with 
 Dirichlet boundary conditions.
@@ -61,7 +59,15 @@ between the sample points, $h$, is the same as the fixed $h$ in the finite
 differences method. Lets consider the two-dimensional Poisson equation $\nabla^2
 u(x, y) = f(x, y)$. We use the central difference approximation to sample
 $\nabla^2 u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
-direction. We assume the dimensions of the domain goes from $0$ to $1$.
+direction. We assume the dimensions of the domain goes from $0$ to $1$. The discretized 
+grid is illustrated in figure \ref{fig:discgrid}.
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.6\textwidth]{images/2d_poisson_ex}
+	\caption{Discretized grid with $n = 3$}
+	\label{fig:discgrid}
+\end{figure}
 
 This way we have $(n-1)^2$ internal points and the remaining points are boundary
 points that have their values specified by the boundary conditions. The total
