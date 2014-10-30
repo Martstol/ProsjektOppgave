@@ -98,18 +98,18 @@ We can then assemble the matrix $A$.
 $$
 A = \begin{bmatrix}
  B & I & 0 & \cdots & 0 \\
- I & B & I &   & 0 \\
+ I & B & I &   & \vdots \\
  \vdots &   & \ddots &   & \vdots \\
  \vdots &   &   & \ddots & \vdots \\
- 0 & \vdots & \vdots & I & B 
+ 0 & \cdots & \cdots & I & B 
 \end{bmatrix}
 ~~
 B = \begin{bmatrix}
 -4 & 1 & 0 & \cdots & 0 \\
- 1 &-4 & 1 &   & 0 \\
+ 1 &-4 & 1 &   & \vdots \\
  \vdots &   & \ddots &   & \vdots \\
  \vdots &   &   & \ddots & \vdots \\
- 0 & \vdots & \vdots & 1 &-4 
+ 0 & \cdots & \cdots & 1 &-4 
 \end{bmatrix}
 $$
 
@@ -119,4 +119,4 @@ The vector $b$ is assembled from $h^2$, the function $f$, and the Dirichlet bord
 
 $$ b_k = h^2 \cdot f_{i,j} - u_{?} $$
 
-TODO: how is $b$ created
+TODO: how is $b$ made
