@@ -8,7 +8,7 @@ processes in multiple dimensions.
 
 A boundary value problem is a differential equation and a set of conditions for the values on the boundary of the problem domain. 
 
-There are several different types of boundary conditions. If the values on the boundary is given, then it is a Dirichlet boundary condition. If the derivative normal to the border is given then it is a Neumann boundary condition[SOURCE].
+There are several different types of boundary conditions. If the values on the boundary is given, then it is a Dirichlet boundary condition. If the normal derivative to the border is given then it is a Neumann boundary condition\cite{Kreyszig}.
 
 \subsection*{Computational Fluid Dynamics}
 
@@ -18,11 +18,11 @@ I'm not sure if I should include this chapter
 
 In general, the Poisson equation is defined as 
 
-$$\Delta \varphi = f$$
+$$\nabla^2 u = f$$
 
-where $\Delta$ is the Laplace operator and $\varphi$ and $f$ are real or complex 
+where $\nabla$ is the partial derivative and $u$ and $f$ are real or complex 
 functions. In three-dimensional Cartesian coordinates, the Poisson Equation can 
 be written as 
 
-$$(\pTwo{x} + \pTwo{y} + \pTwo{z}) \varphi (x, y, z) = f(x, y, z)$$
+$$(\pTwo{x} + \pTwo{y} + \pTwo{z}) u (x, y, z) = f(x, y, z)$$
 

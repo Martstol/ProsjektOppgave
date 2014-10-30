@@ -54,13 +54,18 @@ This is also known as the 7-point stencil as illustrated in figure \ref{7ps}.
 
 \subsection*{Discrete Poisson Equation}
 
-When we want to apply the finite difference method to the Poisson equation in,
+When we want to apply the finite difference method to the Poisson equation with 
+Dirichlet boundary conditions.
 we have to sample the problem domain in a finite number of points. The distance
 between the sample points, $h$, is the same as the fixed $h$ in the finite
-differences method. Lets consider the two-dimensional Poisson equation $\Delta
+differences method. Lets consider the two-dimensional Poisson equation $\nabla^2
 u(x, y) = f(x, y)$. We use the central difference approximation to sample
-$\Delta u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
+$\nabla^2 u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
 direction. We assume the dimensions of the domain goes from $0$ to $1$.
+
+This way we have $(n-1)^2$ internal points and the remaining points are boundary
+points that have their values specified by the boundary conditions. The total
+number of unknowns are therefore $N = (n-1)^2$.
 
 $$h = \frac{1}{n}$$
 $$x_i = ih, ~~~~ i = 0, 1, \dots, n$$
@@ -69,7 +74,7 @@ $$y_j = jh, ~~~~ j = 0, 1, \dots, n$$
 We then denote the approximation of the value of $u(x_i, y_j)$ by $u_{i,j}$ and 
 $f(x_i, y_j)$ by $f_{i,j}$
 
-$$ (\Delta u)_{ij} \approx \frac{u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1}}{h^2} = f_{i,j} $$
+$$ (\nabla^2 u)_{ij} \approx \frac{u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1}}{h^2} = f_{i,j} $$
 $$ u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1} = h^2 f_{i,j} $$
 
 
