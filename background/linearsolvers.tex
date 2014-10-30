@@ -16,8 +16,7 @@ guess until we are satisfied.
 Direct methods are methods that solve the system of linear equations in a finite
 number of steps. The conceptually simplest direct method is to find $\inv{A}$. 
 There are different methods for finding the inverse of $A$, two of the most 
-well known are Gaussian elimination, also known as Gauss-Jordan elimination, 
-and LU decomposition, also known as LU factorization.
+well known are Gaussian elimination, and LU factorization.
 
 \subsubsection*{Gaussian elimination}
 
@@ -34,14 +33,14 @@ Gaussian elimination has O($n^3$) computational complexity, which means using
 Gaussian elimination is not feasible for solving equations with more than a few 
 thousand unknowns with today's computing power.
 
-Another problem with Gaussian elimination is that it is numerically unstable. 
+Another problem with Gaussian elimination is that it is numerically unstable[SOURCE]. 
 When eliminating non-zero elements the algorithm may have to divide all the elements 
 in a row with the value of the first coefficient on that row. If this number is 
 close to zero any rounding error would be amplified.
 
-\subsubsection*{LU decomposition}
+\subsubsection*{LU factorization}
 
-The LU in LU decomposition stands for "Lower Upper". It works by factoring the 
+The LU in LU factorization stands for "Lower Upper". It works by factoring the 
 matrix into the product of a lower and an upper triangular matrix. 
 
 $$A = LU$$
@@ -60,8 +59,8 @@ $$Ux = y$$
 
 for $x$ by backward substitution.
 
-LU decomposition also has computational complexity O($n^3$). However LU decomposition 
-is numerically stable, making it more suitable for a computer implementation.
+LU factorization also has computational complexity O($n^3$). However LU factorization 
+is numerically stable[SOURCE], making it more suitable for a computer implementation.
 
 \subsection*{Iterative Methods}
 
@@ -103,20 +102,15 @@ $$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
 
 When parallelizing the Jacobi method we first write the element-based version:
 
-$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq j} a_{ij} x_i^{(k)} \Big), i = 1, 2, \ldots, n $$
+$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq j} a_{ij} x_i^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
 
 Because the new value of each $x_i$ is independent of the new value for all the 
 other elements in the $x$ vector, the Jacobi method is trivially parallel.
 
-To converge this method requires the system to be strictly diagonally dominant[source],
-meaning that for each row, the absolute value of the diagonal element must be
-greater than or equal to the sum of the absolute value of the rest of the
-elements on that row.
-
-$$|a_{ii}| > \sum_{j \neq i} |a_{ij}|$$
-
-The Jacobi method may converge even if this criteria is not satisfied, which is
-the case with the Poisson equation.
+This method converges for every initial guess, if and only if the spectral
+radius of $I - A$ is less than 1\cite{Kreyszig}. Spectral radius is defined as 
+$\rho = max_i(| \lambda_i |)$, where $\lambda_i$ is the $i$th eigen value of the
+matrix[SOURCE].
 
 \subsubsection*{Gauss-Seidel Method}
 
@@ -124,16 +118,16 @@ Gauss-Seidel works similarly to the Jacobi method, by splitting $A$ into $D$,
 $L$ and $U$. The main difference is how the equation is rearranged and the consequences 
 when parallelizing the iterative solver. 
 
-$$(L+D)x = b - Ux$$
-$$x = \inv{(L+D)}(b - Ux)$$
-
-$$x^{(k+1)} = \inv{(L+D)}(b - Ux^{(k)})$$
+$$ (L+D)x = b - Ux $$
+$$ (L+D)x^{(k+1)} = b - Ux^{(k)} $$
+$$ Dx^{(k+1)} = b - Lx^{(k+1)} - Ux^{(k)} $$
+$$ x^{(k+1)} = \inv{D}(b - Lx^{(k+1)} - Ux^{(k)}) $$
 
 The value of $x^{(k+1)}$ has to be computed sequentially using forward substitution. 
 There is no room for parallelization. Written in element-based form:
 
 $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j < i} a_{ij} x_j^{(k+1)} 
-- \sum_{j > i} a_{ij} x_j^{(k)} \Big),  i = 1, 2, \ldots, n $$
+- \sum_{j > i} a_{ij} x_j^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
 
 As we see from the first sum, the new value of $x_i$ depends on the new value of 
 all previous elements in the $x$ vector.
@@ -142,21 +136,21 @@ It is possible to create a parallel implementation of Gauss-Seidel by changing
 the order in which you calculate new $x$ values. This is known as Red-Black
 ordering. The new ordering depends on the linear system you want to solve.
 
-The convergence of the Gauss-Seidel method requires the matrix $A$ to be either
-symmetric positive definite, or strictly diagonal dominant[SOURCE]. This method
-converges faster than the Jacobi method, because it uses the new estimates for
-$x$ found so far, in updating the value of the next element in the $x$ vector.
+The convergence requirement for Gauss-Seidel is the same as for Jacobi.
 
-\subsubsection*{Successive Over-relaxation}
+\subsubsection*{Successive Overrelaxation}
 
-Successive over-relaxation is a modified version of Gauss-Seidel which gives
-faster convergence. This method differs from Gauss-Seidel by introducing a
-constant $\omega > 1$, which is called \emph{relaxation factor}. The system of
-linear equations can be written as
+Successive overrelaxation (SOR) is a modified version of Gauss-Seidel with the
+goal of having faster convergence\cite{Kreyszig}. This method differs from Gauss-Seidel by
+introducing a constant $\omega > 1$, which is called the \emph{overrelaxation
+factor}. To get the equation for SOR we first add and subtract $x^{(k)}$ on the right 
+hand side of Gauss-Seidel.
 
-$$ (D + \omega L)x = \omega b - \big( \omega U + (\omega - 1)D \big)x $$
+$$ Dx^{(k+1)} = x^{(k)} + b - Lx^{(k+1)} - (U + I)x^{(k)} $$
 
-$$ x = \inv{(D + \omega L)} \Big( \omega b - \big( \omega U + (\omega - 1)D \big)x \Big) $$
+Then we introduce the overrelaxation factor
 
-TODO: How to select a value for $\omega$ \\
-TODO: Convergence
+$$ Dx^{(k+1)} = x^{(k)} + \omega \big( b - Lx^{(k+1)} - (U + I)x^{(k)} \big) $$
+
+A recommended value for the overrelaxation factor is $\omega = \frac{2}{1 +
+\sqrt{1 - \rho}} $, where $\rho$ is the spectral radius of $-\inv{(I + L)}U$. 
