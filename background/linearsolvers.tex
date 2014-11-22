@@ -83,7 +83,7 @@ and the system is then solved iteratively by computing
 
 $$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
 
-When parallelizing the Jacobi method we first write the element-based version:
+Written in element form, the Jacobi method looks like the following:
 
 $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq i} a_{ij} x_i^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
 
