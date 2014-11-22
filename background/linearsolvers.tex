@@ -9,12 +9,12 @@ elements each. $A$ and $b$ are known before hand, and we want to solve for $x$.
 
 This can either be done with direct methods which compute the solution in a finite 
 number of steps or by using an iterative method which iteratively improves an initial 
-guess until we are satisfied. 
+guess until we reach convergence. 
 
 \subsection{Direct Methods}
 
 Direct methods are methods that solve the system of linear equations in a finite
-number of steps. Two of well known methods are Gaussian elimination, and LU factorization.
+number of steps. Two well known methods are Gaussian elimination, and LU factorization.
 
 \subsubsection{Gaussian elimination}
 
@@ -22,10 +22,6 @@ Gaussian elimination solves the system by performing row operations on the matri
 $A$, to turn $A$ into the identity matrix. If these row operations are also performed 
 on the vector $b$ then $b$ will be the solution vector when the Gaussian elimination 
 is complete.
-
-This method does not require you directly find $\inv{A}$, but finds the inverse 
-indirectly. The combination of performing all the row operations is the same as 
-multiplying with $\inv{A}$.
 
 Gaussian elimination has O($n^3$) computational complexity, which means using 
 Gaussian elimination is not feasible for solving equations with more than a few 
@@ -52,9 +48,9 @@ $$Ux = y$$
 
 for $x$ by backward substitution.
 
-LU factorization also has computational complexity O($n^3$), however the constant 
-factors of the LU factorization means that it requires half the number of floating point operations
-compared to Gaussian elimination, and forward and backward substitution is O($n^2$)\cite{Kreyszig}.
+LU factorization also has computational complexity O($n^3$), however the factorization part of 
+LU factorization requires half the number of floating point operations compared to Gaussian elimination, 
+and forward and backward substitution is O($n^2$)\cite{Kreyszig}.
 
 \subsection{Iterative Methods}
 
@@ -68,10 +64,6 @@ Iterative methods stop when a stopping criteria is met, normally when the differ
 between the right-hand side and the left-hand side or the change in the approximate 
 solution is below a tolerance level given by the user. 
 
-Another advantage of iterative methods is that we don't have to store the matrix 
-$A$ because iterative methods don't depend on computing $\inv{A}$. This lowers 
-the number of memory accesses that has to be performed. 
-
 \subsubsection{Jacobi Method}
 
 The Jacobi method works by splitting the matrix $A$ into a diagonal matrix $D$ 
@@ -84,9 +76,6 @@ is lower triangular and contains all the elements from $A$ below the diagonal.
 $U$ is upper triangular and contains all the elements from $A$ above the diagonal.
 
 $$(L+D+U)x = b$$
-
-The equation is then rearranged 
-
 $$Dx = (b - (L+U)x)$$
 $$x = \inv{D}(b - (L+U)x)$$
 
@@ -96,7 +85,7 @@ $$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
 
 When parallelizing the Jacobi method we first write the element-based version:
 
-$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq j} a_{ij} x_i^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
+$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq i} a_{ij} x_i^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
 
 Because the new value of each $x_i$ is independent of the new value for all the 
 other elements in the $x$ vector, the Jacobi method is trivially parallel.

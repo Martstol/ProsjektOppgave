@@ -17,7 +17,7 @@ the derivative.
 
 $$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
 
-We then give $h$ a fixed, non-zero, value instead of having $h$ approach 0. Therefore 
+We give $h$ a fixed, non-zero, value instead of having $h$ approach 0. Therefore 
 the forward difference divided by $h$ approximates the derivative when $h$ is small.
 
 $$f'(x) \approx \frac{f(x+h) - f(x)}{h}$$
@@ -30,7 +30,9 @@ for the central difference:
 
 $$f''(x) \approx \frac{\delta_h^2f(x)}{h^2} = \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$$
 
-When applied to higher dimensions, it is necessary to choose a value for h in each dimension. However we can simplify the problem by choosing the same h. In three-dimensions the approximation looks like this:
+When applied to higher dimensions, it is necessary to choose a value for h in 
+each dimension. However we can simplify the resulting equation by choosing the same h. 
+In three dimensions the approximation looks like this:
 
 $$(\pTwo{x} + \pTwo{y} + \pTwo{z}) f (x, y, z) = \frac{\partial^2 f(x, y, z)}{\partial^2 x} 
 + \frac{\partial^2 f(x, y, z)}{\partial^2 y} + \frac{\partial^2 f(x, y, z)}{\partial^2 z}$$
