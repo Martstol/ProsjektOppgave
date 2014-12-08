@@ -130,7 +130,8 @@ hand side of Gauss-Seidel.
 
 $$ Dx^{(k+1)} = x^{(k)} + b - Lx^{(k+1)} - (U + I)x^{(k)} $$
 
-Then we introduce the overrelaxation factor
+Then we introduce the overrelaxation factor $\omega > 1$ to get the SOR formula 
+for Gauss-Seidel.
 
 $$ Dx^{(k+1)} = x^{(k)} + \omega \big( b - Lx^{(k+1)} - (U + I)x^{(k)} \big) $$
 
