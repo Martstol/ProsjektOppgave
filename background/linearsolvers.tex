@@ -117,8 +117,8 @@ It is possible to create a parallel implementation of Gauss-Seidel by changing
 the order in which you calculate new $x$ values. This is known as Red-Black
 ordering. The new ordering depends on the linear system you want to solve.
 
-The Gauss-Seidel method converges if $||C|| < 1$, where $||C||$ is some matrix 
-norm\cite{Kreyszig}.
+The Gauss-Seidel method converges if $||C|| < 1$, where $C = -\inv{(I+L)}U$ and 
+$||C||$ is some matrix norm of $C$\cite{Kreyszig}.
 
 \subsubsection{Successive Overrelaxation}
 
