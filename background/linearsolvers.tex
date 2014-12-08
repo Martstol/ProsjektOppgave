@@ -85,7 +85,7 @@ $$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
 
 Written in element form, the Jacobi method looks like the following:
 
-$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq i} a_{ij} x_i^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
+$$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq i} a_{ij} x_j^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
 
 Because the new value of each $x_i$ is independent of the new value for all the 
 other elements in the $x$ vector, the Jacobi method is trivially parallel.
