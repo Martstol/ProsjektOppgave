@@ -91,9 +91,7 @@ Because the new value of each $x_i$ is independent of the new value for all the
 other elements in the $x$ vector, the Jacobi method is trivially parallel.
 
 This method converges for every initial guess, if and only if the spectral
-radius of $I - A$ is less than 1\cite{Kreyszig}. Spectral radius is defined as 
-$\rho = max_i(| \lambda_i |)$, where $\lambda_i$ is the $i$th eigen value of the
-matrix[SOURCE].
+radius of $I - A$ is less than 1\cite{Kreyszig}.
 
 \subsubsection{Gauss-Seidel Method}
 
@@ -119,7 +117,8 @@ It is possible to create a parallel implementation of Gauss-Seidel by changing
 the order in which you calculate new $x$ values. This is known as Red-Black
 ordering. The new ordering depends on the linear system you want to solve.
 
-The convergence requirement for Gauss-Seidel is the same as for Jacobi.
+The Gauss-Seidel method converges if $||C|| < 1$, where $||C||$ is some matrix 
+norm\cite{Kreyszig}.
 
 \subsubsection{Successive Overrelaxation}
 
