@@ -1,0 +1,26 @@
+\section{PETSc}
+
+This section describes which PETSc functions were used and how they were used in 
+the implementation of the linear solver\cite{petsc-user-ref}. 
+
+\subsection{Setup}
+
+The $DM$ object and $MatSetValuesStencil$ function are the primary functionality from 
+PETSc used when creating the matrix $A$\cite{petsc-user-ref}. DM is short for 
+Data Management and is used to manage the mapping between the distributed PETSc 
+algebraic structures (Vec and Mat) and the structure of the mesh grids for the PDE. 
+$MatSetValuesStencil$ handles the mapping from the physical coordinates of the 
+internal nodes in the PDE matrix to their global ordering. 
+
+The $DM$ object is used to get the process local domain of the matrix, 
+making it possible to set the values of the matrix when it is distributed across 
+different machines in a distributed memory system. $MatSetValuesStencil$ is used 
+to set the values of the matrix.
+
+To assemble the right hand side vector, $b$ the To create the mapping the function 
+$DMDACreate3D$ was used.
+
+\subsection{Solver}
+
+The linear solvers used in PETSc are called KSP, which stands for Krylov subspace 
+methods. 
