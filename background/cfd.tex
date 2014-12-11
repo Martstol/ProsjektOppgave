@@ -6,4 +6,31 @@ of mass, momentum and energy.
 \subsection{Navier-Stokes Equations}
 
 Navier-Strokes Equations is a set of partial differential equations which can be
-used to describe incompressible flows\cite{fluidDynamicsIntro}.
+used to describe incompressible flows\cite{fluidDynamicsIntro}. 
+
+Momentum equation: 
+$$\pOne{t}u  = -(u \cdot \nabla)u - \frac{1}{\rho}\nabla p + \nu \nabla^2 u + f$$
+
+Continuity equation:
+$$\nabla u = 0$$
+
+\subsubsection{Advection}
+
+\subsubsection{Pressure}
+
+\subsubsection{Diffusion}
+
+\subsubsection{External forces}
+
+
+
+In the fluid models for wind, some of these terms are left out. If we assume that 
+the air has zero viscosity and that the density is equal to one, then the 
+incompressible Navier-Stokes equations reduce to the incompressible Euler 
+equations. 
+
+Momentum equation: 
+$$\pOne{t}u  = -(u \cdot \nabla)u - \nabla p$$
+
+Continuity equation:
+$$\nabla u = 0$$
