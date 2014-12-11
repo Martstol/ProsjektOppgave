@@ -5,7 +5,9 @@ as the hardware and software of the workstation used for the tests in the next s
 
 \subsection{PETSc}
 
-PETSc was acquired from the PETSc Web Page\cite{petsc-web-page}. 
+PETSc was acquired from the PETSc Web Page\cite{petsc-web-page} as version 3.5.2. 
+The version of the compilers used when configuring PETSc can be found in table 
+\ref{table:workstation}.
 
 For development, PETSc was configured with the following flags:
 \lstset{language=bash}
@@ -19,13 +21,13 @@ flag is not being specified.
 For performance tests, a PETSc configured with these flags were used:
 \lstset{language=bash}
 \begin{lstlisting}
-./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran 
+./configure --with-cc=gcc --with-cxx=g++ --with-fc=0
 --with-debugging=0 --with-precision=single
-COPTFLAGS='-O3 -march=native -mtune=native' 
-CXXOPTFLAGS='-O3 -march=native -mtune=native' 
-FOPTFLAGS='-O3 -march=native -mtune=native' 
+COPTFLAGS='-O3' CXXOPTFLAGS='-O3' 
 --download-f2cblaslapack --download-mpich
 \end{lstlisting}
+For this configuration of PETSc debugging was disabled and precision was set to 
+single. 
 
 \subsection{Compilation}
 
@@ -48,6 +50,7 @@ the specifications for the workstation used.
 		Nvidia driver & 343.22 \\ \hline
 		CUDA toolkit & 6.5 \\ \hline
 		g++ & 4.8.2 \\ \hline
+		gcc & 4.8.2 \\ \hline
 	\end{tabular}
 	\end{center}
 	\caption{Workstation specifications}
