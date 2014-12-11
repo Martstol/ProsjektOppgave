@@ -5,7 +5,7 @@ as the hardware and software of the workstation used for the tests in the next s
 
 \subsection{PETSc}
 
-PETSc was obtained from 
+PETSc was acquired from the PETSc Web Page\cite{petsc-web-page}. 
 
 For development, PETSc was configured with the following flags:
 \lstset{language=bash}
@@ -13,7 +13,8 @@ For development, PETSc was configured with the following flags:
 ./configure --with-cc=gcc --with-cxx=g++ --with-fc=0 
 --download-f2cblaslapack --download-mpich
 \end{lstlisting}
-Debug options are by default enabled, therefore the debug flag is not being specified.
+Debugging is by default enabled by the PETSc configuration, therefore the debug 
+flag is not being specified.
 
 For performance tests, a PETSc configured with these flags were used:
 \lstset{language=bash}
@@ -30,25 +31,25 @@ FOPTFLAGS='-O3 -march=native -mtune=native'
 
 \subsection{Workstation}
 
-This project was only tested on one workstation. Table \ref{tab:workstation} contains 
+This project was only tested on one workstation. Table \ref{table:workstation} contains 
 the specifications for the workstation used.
 
 \begin{table}[h]
-\begin{center}
-\begin{tabular}{|l|l|}
-\hline
-\multicolumn{2}{|l|}{\textbf{Workstation hardware}} \\ \hline
- CPU & x \\ \hline
- GPU & x \\ \hline
- Memory & x \\ \hline
- Power supply & x \\ \hline
-\multicolumn{2}{|l|}{\textbf{Workstation software}} \\ \hline
- Operating system & Ubuntu 14.04 64-bit \\ \hline
- Nvidia driver & x \\ \hline
- CUDA toolkit & x \\ \hline
- g++ & x \\ \hline
-\end{tabular}
-\end{center}
-\label{tab:workstation}
-\caption{Workstation specifications}
+	\begin{center}
+	\begin{tabular}{|l|l|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Workstation hardware}} \\ \hline
+		CPU & i7-3770@3.4 GHz \\ \hline
+		GPU & Nvidia GeForce GTX 980 \\ \hline
+		Memory & 16 GB DDR3 1600 MHz \\ \hline
+		Power supply & CORSAIR AX1200 \\ \hline
+		\multicolumn{2}{|l|}{\textbf{Workstation software}} \\ \hline
+		Operating system & Ubuntu 14.04 64-bit \\ \hline
+		Nvidia driver & 343.22 \\ \hline
+		CUDA toolkit & 6.5 \\ \hline
+		g++ & 4.8.2 \\ \hline
+	\end{tabular}
+	\end{center}
+	\caption{Workstation specifications}
+	\label{table:workstation}
 \end{table}
