@@ -5,6 +5,27 @@ as the hardware and software of the workstation used for the tests in the next s
 
 \subsection{PETSc}
 
+PETSc was obtained from 
+
+For development, PETSc was configured with the following flags:
+\lstset{language=bash}
+\begin{lstlisting}
+./configure --with-cc=gcc --with-cxx=g++ --with-fc=0 
+--download-f2cblaslapack --download-mpich
+\end{lstlisting}
+Debug options are by default enabled, therefore the debug flag is not being specified.
+
+For performance tests, a PETSc configured with these flags were used:
+\lstset{language=bash}
+\begin{lstlisting}
+./configure --with-cc=gcc --with-cxx=g++ --with-fc=gfortran 
+--with-debugging=0 --with-precision=single
+COPTFLAGS='-O3 -march=native -mtune=native' 
+CXXOPTFLAGS='-O3 -march=native -mtune=native' 
+FOPTFLAGS='-O3 -march=native -mtune=native' 
+--download-f2cblaslapack --download-mpich
+\end{lstlisting}
+
 \subsection{Compilation}
 
 \subsection{Workstation}
