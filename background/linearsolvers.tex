@@ -54,14 +54,14 @@ and forward and backward substitution is O($n^2$)\cite{Kreyszig}.
 
 \subsection{Iterative Methods}
 
-Iterative methods often start with a guess as to what the correct solution is, 
-with the zero vector being a common choice for initial solution. Then they improve 
+Iterative methods start from an initial guess as to what the correct solution is, 
+with the zero vector being a common choice for the initial solution. Then they improve 
 this solution by repeating a procedure multiple times, with each step 
 giving an improved approximation to the solution of the problem. Iterative methods 
 are not guaranteed to produce a correct solution in a given amount of steps. 
 
-Iterative methods stop when a stopping criteria is met, normally when the difference 
-between the right-hand side and the left-hand side or the change in the approximate 
+Iterative methods stop when a stopping criteria is met, for example when the difference 
+between the right-hand side and the left-hand side is small or the change in the approximate 
 solution is below a tolerance level given by the user. 
 
 \subsubsection{Jacobi Method}
