@@ -1,7 +1,13 @@
 \chapter{Implementation}
 
-This chapter will look at the implementations done in this project. It will describe 
-how PETSc was used to setup and solve the discrete Poisson problem for the wind 
-simulation. 
+This chapter will look at the implementation of the wind simulation with PETSc. 
+It will first describe how the wind simulation has been implemented in $C++$. Then 
+this chapter will describe how a small, modern $C++$ wrapper for PETSc was created.
+Finally this chapter details how PETSc was used to setup and solve the discrete 
+Poisson problem for the wind simulation. 
+
+\input{implementation/windsimulation.tex}
+
+\input{implementation/cppwrapper.tex}
 
 \input{implementation/petsc.tex}
