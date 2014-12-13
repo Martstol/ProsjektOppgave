@@ -1,24 +1,39 @@
 \section{Computational Fluid Dynamics}
 
 Fluid flows can be described by partial differential equations for the conservation 
-of mass, momentum and energy. 
+of mass, momentum and energy. In computational fluid dynamics (CFD) the partial 
+differential equations are replaced by a system of linear equations that can be 
+solved by a computer. 
 
 \subsection{Navier-Stokes Equations}
 
-Navier-Strokes Equations is a set of partial differential equations which can be
-used to describe incompressible flows\cite{fluidDynamicsIntro}. 
+Navier-Strokes equations are a set of partial differential equations which describes 
+fluid flow\cite{fluidDynamicsIntro}. By assuming the fluid is incompressible, 
+the equations are simplified to the Navier-Strokes equations for incompressible 
+flow\cite{originalSnowThesis}. 
 
-Momentum equation: 
-$$\pOne{t}u  = -(u \cdot \nabla)u - \frac{1}{\rho}\nabla p + \nu \nabla^2 u + f$$
+\begin{equation} 
+	\tag{momentum equation}
+	\pOne{t}u  = -(u \cdot \nabla)u - \frac{1}{\rho}\nabla p + \nu \nabla^2 u + f
+\end{equation}
 
-Continuity equation:
-$$\nabla u = 0$$
+\begin{equation}
+	\tag{continuity equation}
+	\nabla u = 0
+\end{equation}
+
+Here $u$ is the velocity vector field, $p$ is the pressure field, $\rho$ is density,
+$\nu$ is the kinematic viscosity and $f$ are external forces working on the fluid
+\cite{gpuSnowThesis}. The continuity equation states that the divergence of the 
+velocity field is 0, in other words the velocity field is divergence-free. This 
+means that for every point on the field, the flow in is equal to the flow out
+\cite{originalSnowThesis}. 
 
 \begin{description}
-	\item[Advection]
-	\item[Pressure]
-	\item[Diffusion]
-	\item[External forces]
+	\item[Advection,]
+	\item[Pressure,]
+	\item[Diffusion,]
+	\item[External forces,] the term $f$ accounts for external forces, like gravity.
 \end{description}
 
 In the fluid models for air, some of these terms are left out. If we assume that 
@@ -26,8 +41,12 @@ the air has zero viscosity and that the density is equal to one, then the
 incompressible Navier-Stokes equations reduce to the incompressible Euler 
 equations. 
 
-Momentum equation: 
-$$\pOne{t}u  = -(u \cdot \nabla)u - \nabla p$$
+\begin{equation} 
+	\tag{momentum equation}
+	\pOne{t}u  = -(u \cdot \nabla)u - \nabla p
+\end{equation}
 
-Continuity equation:
-$$\nabla u = 0$$
+\begin{equation}
+	\tag{continuity equation}
+	\nabla u = 0
+\end{equation}
