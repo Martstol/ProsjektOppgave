@@ -55,8 +55,8 @@ and forward and backward substitution is O($n^2$)\cite{Kreyszig}.
 \subsection{Iterative Methods}
 
 Iterative methods start from an initial guess as to what the correct solution is, 
-with the zero vector being a common choice for the initial solution. Then they improve 
-this solution by repeating a procedure multiple times, with each step 
+with the zero vector being a common choice for the initial solution. Then this 
+solution is improved by repeating a procedure multiple times, with each step 
 giving an improved approximation to the solution of the problem. Iterative methods 
 are not guaranteed to produce a correct solution in a given amount of steps. 
 
@@ -79,11 +79,11 @@ $$(L+D+U)x = b$$
 $$Dx = (b - (L+U)x)$$
 $$x = \inv{D}(b - (L+U)x)$$
 
-and the system is then solved iteratively by computing 
+The system is then solved iteratively by computing 
 
 $$x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)})$$
 
-Written in element form, the Jacobi method looks like the following:
+Written in element form
 
 $$ x_i^{(k+1)} = \frac{1}{a_{ii}} \Big( b_i - \sum_{j \neq i} a_{ij} x_j^{(k)} \Big), ~ i = 1, 2, \ldots, n $$
 
@@ -114,8 +114,8 @@ As we see from the first sum, the new value of $x_i$ depends on the new value of
 all previous elements in the $x$ vector.
 
 It is possible to create a parallel implementation of Gauss-Seidel by changing
-the order in which you calculate new $x$ values. This is known as Red-Black
-ordering. The new ordering depends on the linear system you want to solve.
+the order new values of $x$ is calculated. This is known as Red-Black
+ordering. The new ordering depends on the linear system.
 
 The Gauss-Seidel method converges if $||C|| < 1$, where $C = -\inv{(I+L)}U$ and 
 $||C||$ is some matrix norm of $C$\cite{Kreyszig}.

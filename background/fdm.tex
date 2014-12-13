@@ -24,9 +24,11 @@ $$f'(x) \approx \frac{f(x+h) - f(x)}{h}$$
 
 TODO: Write about the error in the approximation
 
-The second order derivative can be approximated by applying a finite difference 
-approximation to the finite difference approximation. The following is the result 
-for the central difference:
+The second order derivative can be approximated by applying the finite difference 
+approximation to each term in the already derived expression for the approximation. 
+For the central difference approximation another central difference approximation 
+is applied to $f'(x + \frac{1}{2}h)$ and $f'(x - \frac{1}{2}h)$. This results in 
+the following second order central difference approximation:
 
 $$f''(x) \approx \frac{\delta_h^2f(x)}{h^2} = \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$$
 
@@ -54,10 +56,9 @@ This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}
 
 \subsection{Discrete Poisson Equation}
 
-When we want to apply the finite difference method to the Poisson equation with 
-Dirichlet boundary conditions.
-We have to sample the problem domain in a finite number of points. The distance
-between the sample points, $h$, is the same as the fixed $h$ in the finite
+To apply the finite difference method to the Poisson equation with Dirichlet 
+boundary conditions, problem domain is sampled in a finite number of points. 
+The distance between the sample points, $h$, is the same as the fixed $h$ in the finite
 differences method. Lets consider the two-dimensional Poisson equation $\nabla^2
 u(x, y) = f(x, y)$. We use the central difference approximation to sample
 $\nabla^2 u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
@@ -89,9 +90,9 @@ This creates a system of linear equations, which we want to write on matrix form
 
 $$Ax = b$$
 
-To create this linear system we have to create a global ordering for the
+To create this linear system we have to create a global order for the
 internal nodes to create the $x$ vector of unknowns. We use the natural
-ordering, which means that we list the nodes along the $x$ direction first.
+order, which means that we list the nodes along the $x$ direction first.
 
 $$x_k = u_{i,j}, ~ k = (i-1) + (n-1) \cdot (j-1), ~ i, j = 1, 2, \dots, n-1$$
 
