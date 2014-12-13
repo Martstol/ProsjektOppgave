@@ -40,17 +40,20 @@ The momentum equation consists of four terms;
 \end{description}
 
 To model fluid flow realistically a method for solving Navier-Stokes equations are 
-required. However solving the equations is difficult because of their nonlinearity
+required. However solving the equations is difficult because of their nonlinearity. 
+There are no general analytic solution to them, it is therefore necessary to make 
+some assumptions about the system the equations are applied to. For example for 
+visualization purposes the appearance of the fluid is more important than accuracy 
 \cite{smokeAndFire}. 
 
 \subsection{Air}
 
-In the fluid models for air, some of these terms are left out. If we assume that 
-the air has zero viscosity and that the density is equal to one, then the 
-incompressible Navier-Stokes equations reduce to the incompressible Euler 
-equations. We also assume that the force of gravity on air is negligible compared 
-to the advection and pressure terms, the term for external forces can therefore be 
-emitted. 
+In the fluid models for air, some of the terms in the momentum equation are left 
+out. If we assume that the air has zero viscosity and that the density is equal 
+to one, then the incompressible Navier-Stokes equations reduce to the incompressible 
+Euler equations. We also assume that the force of gravity on air is negligible 
+compared to the advection and pressure terms, the term for external forces can 
+therefore be omitted\cite{originalSnowThesis}. 
 
 \begin{equation} 
 	\tag{momentum equation}
