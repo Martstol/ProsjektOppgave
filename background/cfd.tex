@@ -24,22 +24,36 @@ flow\cite{originalSnowThesis}.
 
 Here $u$ is the velocity vector field, $p$ is the pressure field, $\rho$ is density,
 $\nu$ is the kinematic viscosity and $f$ are external forces working on the fluid
-\cite{gpuSnowThesis}. The continuity equation states that the divergence of the 
+\cite{gpuSnowThesis}. 
+
+The continuity equation states that the divergence of the 
 velocity field is 0, in other words the velocity field is divergence-free. This 
 means that for every point on the field, the flow in is equal to the flow out
 \cite{originalSnowThesis}. 
 
+The momentum equation consists of four terms;
 \begin{description}
-	\item[Advection,]
+	\item[Advection,] 
 	\item[Pressure,]
 	\item[Diffusion,]
 	\item[External forces,] the term $f$ accounts for external forces, like gravity.
 \end{description}
 
+"The problem of simulating realistic fluids is equivalent
+to writing good solvers for the Navier-Stokes
+equations. Solving them is central to research in areas
+as diverse as aeronautics, combustion science, biophysics,
+and mechanical engineering. However, they
+are also notoriously difficult to solve, due to their
+nonlinearity, complicating the relationship between
+causes and effects."
+
 In the fluid models for air, some of these terms are left out. If we assume that 
 the air has zero viscosity and that the density is equal to one, then the 
 incompressible Navier-Stokes equations reduce to the incompressible Euler 
-equations. 
+equations. We also assume that the force of gravity on air is negligible compared 
+to the advection and pressure terms, the term for external forces can therefore be 
+emitted. 
 
 \begin{equation} 
 	\tag{momentum equation}
