@@ -1,15 +1,22 @@
 \section{PETSc}
 
-PETSc is short for Portable, Extensible Toolkit for Scientific Computation 
-\cite{petsc-web-page}. It contains various data structures and functions for 
-solving partial differential equations in parallel. PETSc supports distributed 
+PETSc is short for Portable, Extensible Toolkit for Scientific Computation. 
+It contains various data structures and functions for 
+solving  in parallel. PETSc supports distributed 
 memory systems with MPI, shared memory systems using Pthreads or OpenMP as well 
-as GPGPU computing using CUDA or OpenCL.
+as GPGPU computing using CUDA or OpenCL. PETSc is open source and distributed 
+under the 2-clause BSD license\cite{petsc-web-page}.
 
-Despite being written in C, PETSc features an object-oriented design pattern.
+\subsection{Programming Model}
+PETSc is primarily written in C, but depends on certain Fortran libraries like BLAS 
+and LAPACK. PETSc is written with an object-oriented design pattern.
 There are object types for representing both data structures and solvers.
-Instead of accessing data directly, all manipulation of structs uses functions
-that abstracts away the underlying implementation. There is no direct data
-access, everything goes through functions. This abstracts away complications as 
-vectors being distributed to several machines running in parallel.
+Instead of accessing data directly, all manipulation of data structures uses functions
+that abstracts away the underlying implementation, there is no direct data access. 
+PETSc' interface is designed based on the operations you perform on the data, rather 
+than the data itself. This hides complications as vectors being distributed to 
+several machines running in parallel.
 
+\subsection{Solvers}
+PETSc implements a large number of parallel numerical solvers, both for linear and 
+nonlinear equations and ordinary differential equation solvers. The 
