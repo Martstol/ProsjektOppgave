@@ -9,8 +9,8 @@ solved by a computer.
 
 Navier-Strokes equations are a set of partial differential equations which describes 
 fluid flow\cite{fluidDynamicsIntro}. By assuming the fluid is incompressible, 
-the equations are simplified to the Navier-Strokes equations for incompressible 
-flow\cite{originalSnowThesis}. 
+meaning that the volume does not change, the equations are simplified to the 
+Navier-Strokes equations for incompressible flow\cite{originalSnowThesis}. 
 
 \begin{equation} 
 	\tag{momentum equation}
@@ -22,9 +22,35 @@ flow\cite{originalSnowThesis}.
 	\nabla u = 0
 \end{equation}
 
-Here $u$ is the velocity vector field, $p$ is the pressure field, $\rho$ is density,
-$\nu$ is the kinematic viscosity and $f$ are external forces working on the fluid
-\cite{gpuSnowThesis}. 
+Here $u$ is the velocity vector field, $p$ is the pressure field, $\rho$ is the 
+density of the fluid, $\nu$ is the kinematic viscosity and $f$ are external 
+forces working on the fluid\cite{gpuGemsCh38}. Table \ref{table:vectorCalculus} 
+explains the difference between the different uses of $\nabla$, also called the 
+nabla operator\cite{gpuGemsCh38}.
+
+\begin{table}[h]
+	\begin{center}
+	\bgroup
+	\def\arraystretch{1.5}
+	\begin{tabular}{ccc}
+		\hline
+		Operator & Definition & Example \\
+		\hline
+		Gradient & $ \nabla p $ & $\Big( \pTwo{x}p, \pTwo{x}p \Big)$ \\ \hline
+		Divergence & $ \nabla \cdot u $ & $ \pOne{x}u_x + \pOne{y}u_y $ \\ \hline
+		Laplacian & $ \nabla^2 u $ & $ \pTwo{x}p + \pTwo{y}p $ \\ \hline
+	\end{tabular}
+	\egroup
+	\end{center}
+	\caption{Usage of the nabla operator in Computational Fluid Dynamics.}
+	\label{table:vectorCalculus}
+\end{table}
+
+The gradient of the pressure field is a vector of partial derivatives of the 
+scalar field, also called the gradient vector field. Divergence leads to a sum of 
+the partial derivatives of each component of the vectors in a vector field. While 
+the Laplacian is the application of divergence operator to the result of the 
+gradient operator. 
 
 The continuity equation states that the divergence of the 
 velocity field is 0, in other words the velocity field is divergence-free. This 
@@ -33,9 +59,15 @@ means that for every point on the field, the flow in is equal to the flow out
 
 The momentum equation consists of four terms;
 \begin{description}
-	\item[Advection,] 
-	\item[Pressure,]
-	\item[Diffusion,]
+	\item[Advection,] the term $-(u \cdot \nabla)u$ describes how the fluid's 
+	velocity causes it's density and other properties to change along with the 
+	flow. The fluid is \emph{advected} along it's velocity field. 
+	\item[Pressure,] the term $-\frac{1}{\rho}\nabla p$ accounts for the pressure 
+	in the fluid and is a result of the molecules in the fluid pushing on each 
+	other. This leads to changes in the fluid's velocity. 
+	\item[Diffusion,] the term $\nu \nabla^2 u$ describes how the thickness of the 
+	fluid affects the change in velocity, a fluids thickness is also called viscosity. 
+	Viscosity describes how resistant the fluid is to flow. 
 	\item[External forces,] the term $f$ accounts for external forces, like gravity.
 \end{description}
 
