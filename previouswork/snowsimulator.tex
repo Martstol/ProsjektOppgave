@@ -4,6 +4,8 @@ The snow simulator has been developed over several years by different students i
 the HPC-lab at NTNU. It simulates a finite number of snow particles and how they 
 are affected by the wind and terrain. 
 
+\subsection{History}
+
 The snow simulator was originally developed  by Ingar Saltvik for his master
 thesis \emph{"Parallel Methods for Real-Time  Visualization of Snow"}
 \cite{originalSnowThesis}. Saltvik's implementation was  designed for multi-core
@@ -37,7 +39,23 @@ have worked on the snow simulator
 
 \subsection{Overview}
 
-TODO: Write a general overview of the different parts of the snow simulator
+The snow simulator is written in a combination of C, C++ and CUDA.
+The four main components of the snow simulator is the \emph{wind simulator}, 
+\emph{snow simulator}, \emph{terrain} and the \emph{renderer}. The wind and 
+snow simulators are written CUDA and compiled separately using the NVCC compiler 
+into a external library called \emph{particle}. The wind simulator 
+solves the incompressible Euler equations to calculate the wind velocity field. 
+The wind simulator uses the terrain to create obstacles for the wind. The snow 
+simulator uses the result from the wind simulator to update the position of the 
+snow particles. When a snow particle lands on the ground it is added to the terrain.
+The terrain uses a heightmap to identify the snow buildup.
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.30\textwidth]{images/snow_sim_main_loop}
+	\caption{Snow simulator main loop.}
+	\label{fig:mainLoop}
+\end{figure}
 
 \subsection{Wind Simulation}
 
