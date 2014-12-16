@@ -48,7 +48,8 @@ solves the incompressible Euler equations to calculate the wind velocity field.
 The wind simulator uses the terrain to create obstacles for the wind. The snow 
 simulator uses the result from the wind simulator to update the position of the 
 snow particles. When a snow particle lands on the ground it is added to the terrain.
-The terrain uses a heightmap to identify the snow buildup.
+The terrain uses a heightmap to identify the snow buildup. Figure \ref{fig:mainLoop} 
+shows a short overview of the different stages in the simulation. 
 
 \begin{figure}[ht]
 	\center
@@ -56,6 +57,12 @@ The terrain uses a heightmap to identify the snow buildup.
 	\caption{Snow simulator main loop.}
 	\label{fig:mainLoop}
 \end{figure}
+
+The renderer uses OpenGL version 4.0 and shaders written in GLSL to make use of 
+the programmable graphics pipeline. The renderer handles the windowing system, 
+lighting, shadows, skybox, camera and user input. Rendering of the wind, snow and 
+terrain is delegated to the corresponding component. The windowing system used 
+is GLFW and GLEW is used to get access to modern OpenGL functionality. 
 
 \subsection{Wind Simulation}
 
