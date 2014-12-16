@@ -25,7 +25,7 @@ distributed to several machines running in parallel.
 PETSc implements a large number of parallel numerical solvers, both for linear and 
 nonlinear equations and ordinary differential equation solvers. For linear systems, 
 PETSc implements both direct and iterative methods. The iterative methods implemented 
-in PETSc are Krylov subsspace methods, discussed previously.
+in PETSc are Krylov subspace methods, discussed previously.
 
 \subsection{GPGPU}
 
@@ -37,7 +37,11 @@ and Cusp\footnote{http://cusplibrary.github.io/} and OpenCL with ViennaCL
 points out that OpenCL is less a burden on the build system than CUDA, and makes 
 installation easier as it works with any host compiler. 
 
-\subsubsection{CUDA}
+To utilize the GPU the application programmer have to specify a GPU vector type 
+for vectors and a GPU matrix type for matrices. This can either be done by using 
+the $VecSetType$ and $MatSetType$ functions or by using the $VecSetFromOptions$ 
+and $MatSetOptions$ functions and specifying the type by adding $-vec\_type$ and 
+$-mat\_type$ along with a GPU type on the commandline during runtime. 
 
-\subsection{OpenCL}
-
+All Krylov subspace methods (except for KSPIBCGS) function on the GPU, but the 
+selection of preconditioners is more limited. 
