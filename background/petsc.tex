@@ -4,20 +4,24 @@ PETSc is short for Portable, Extensible Toolkit for Scientific Computation.
 It contains various data structures and functions for 
 solving  in parallel. PETSc supports distributed 
 memory systems with MPI, shared memory systems using Pthreads or OpenMP as well 
-as GPGPU computing using CUDA or OpenCL. PETSc is open source and distributed 
+as GPGPU computing using CUDA\footnote{\url{https://developer.nvidia.com/cuda-toolkit}} 
+or OpenCL\footnote{\url{https://www.khronos.org/opencl/}}. PETSc is open source and distributed 
 under the 2-clause BSD license\cite{petsc-web-page}.
 
 \subsection{Programming Model}
-PETSc is primarily written in C, but depends on certain Fortran libraries like BLAS 
-and LAPACK. PETSc is written with an object-oriented design pattern.
-There are object types for representing both data structures and solvers.
-Instead of accessing data directly, all manipulation of data structures uses functions
-that abstracts away the underlying implementation, there is no direct data access. 
-PETSc' interface is designed based on the operations you perform on the data, rather 
-than the data itself. This hides complications as vectors being distributed to 
-several machines running in parallel.
+
+PETSc is primarily written in C, but depends on certain Fortran libraries like 
+BLAS\footnote{\url{http://www.netlib.org/blas/}} and LAPACK
+\footnote{\url{http://www.netlib.org/lapack/}}. PETSc is written with an object-
+oriented design pattern. There are object types for representing both data structures 
+and solvers. Instead of accessing data directly, all manipulation of data structures 
+uses functions that abstracts away the underlying implementation, there is no direct 
+data access. PETSc' interface is designed based on the operations you perform on 
+the data, rather than the data itself. This hides complications as vectors being 
+distributed to several machines running in parallel.
 
 \subsection{Solvers}
+
 PETSc implements a large number of parallel numerical solvers, both for linear and 
 nonlinear equations and ordinary differential equation solvers. For linear systems, 
 PETSc implements both direct and iterative methods. The iterative methods implemented 
@@ -25,4 +29,15 @@ in PETSc are Krylov subsspace methods, discussed previously.
 
 \subsection{GPGPU}
 
-TODO: Write about how petsc implements gpgpu stuff
+GPGPU stands for general purpose computing on graphics processing units. It was 
+first implemented as a part of PETSc in 2010\cite{minden2010preliminary} by Victor 
+Minden et al. PETSc can utilize CUDA through Thrust\footnote{\url{http://thrust.github.io/}} 
+and Cusp\footnote{http://cusplibrary.github.io/} and OpenCL with ViennaCL
+\footnote{\url{http://viennacl.sourceforge.net/}}. PETSc's installation instructions 
+points out that OpenCL is less a burden on the build system than CUDA, and makes 
+installation easier as it works with any host compiler. 
+
+\subsubsection{CUDA}
+
+\subsection{OpenCL}
+
