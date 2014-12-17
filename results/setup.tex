@@ -31,9 +31,8 @@ version of PETSc. Therefore PETSc was obtained from PETSc's bitbucket repository
 --with-debugging=0 --with-precision=single
 COPTFLAGS='-O3' CXXOPTFLAGS='-O3' 
 --download-f2cblaslapack --download-mpich
---with-cuda=/usr/local/cuda-6.5 
---with-cusp=/usr/local/cuda-6.5 
---with-thrust=/usr/local/cuda-6.5
+--with-cuda=1 --with-cuda-dir=/usr/local/cuda-6.5 
+--with-cuda-arch=sm_52 --with-cusp=1 --download-cusp=yes
 \end{lstlisting}
 For this configuration of PETSc debugging was disabled and precision was set to 
 single. This is because single precision is faster and some GPUs may not support 
