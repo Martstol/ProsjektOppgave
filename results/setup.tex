@@ -9,6 +9,8 @@ PETSc was acquired from the PETSc Web Page\cite{petsc-web-page} as version 3.5.2
 The version of the compilers used when configuring PETSc can be found in table 
 \ref{table:workstation}.
 
+\subsubsection{Development configuration}
+
 For development, PETSc was configured with the following flags:
 \lstset{language=bash}
 \begin{lstlisting}
@@ -18,16 +20,22 @@ For development, PETSc was configured with the following flags:
 Debugging is by default enabled by the PETSc configuration, therefore the debug 
 flag is not being specified.
 
-For performance tests, a PETSc configured with these flags were used:
+\subsubsection{Testing configuration}
+
+To use PETSc's GPU features, it is recommended to use the current development 
+version of PETSc. Therefore PETSc was obtained from PETSc's bitbucket repository
+\footnote{https://bitbucket.org/petsc/petsc}. Petsc was then configured as follows:
 \lstset{language=bash}
 \begin{lstlisting}
 ./configure --with-cc=gcc --with-cxx=g++ --with-fc=0
 --with-debugging=0 --with-precision=single
 COPTFLAGS='-O3' CXXOPTFLAGS='-O3' 
 --download-f2cblaslapack --download-mpich
+--with-cuda=1 --with-cusp=1 --with-thrust=1
 \end{lstlisting}
 For this configuration of PETSc debugging was disabled and precision was set to 
-single. 
+single. This is because single precision is faster and some GPUs may not support 
+double precision. The rest of the snow simulator also uses single precision.
 
 \subsection{Compilation}
 
@@ -53,7 +61,7 @@ the specifications for the workstation used.
 		CUDA toolkit & 6.5 \\ \hline
 		g++ & 4.8.2 \\ \hline
 		gcc & 4.8.2 \\ \hline
-		PETSc & 3.5.2 \\ \hline
+		PETSc & 3.5.2 \& development version \\ \hline
 	\end{tabular}
 	\egroup
 	\end{center}
