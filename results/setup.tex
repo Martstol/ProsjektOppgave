@@ -5,6 +5,37 @@ as the hardware and software of the workstation used for the tests in the next s
 
 \subsection{Workstation}
 
+% Petsc required cuda version 5, cuda version 5 required ubuntu version 11.10, which was
+% installed on a workstation with the following setup:
+
+\begin{table}[h]
+	\begin{center}
+	\bgroup
+	\def\arraystretch{1.2}
+	\begin{tabular}{|l|l|}
+		\hline
+		\multicolumn{2}{|l|}{\textbf{Workstation hardware}} \\ \hline
+		CPU & i7-930 @ 2.8 GHz \\ \hline
+		GPU 1 & Nvidia GeForce GTX 460 \\ \hline
+		GPU 2 & Nvidia Tesla C2050 \\ \hline
+		Memory & 10 GB DDR3 1333 MHz \\ \hline
+		Power supply & MIST AX1000 \\ \hline
+		\multicolumn{2}{|l|}{\textbf{Workstation software}} \\ \hline
+		Operating system & Ubuntu 11.10 64-bit \\ \hline
+		Nvidia driver & unknown \\ \hline
+		CUDA toolkit & 5.0 \\ \hline
+		g++ & unknown \\ \hline
+		gcc & unknown \\ \hline
+		PETSc & development version \\ \hline
+	\end{tabular}
+	\egroup
+	\end{center}
+	\caption{Workstation specifications}
+	\label{table:workstation}
+\end{table}
+
+TODO: Rewrite below, that is the development and testing without petsc\+cuda setup
+
 This project was only tested on one workstation. Table \ref{table:workstation} contains 
 the specifications for the workstation used.
 
@@ -25,7 +56,7 @@ the specifications for the workstation used.
 		CUDA toolkit & 6.5 \\ \hline
 		g++ & 4.8.2 \\ \hline
 		gcc & 4.8.2 \\ \hline
-		PETSc & 3.5.2 \& development version \\ \hline
+		PETSc & 3.5.2 \\ \hline
 	\end{tabular}
 	\egroup
 	\end{center}
