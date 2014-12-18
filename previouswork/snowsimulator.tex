@@ -10,19 +10,30 @@ The snow simulator was originally developed  by Ingar Saltvik for his master
 thesis \emph{"Parallel Methods for Real-Time  Visualization of Snow"}
 \cite{originalSnowThesis}. Saltvik's implementation was  designed for multi-core
 CPUs and achieved real-time performance for tens of  thousands snow particles
-and unknowns for the wind simulation.
+and unknowns for the wind simulation. Figure \ref{fig:originalSnow} shows a 
+screenshot of this snow simulator, obtained from DAIM\footnote{\url{http://daim.idi.ntnu.no/}}.
 
-TODO: Insert figure of Saltvik's snow simulator
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=1.0\textwidth]{images/snow/serial/snow5}
+	\caption{The original snow simulator by Saltvik.}
+	\label{fig:originalSnow}
+\end{figure}
 
 The snow simulator was later ported to the GPU by Robin Eidissen for his master 
 thesis \emph{"Utilizing GPUs for Real-Time Visualization of Snow"}\cite{gpuSnowThesis}.
 Eidissen's implementation achieved real-time performance with more than two million 
 snow particles and four million unknowns in the wind simulation. 
 
-TODO: Insert figure of the GPU snow simulator
-
 TODO: Write about the other master theses and specialization projects that 
 have worked on the snow simulator
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=1.0\textwidth]{images/snow/gpu/snow7}
+	\caption{The original snow simulator by Saltvik.}
+	\label{fig:gpuSnow}
+\end{figure}
 
 %The following master theses have done work on the snow simulator:
 %
