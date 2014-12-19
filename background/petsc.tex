@@ -26,6 +26,8 @@ PETSc implements a large number of parallel numerical solvers, both for linear a
 nonlinear equations and ordinary differential equation solvers. For linear systems, 
 PETSc implements both direct and iterative methods. The iterative methods implemented 
 in PETSc are Krylov subspace methods, discussed in the section for linear solvers.
+A complete list of the linear solvers implemented by PETSc can be found on the 
+PETSc webpage\footnote{\url{http://www.mcs.anl.gov/petsc/documentation/linearsolvertable.html}}.
 
 \subsection{GPGPU}
 
@@ -49,7 +51,7 @@ and $MatSetOptions$ functions and specifying the type by adding $-vec\_type$ and
 $-mat\_type$ along with a GPU type on the commandline during runtime. 
 
 All Krylov subspace methods implemented in PETSc function on the GPU and require 
-no copies between the CPU and GPU during a Krylov solve. With the exception 
-of KSPIBCGS\footnote{Improved Stabilized version of BiConjugate Gradient Squared},
-as this method requires direct access to the underlying data stored in the vectors 
-and would require a complete rewrite.
+no copies between the CPU and GPU during a Krylov solve. With the exception that
+of KSPIBCGS (Improved Stabilized version of BiConjugate Gradient Squared) is not
+implemented for the GPU, as this method requires direct access to the underlying 
+data stored in the vectors and would require a complete rewrite.
