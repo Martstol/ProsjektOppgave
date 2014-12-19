@@ -208,10 +208,21 @@ solution\cite{krylovSolvers}.
 
 The conjugate gradient method (CG) is a Krylov subspace solver, and is an orthogonal 
 projection method. The conjugate gradient method is only guaranteed to work for 
-linear systems that are symmetric positive definite or Hermitian positive definite.
+linear systems that are symmetric positive definite.
 
 The matrix $A$ is symmetric positive definite if it is symmetric and $x^T A x$ is 
 positive for all non-zero $x$ vectors. Another way of checking if a matrix is 
 positive definite is if all it's eigenvalues are positive. 
 
+The conjugate gradient method attempts to find the value of the $x$ vector which 
+minimizes the following function
 
+$$ \Psi(x) = \frac{1}{2}x^T A x - b^T x + \gamma $$
+
+If $A$ is symmetric positive definite, then $\Psi$ is convex which means it has 
+a unique minimum (no local minimums). Its gradient is 
+
+$$ \grad \Psi(x) = Ax-b = -r $$
+
+Here $r$ is the residual vector. Minimizing $\Psi(x)$ is the same as finding 
+$\grad \Psi(x) = 0$, which is the same as solving $Ax = b$.
