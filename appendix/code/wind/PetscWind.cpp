@@ -15,17 +15,6 @@
 #define VOXEL_MASK_FRONT	(32)
 #define VOXEL_MASK_BACK		(64)
 
-/* 
- * To use petsc, the following commandline arguments must be specified:
- * -vec_type, -mat_type, -ksp_type, -pc_type
- *
- * Example of usage:
- * ./snow -vec_type seq -mat_type aij -ksp_type cg -pc_type jacobi
- *
- * To run on the gpu:
- * ./snow -vec_type seqcusp -mat_type aijcusp -ksp_type cg -pc_type jacobi
- */
-
 PetscWind::PetscWind() : 
 	N((conf.wind_x+2) * (conf.wind_y+2) * (conf.wind_z+2)),
 	obstacles(N), velocity(N), prevVelocity(N), velocityStar(N),
@@ -38,12 +27,9 @@ PetscWind::PetscWind() :
 	p.fill(0);
 	b.fill(0);
 	
-	A.assemblyBegin();
-	p.assemblyBegin();
-	b.assemblyBegin();
-	A.assemblyEnd();
-	p.assemblyEnd();
-	b.assemblyEnd();
+	A.assemble();
+	p.assemble();
+	b.assemble();
 	
 	A.setNullSpace();
 	
@@ -434,14 +420,30 @@ void PetscWind::setupSolution(double dt) {
 }
 
 void PetscWind::setupMatrix() {
+	// Preallocate memory for the matrix
+	A.setType(MATAIJ);
+	std::vector<PetscInt> nz(N);
+	std::fill(nz.begin(), nz.end(), 0);
+	int total = 0;
+	for (int z = 1; z < dim.z+1; z++) {
+		for (int y = 1; y < dim.y+1; y++) {
+			for (int x = 1; x < dim.x+1; x++) {
+				total += 7;
+				nz[getIndex(x, y, z)] = 7;
+			}
+		}
+	}
+	A.seqAIJSetPreAllocation(nz);
+	A.setOption(MAT_KEEP_NONZERO_PATTERN, PETSC_TRUE);
+	A.setup();
+	
+	// Fill the matrix with values
 	PetscScalar hx = 1 / static_cast<PetscScalar>(dim.x+1);
 	PetscScalar hy = 1 / static_cast<PetscScalar>(dim.y+1);
 	PetscScalar hz = 1 / static_cast<PetscScalar>(dim.z+1);
-	
 	PetscScalar hyz = hy*hy*hz*hz;
 	PetscScalar hxz = hx*hx*hz*hz;
 	PetscScalar hxy = hx*hx*hy*hy;
-	
 	for (int z = 1; z < dim.z+1; z++) {
 		for (int y = 1; y < dim.y+1; y++) {
 			for (int x = 1; x < dim.x+1; x++) {

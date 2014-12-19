@@ -1,0 +1,172 @@
+grid 16 16 16
+maxitr 5
+
+solver richardson
+fps 137
+iterations 5
+reason -3
+
+solver chebyshev
+fps 123
+iterations 5
+reason -3
+
+solver cg
+fps 127
+iterations 5
+reason -3
+
+solver groppcg
+fps: -1
+iterations -1
+reason -11
+
+solver pipecg
+fps -1
+iterations -1
+reason -11
+
+solver cgne
+fps 73
+iterations 5
+reason -3
+
+solver nash
+fps 195
+iterations 0
+reason -8
+
+solver stcg
+fps 195
+iterations 0
+reason -8
+
+solver gltr
+fps 195
+iteratons 0
+reason -8
+
+solver gmres
+fps 105
+iterations 5
+reason -3
+
+solver fgmres
+fps 195
+iterations 0
+reason 3
+
+solver lgmres
+fps 105
+iterations 5
+reason -3
+
+solver dgmres
+fps 105
+iterations 5
+reason -3
+
+solver pgmres
+fps 87
+iterations 5
+reason -3
+
+solver tcqmr
+fps 43
+iterations 5
+reason -3
+
+solver bcgs
+fps 65
+iterations 5
+reason -3
+
+solver ibcgs
+fps 57
+iterations 6
+reason -3
+
+solver fbcgs
+fps 195
+iterations 0
+reason 3
+
+solver fbcgsr
+fps 195
+iterations 0
+reason 3
+
+solver bcgsl
+fps 54
+iterations 4
+reasons -3
+
+solver cgs
+fps 54
+iterations 4
+reason -3
+
+solver tfqmr
+fps 57
+iterations 5
+reason -3
+
+solver cr
+fps 195
+iterations 0
+reason -8
+
+solver pipecr
+fps -1
+iterations -1
+reason -11
+
+solver lsqr
+fps 195
+iterations 0
+reason 3
+
+solver preonly
+fps 195
+iterations 1
+reason 4
+
+solver qcg
+fps -1
+iterations -1
+reason -11
+
+solver bicg
+fps 79
+iterations 5
+reason -3
+
+solver minres
+fps 195
+iterations 0
+reason -10
+
+solver symmlq
+fps 195
+iterations 0
+reason -8
+
+solver lcd
+fps 88
+iterations 5
+reason -3
+
+solver python
+fps -1
+reason -1
+reason -11
+
+solver gcr
+fps 195
+iterations 0
+reason 3
+
+solver specest
+fps 137
+iterations 5
+reason 4
