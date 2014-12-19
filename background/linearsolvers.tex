@@ -138,6 +138,71 @@ $$ Dx^{(k+1)} = x^{(k)} + \omega \big( b - Lx^{(k+1)} - (U + I)x^{(k)} \big) $$
 A recommended value for the overrelaxation factor is $\omega = \frac{2}{1 +
 \sqrt{1 - \rho}} $, where $\rho$ is the spectral radius of $-\inv{(I + L)}U$\cite{Kreyszig}. 
 
-\subsubsection{Krylov Subspace Methods}
+\subsection{Krylov Subspace Methods}
 
-TODO write stuff
+The Krylov subspace methods are considered to be some of the most important iterative 
+methods for solving linear systems.
+
+From the section on the Jacobi method, we have the expression 
+
+$$ x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)}) $$
+
+which can be rewritten as 
+
+$$ x^{(k+1)} = (I - \inv{D}A)x^{(k)} + \inv{D}b $$
+
+If $x^{(k)}$ is an approximate solution and $x^{*}$ the exact solution, then the 
+$k$th error vector is defined as 
+
+$$ d^{(k)} = x^{(k)} - x^{*}$$
+
+However as we don't know the exact solution, for convergence we use the $k$th residual 
+vector
+
+$$ r^{(k)} = b - Ax^{(k)} $$
+
+We can rewrite this expression to
+
+$$ r^{(k)} = b - Ax^{(k)} + x^{(k)} - x^{(k)}$$
+$$ r^{(k)} = b + (I - A)x^{(k)} - x^{(k)}$$
+
+Then by normalizing $Ax = b$ by dividing all rows by the value of the diagonal element 
+from $A$, or in other words by calculating $\inv{D}Ax = \inv{D}b$ we get a new linear 
+system with $I$ as the diagonal matrix, $I = D$. If we solve this system instead we 
+get
+
+$$ r^{(k)} = b + (U+L)x^{(k)} - x^{(k)} = x^{(k+1)} - x^{(k)}$$
+$$ r^{(k)} = x^{(k+1)} - x^{(k)} $$
+
+We can then rewrite the Jacobi method to
+
+$$ x^{(k+1)} = x^{(k)} + r^{(k)} $$
+
+By multiplying both sides with $-A$ and adding $b$ to both sides, we obtain a 
+recursive formula for the residual.
+
+$$ -Ax^{(k+1)} = -Ax^{(k)} - Ar^{(k)} $$
+$$ -Ax^{(k+1)} + b = -Ax^{(k)} - Ar^{(k)} + b $$
+$$ r^{(k+1)} = r^{(k)} - Ar^{(k)} $$
+$$ r^{(k+1)} = (I - A)r^{(k)} $$
+
+From this it follows that 
+
+$$ r^{(n)} = p_n(A)r^{(0)} \in span \{r^{(0)}, Ar^{(0)}, ..., A^{n}r^{(0)}\} $$
+
+where $p_n(A) = (I - A)^n$. From $ x^{(k+1)} = x^{(k)} + r^{(k)} $ we get 
+
+$$ x^{(n)} = x^{(0)} + r^{(0)} + ... + r^{(n-1)} = x^{(0)} + q_{n-1}(A)r^{(0)} $$
+
+The subspaces that appear in the equation for $r^{(n)}$ and $x^{(n)}$ is called the 
+Krylov subspace. The idea behind Krylov subspace solvers is to calculate a sequence 
+of approximate solutions of $Ax = b$, so that the residual vectors converge to the 
+null vector. If the residuals are linearly independent then 
+after a finite number of steps the approximate solution $x_n$ will be equal to the 
+exact solution and the residual vector will be zero. This only holds true with exact 
+arithmetics, therefore a computer implementation is not guaranteed to reach an exact 
+solution\cite{krylovSolvers}.
+
+\subsubsection{Conjugate Gradient Method}
+
+
