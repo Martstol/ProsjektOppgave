@@ -84,7 +84,8 @@ $f(x_i, y_j)$ by $f_{i,j}$
 $$ (\nabla^2 u)_{ij} \approx \frac{u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1}}{h^2} = f_{i,j} $$
 $$ u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1} = h^2 f_{i,j} $$
 
-This creates a system of linear equations, which we want to write on matrix form.
+This creates a system of linear equations, that can be written on matrix form as
+follows.
 
 $$Ax = b$$
 
@@ -114,7 +115,16 @@ B = \begin{bmatrix}
 \end{bmatrix}
 $$
 
-$A$ is a $N \times N$ matrix, $B$ is a $(n-1) \times (n-1)$ matrix and $I$ is the identity matrix.
+$A$ is a $N \times N$ matrix, $B$ is a $(n-1) \times (n-1)$ matrix and $I$ is the identity matrix. Below we show how the matrix looks for n = 3.
+
+$$
+A = \begin{bmatrix}
+ -4 &  1 &  1 &  0 \\
+  1 & -4 &  0 &  1 \\
+  1 &  0 & -4 &  1 \\
+  0 &  1 &  1 & -4
+\end{bmatrix}
+$$
 
 %The vector $b$ is assembled from $h^2$, the function $f$, and the Dirichlet border conditions. 
 
