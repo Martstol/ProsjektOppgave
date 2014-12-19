@@ -7,22 +7,20 @@ as a system of linear equations.
 
 There are different versions of the finite difference method.
 \begin{itemize}
-	\item Forward difference, $\Delta_hf(x) = f(x+h) - f(x)$
-	\item Backward difference, $\nabla_hf(x) = f(x) - f(x - h)$
-	\item Central difference, $\delta_hf(x) = f(x + \frac{1}{2}h) - f(x - \frac{1}{2}h)$
+	\item Forward difference, $\Delta_hu(x) = u(x+h) - u(x)$
+	\item Backward difference, $\nabla_hu(x) = u(x) - u(x - h)$
+	\item Central difference, $\delta_hu(x) = u(x + \frac{1}{2}h) - u(x - \frac{1}{2}h)$
 \end{itemize}
 
 It is easy to see the connection of the forward difference and the definition of 
 the derivative.
 
-$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$
+$$f'(x) = \lim_{h \to 0} \frac{u(x+h) - u(x)}{h}$$
 
 We give $h$ a fixed, non-zero, value instead of having $h$ approach 0. Therefore 
 the forward difference divided by $h$ approximates the derivative when $h$ is small.
 
-$$f'(x) \approx \frac{f(x+h) - f(x)}{h}$$
-
-TODO: Write about the error in the approximation
+$$f'(x) \approx \frac{u(x+h) - u(x)}{h}$$
 
 The second order derivative can be approximated by applying the finite difference 
 approximation to each term in the already derived expression for the approximation. 
@@ -30,20 +28,20 @@ For the central difference approximation another central difference approximatio
 is applied to $f'(x + \frac{1}{2}h)$ and $f'(x - \frac{1}{2}h)$. This results in 
 the following second order central difference approximation:
 
-$$f''(x) \approx \frac{\delta_h^2f(x)}{h^2} = \frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$$
+$$f''(x) \approx \frac{\delta_h^2u(x)}{h^2} = \frac{u(x+h) - 2u(x) + u(x-h)}{h^2}$$
 
 When applied to higher dimensions, it is necessary to choose a value for h in 
 each dimension. However we can simplify the resulting equation by choosing the same h. 
 In three dimensions the approximation looks like this:
 
-$$(\pTwo{x} + \pTwo{y} + \pTwo{z}) f (x, y, z) = \frac{\partial^2 f(x, y, z)}{\partial^2 x} 
-+ \frac{\partial^2 f(x, y, z)}{\partial^2 y} + \frac{\partial^2 f(x, y, z)}{\partial^2 z}$$
+$$(\pTwo{x} + \pTwo{y} + \pTwo{z}) u(x, y, z) = \frac{\partial^2 u(x, y, z)}{\partial^2 x} 
++ \frac{\partial^2 u(x, y, z)}{\partial^2 y} + \frac{\partial^2 u(x, y, z)}{\partial^2 z}$$
 
-$$\frac{\partial^2 f(x, y, z)}{\partial^2 x} \approx \frac{f(x+h, y, z) - 2f(x, y, z) + f(x-h, y, z)}{h^2}$$
+$$\frac{\partial^2 u(x, y, z)}{\partial^2 x} \approx \frac{u(x+h, y, z) - 2u(x, y, z) + u(x-h, y, z)}{h^2}$$
 
-$$\frac{\partial^2 f(x, y, z)}{\partial^2 y} \approx \frac{f(x, y+h, z) - 2f(x, y, z) + f(x, y-h, z)}{h^2}$$
+$$\frac{\partial^2 u(x, y, z)}{\partial^2 y} \approx \frac{u(x, y+h, z) - 2u(x, y, z) + u(x, y-h, z)}{h^2}$$
 
-$$\frac{\partial^2 f(x, y, z)}{\partial^2 z} \approx \frac{f(x, y, z+h) - 2f(x, y, z) + f(x, y, z-h)}{h^2}$$
+$$\frac{\partial^2 u(x, y, z)}{\partial^2 z} \approx \frac{u(x, y, z+h) - 2u(x, y, z) + u(x, y, z-h)}{h^2}$$
 
 This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}.
 
