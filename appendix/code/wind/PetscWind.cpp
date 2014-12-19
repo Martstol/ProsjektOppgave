@@ -31,8 +31,6 @@ PetscWind::PetscWind() :
 	p.assemble();
 	b.assemble();
 	
-	A.setNullSpace();
-	
 	solver.setOperators(A, A);
 	solver.createPreconditioner();
 	solver.setTolerances(1E-3, 1E-3, 1E6, 15);
@@ -421,7 +419,6 @@ void PetscWind::setupSolution(double dt) {
 
 void PetscWind::setupMatrix() {
 	// Preallocate memory for the matrix
-	A.setType(MATAIJ);
 	std::vector<PetscInt> nz(N);
 	std::fill(nz.begin(), nz.end(), 0);
 	int total = 0;

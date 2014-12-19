@@ -143,7 +143,7 @@ A recommended value for the overrelaxation factor is $\omega = \frac{2}{1 +
 The Krylov subspace methods are considered to be some of the most important iterative 
 methods for solving linear systems.
 
-From the section on the Jacobi method, we have the expression 
+In the section on the Jacobi method, the following expression was derived
 
 $$ x^{(k+1)} = \inv{D}(b - (L+U)x^{(k)}) $$
 
@@ -156,20 +156,20 @@ $k$th error vector is defined as
 
 $$ d^{(k)} = x^{(k)} - x^{*}$$
 
-However as we don't know the exact solution, for convergence we use the $k$th residual 
-vector
+However as the exact solution is unknown, the residual vector is used instead 
+to test for convergence. The expression for the $k$th residual vector is
 
 $$ r^{(k)} = b - Ax^{(k)} $$
 
-We can rewrite this expression to
+This expression can be rewritten as
 
 $$ r^{(k)} = b - Ax^{(k)} + x^{(k)} - x^{(k)}$$
 $$ r^{(k)} = b + (I - A)x^{(k)} - x^{(k)}$$
 
 Then by normalizing $Ax = b$ by dividing all rows by the value of the diagonal element 
-from $A$, or in other words by calculating $\inv{D}Ax = \inv{D}b$ we get a new linear 
-system with $I$ as the diagonal matrix, $I = D$. If we solve this system instead we 
-get
+from $A$, or in other words by calculating $\inv{D}Ax = \inv{D}b$, we get a new linear 
+system with $I$ as the diagonal matrix, $I = D$. Then replacing $I-A$ with $L+U$ 
+leads to the following expression
 
 $$ r^{(k)} = b + (U+L)x^{(k)} - x^{(k)} = x^{(k+1)} - x^{(k)}$$
 $$ r^{(k)} = x^{(k+1)} - x^{(k)} $$
@@ -192,7 +192,8 @@ $$ r^{(n)} = p_n(A)r^{(0)} \in span \{r^{(0)}, Ar^{(0)}, ..., A^{n}r^{(0)}\} $$
 
 where $p_n(A) = (I - A)^n$. From $ x^{(k+1)} = x^{(k)} + r^{(k)} $ we get 
 
-$$ x^{(n)} = x^{(0)} + r^{(0)} + ... + r^{(n-1)} = x^{(0)} + q_{n-1}(A)r^{(0)} $$
+$$ x^{(n)} = x^{(0)} + r^{(0)} + r^{(1)} + ... + r^{(n-1)} = x^{(0)} + q_{n-1}(A)r^{(0)} $$
+$$ q_{n-1}(A) = 1 + (I-A) + (I-A)^2 + ... + (I-A)^{n-1} $$
 
 The subspaces that appear in the equation for $r^{(n)}$ and $x^{(n)}$ is called the 
 Krylov subspace. The idea behind Krylov subspace solvers is to calculate a sequence 
@@ -204,5 +205,13 @@ arithmetics, therefore a computer implementation is not guaranteed to reach an e
 solution\cite{krylovSolvers}.
 
 \subsubsection{Conjugate Gradient Method}
+
+The conjugate gradient method (CG) is a Krylov subspace solver, and is an orthogonal 
+projection method. The conjugate gradient method is only guaranteed to work for 
+linear systems that are symmetric positive definite or Hermitian positive definite.
+
+The matrix $A$ is symmetric positive definite if it is symmetric and $x^T A x$ is 
+positive for all non-zero $x$ vectors. Another way of checking if a matrix is 
+positive definite is if all it's eigenvalues are positive. 
 
 
