@@ -421,11 +421,9 @@ void PetscWind::setupMatrix() {
 	// Preallocate memory for the matrix
 	std::vector<PetscInt> nz(N);
 	std::fill(nz.begin(), nz.end(), 0);
-	int total = 0;
 	for (int z = 1; z < dim.z+1; z++) {
 		for (int y = 1; y < dim.y+1; y++) {
 			for (int x = 1; x < dim.x+1; x++) {
-				total += 7;
 				nz[getIndex(x, y, z)] = 7;
 			}
 		}
