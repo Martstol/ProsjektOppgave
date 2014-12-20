@@ -10,6 +10,9 @@ further details about the wind simulator.
 
 \subsection{History}
 
+% - Jarle Erdal Steinsland, 2010 ?
+% - Jan Magne Rovde, 2012 ?
+
 The snow simulator was originally developed by Ingar Saltvik for his master
 thesis \emph{"Parallel Methods for Real-Time Visualization of Snow"}
 \cite{originalSnowThesis}. Saltvik's implementation was designed for multi-core
@@ -101,6 +104,9 @@ by the terrain vertex data and the external wind velocity at the borders of the
 domain. The external wind velocity can be set by the user at runtime.
 
 \subsubsection{Implementation}
+
+% http://daim.idi.ntnu.no/masteroppgaver/009/9823/masteroppgave.pdf, ch 3.5
+% http://daim.idi.ntnu.no/masteroppgaver/009/9033/masteroppgave.pdf, ch 2.6.3
 
 The wind simulator is implemented in CUDA and consists of eight kernels. Five of 
 the kernels are used for simulation while the remaining three kernels are for 
