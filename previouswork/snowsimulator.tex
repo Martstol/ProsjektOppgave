@@ -3,7 +3,10 @@
 The snow simulator has been developed over several years by different students in 
 the HPC-lab at NTNU as a part of their specialization project or master thesis. 
 It simulates a finite number of snow particles and how they are affected by the 
-wind and terrain. 
+wind and terrain. Here a short summary of the previous master theses and 
+specialization projects that have worked on the snow simulator is given. This 
+section also gives a short overview of the snow simulator and then goes into 
+further details about the wind simulator.
 
 \subsection{History}
 
@@ -58,14 +61,7 @@ avalanches could occur.
 
 The snow simulator is written in a combination of C, C++ and CUDA.
 The four main components of the snow simulator is the \emph{wind simulator}, 
-\emph{snow simulator}, \emph{terrain} and the \emph{renderer}. The wind and 
-snow simulators are written CUDA and compiled separately using the NVCC compiler 
-into a external library called \emph{particle}. The wind simulator 
-solves the incompressible Euler equations to calculate the wind velocity field. 
-The wind simulator uses the terrain to create obstacles for the wind. The snow 
-simulator uses the result from the wind simulator to update the position of the 
-snow particles. When a snow particle lands on the ground it is added to the terrain.
-The terrain uses a heightmap to identify the snow buildup. Figure \ref{fig:mainLoop} 
+\emph{snow simulator}, \emph{terrain} and the \emph{renderer}. Figure \ref{fig:mainLoop} 
 shows a short overview of the different stages in the simulation. 
 
 \begin{figure}[ht]
@@ -74,6 +70,14 @@ shows a short overview of the different stages in the simulation.
 	\caption{Snow simulator main loop.}
 	\label{fig:mainLoop}
 \end{figure}
+
+The wind simulator solves the incompressible Euler equations to calculate the
+wind velocity field. The wind simulator uses the terrain to create obstacles for
+the wind. The snow simulator models the behavior of individual snowflakes as
+particles with position, velocity and rotation. The snow simulator uses the
+wind velocity field from the wind simulator to update the properties each
+individual snow particle. When a snow particle lands on the ground it is added
+to the terrain's height map.
 
 The renderer uses OpenGL version 4.0 and shaders written in GLSL to make use of 
 the programmable graphics pipeline. The renderer handles the windowing system, 
