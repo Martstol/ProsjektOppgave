@@ -1,21 +1,23 @@
-This chapter will cover the mathematical background material for the project. 
-The first section of this chapter covers computational fluid dynamics (CFD) 
+This chapter will cover the theoretical foundation material of the project. 
+The first section of this chapter deals with computational fluid dynamics (CFD) 
 for the wind simulation as air can be modeled approximately as a fluid with 
 zero viscosity and a density equal to one\cite{originalSnowThesis}.
 
-The second section will cover partial differential equations and boundary value
+The second section deals with partial differential equations and boundary value
 problems. This section will describe the Poisson equation which is solved as a 
 part of the wind simulation.
 
-The third section covers the finite difference method for creating systems of
-linear equations approximating partial differential equations and will discuss
+The third section deals with the finite difference method for creating systems of
+linear equations approximating partial differential equations and discusses
 the central difference and the discretized Poisson equation.
 
-The fourth section covers the topic of linear solvers, explaining both direct
+The fourth section deals with the topic of linear solvers, explaining both direct
 methods and iterative methods. This section describes two direct
 methods for solving systems of linear equations, Gaussian elimination and LU
 decomposition and three iterative methods, the Jacobi method, Gauss-Seidel and
-successive overrelaxation.
+successive overrelaxation. This section also discuss a class of iterative methods 
+known as Krylov subspace methods. 
 
 The fifth and final section will cover the Portable, Extensible Toolkit for
-Scientific Computation, PETSc\footnote{\url{http://www.mcs.anl.gov/petsc/}}, a C library that was used in the implementation.
+Scientific Computation, PETSc\footnote{\url{http://www.mcs.anl.gov/petsc/}}, a C 
+library that was used in the implementation.
