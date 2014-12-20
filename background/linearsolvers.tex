@@ -5,7 +5,7 @@ A system of linear equations with $N$ unknowns can be written as
 $$Ax = b$$
 
 where $A$ is a $N \times N$ matrix, and $x$ and $b$ are column vectors with $N$ 
-elements each. $A$ and $b$ are known before hand, and we want to solve for $x$.
+elements each. $A$ and $b$ are known, and we want to solve for $x$.
 
 This can either be done with direct methods which compute the solution in a finite 
 number of steps or by using an iterative method which iteratively improves an initial 
@@ -29,7 +29,7 @@ thousand unknowns with today's computing power.
 
 \subsubsection{LU factorization}
 
-The LU in LU factorization stands for "Lower Upper". It works by factoring the 
+The LU in LU factorization stands for "Lower Upper". It works by factorizing the 
 matrix into the product of a lower and an upper triangular matrix. 
 
 $$A = LU$$
@@ -54,15 +54,15 @@ and forward and backward substitution is O($n^2$)\cite{Kreyszig}.
 
 \subsection{Iterative Methods}
 
-Iterative methods start from an initial guess as to what the correct solution is, 
-with the zero vector being a common choice for the initial solution. Then this 
-solution is improved by repeating a procedure multiple times, with each step 
+Iterative methods start from an initial guess at the correct solution, 
+with the null vector being a common choice for the initial solution. This 
+solution is then improved by repeating a procedure multiple times, with each step 
 giving an improved approximation to the solution of the problem. Iterative methods 
 are not guaranteed to produce a correct solution in a given amount of steps. 
 
-Iterative methods stop when a stopping criteria is met, for example when the difference 
+Iterative methods end when a stopping criteria is met, for example when the difference 
 between the right-hand side and the left-hand side is small or the change in the approximate 
-solution is below a tolerance level given by the user. 
+solution is below a given tolerance level. 
 
 \subsubsection{Jacobi Method}
 

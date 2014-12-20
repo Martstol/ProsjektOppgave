@@ -3,7 +3,7 @@
 Fluid flows can be described by partial differential equations for the conservation 
 of mass, momentum and energy. In computational fluid dynamics (CFD) the partial 
 differential equations are replaced by a system of linear equations that can be 
-solved by a computer. 
+solved by computers. 
 
 \subsection{Navier-Stokes Equations}
 
@@ -48,9 +48,9 @@ nabla operator\cite{gpuGemsCh38}.
 
 The gradient of the pressure field is a vector of partial derivatives of the 
 scalar field, also called the gradient vector field. Divergence leads to a sum of 
-the partial derivatives of each component of the vectors in a vector field. While 
-the Laplacian is the application of divergence operator to the result of the 
-gradient operator. 
+the partial derivatives of each component of the vectors in a vector field. The 
+Laplacian is the application of divergence operator to the result of the gradient 
+operator. 
 
 The continuity equation states that the divergence of the 
 velocity field is 0, in other words the velocity field is divergence-free. This 
@@ -61,7 +61,7 @@ The momentum equation consists of four terms;
 \begin{description}
 	\item[Advection,] the term $-(u \cdot \nabla)u$ describes how the fluid's 
 	velocity causes it's density and other properties to change along with the 
-	flow. The fluid is \emph{advected} along it's velocity field. 
+	flow. The fluid is advected along it's velocity field. 
 	\item[Pressure,] the term $-\frac{1}{\rho}\nabla p$ accounts for the pressure 
 	in the fluid and is a result of the molecules in the fluid pushing on each 
 	other. This leads to changes in the fluid's velocity. 

@@ -17,7 +17,7 @@ oriented design pattern. There are object types for representing both data struc
 and solvers. Instead of accessing data directly, all manipulation of data structures 
 uses functions that abstracts away the underlying implementation, there is no direct 
 data access. PETSc's interface is designed based on the operations you perform on 
-the data, rather than the data itself. This hides complications as vectors being 
+the data, rather than the data itself. This conceals complications as vectors being 
 distributed to several machines running in parallel.
 
 \subsection{Solvers}
@@ -41,17 +41,18 @@ installation easier as it works with any host compiler.
 
 The changes required to have PETSc utilize the GPU is minimal. For the GPU 
 implementation PETSc adds new subclasses of the vector and matrix classes that 
-stores the data on both the GPU and the CPU. Krylov solvers utilize GPU implementations 
+store the data on both the GPU and the CPU. Krylov solvers utilize GPU implementations 
 of the functions defined for these classes.
 
-To utilize the GPU the application programmer have to specify a GPU vector type 
+To utilize the GPU the application programmer has to specify a GPU vector type 
 for vectors and a GPU matrix type for matrices. This can either be done by using 
 the $VecSetType$ and $MatSetType$ functions or by using the $VecSetFromOptions$ 
 and $MatSetOptions$ functions and specifying the type by adding $-vec\_type$ and 
 $-mat\_type$ along with a GPU type on the commandline during runtime. 
 
 All Krylov subspace methods implemented in PETSc function on the GPU and require 
-no copies between the CPU and GPU during a Krylov solve. With the exception
-of KSPIBCGS (Improved Stabilized version of BiConjugate Gradient Squared) is not
-implemented for the GPU, as this method requires direct access to the underlying 
-data stored in the vectors and would require a complete rewrite.
+no data copies between the CPU and GPU while solving a system. With the exception
+of the KSPIBCGS method (Improved Stabilized version of BiConjugate Gradient Squared),
+which is not implemented for the GPU. This method requires direct access to the 
+underlying data stored in the vectors and would require a complete rewrite to 
+function on the GPU.

@@ -55,7 +55,7 @@ This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}
 \subsection{Discrete Poisson Equation}
 
 To apply the finite difference method to the Poisson equation with Dirichlet 
-boundary conditions, problem domain is sampled in a finite number of points. 
+boundary conditions, the problem domain is sampled in a finite number of points. 
 The distance between the sample points, $h$, is the same as the fixed $h$ in the finite
 differences method. Lets consider the two-dimensional Poisson equation $\nabla^2
 u(x, y) = f(x, y)$. We use the central difference approximation to sample
@@ -105,7 +105,7 @@ A = \begin{bmatrix}
  \vdots &   &   & \ddots & \vdots \\
  0 & \cdots & \cdots & I & B 
 \end{bmatrix}
-~~
+ ~ where ~ 
 B = \begin{bmatrix}
 -4 & 1 & 0 & \cdots & 0 \\
  1 &-4 & 1 &   & \vdots \\
