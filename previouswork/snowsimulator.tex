@@ -1,17 +1,18 @@
 \section{Snow Simulator}
 
 The snow simulator has been developed over several years by different students in 
-the HPC-lab at NTNU. It simulates a finite number of snow particles and how they 
-are affected by the wind and terrain. 
+the HPC-lab at NTNU as a part of their specialization project or master thesis. 
+It simulates a finite number of snow particles and how they are affected by the 
+wind and terrain. 
 
 \subsection{History}
 
-The snow simulator was originally developed  by Ingar Saltvik for his master
-thesis \emph{"Parallel Methods for Real-Time  Visualization of Snow"}
-\cite{originalSnowThesis}. Saltvik's implementation was  designed for multi-core
-CPUs and achieved real-time performance for tens of  thousands snow particles
+The snow simulator was originally developed by Ingar Saltvik for his master
+thesis \emph{"Parallel Methods for Real-Time Visualization of Snow"}
+\cite{originalSnowThesis}. Saltvik's implementation was designed for multi-core
+CPUs and achieved real-time performance for tens of thousands snow particles
 and unknowns for the wind simulation. Figure \ref{fig:originalSnow} shows a 
-screenshot of this snow simulator, obtained from DAIM\footnote{\url{http://daim.idi.ntnu.no/}}.
+screenshot of this snow simulator.
 
 \begin{figure}[ht]
 	\center
@@ -20,13 +21,25 @@ screenshot of this snow simulator, obtained from DAIM\footnote{\url{http://daim.
 	\label{fig:originalSnow}
 \end{figure}
 
-The snow simulator was later ported to the GPU by Robin Eidissen for his master 
-thesis \emph{"Utilizing GPUs for Real-Time Visualization of Snow"}\cite{gpuSnowThesis}.
+The snow simulator was later ported to the GPU using Nvidia's CUDA by Robin 
+Eidissen for his master thesis \emph{"Utilizing GPUs for Real-Time Visualization of Snow"}\cite{gpuSnowThesis}.
 Eidissen's implementation achieved real-time performance with more than two million 
 snow particles and four million unknowns in the wind simulation. 
 
-TODO: Write about the other master theses and specialization projects that 
-have worked on the snow simulator
+Alexander Gjermundsen\cite{lbmWind} compared the previously implemented computational fluid 
+dynamics solver with a solver using the Lattice Boltzmann method and Joel Chellian\cite{fermi} 
+improved this implementation by tuning it for GPU's with Nvidia's Fermi architecture. 
+Øystein Eklund Krog\cite{avalanche1} implemented avalanche simulations into the snow simulator 
+using smoothing particle hydrodynamics on the GPU. 
+Hallgeir Lien\cite{road} implemented a road generation algorithm as a part of the snow 
+simulator and a USGS DEM to RAW height map converter, making it possible to use 
+real-world maps in the snow simulator. 
+Frederik Magnus Johansen Vestre\cite{openclSnowThesis} ported the snow simulator to GPUs designed for 
+mobile phones and tablets using OpenCL and compared the performance of the CPU and 
+GPU when using OpenCL.
+Kjetil Babington\cite{snowTerrainThesis} improved the terrain rendering and updated the collision detection 
+between the snow particles and the terrain. 
+
 
 \begin{figure}[ht]
 	\center
@@ -34,19 +47,6 @@ have worked on the snow simulator
 	\caption{Current snow simulator implementation.}
 	\label{fig:gpuSnow}
 \end{figure}
-
-%The following master theses have done work on the snow simulator:
-%
-%\begin{itemize}
-%	\item Enhancing and Porting the HPC-Lab Snow Simulator to OpenCL on Mobile Platforms
-%	\cite{openclSnowThesis}
-%	\item Terrain Rendering Techniques for the HPC-Lab Snow Simulator\cite{snowTerrainThesis}
-%	\item Enhancing the HPC-Lab Snow Simulator with More Realistic Terrains and Other Interactive Features
-%	\cite{realisticSnowTerrainThesis}
-%	\item Ray Tracing for Simulation of Wireless Networks in 3D Scenes\cite{rayTracingThesis}
-%	\item OpenACC-based Snow Simulation\cite{openAccThesis}
-%	\item Avalanche Simulations using Fracture Mechanics on the GPU\cite{avalancheThesis}
-%\end{itemize}
 
 \subsection{Overview}
 

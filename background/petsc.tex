@@ -51,7 +51,7 @@ and $MatSetOptions$ functions and specifying the type by adding $-vec\_type$ and
 $-mat\_type$ along with a GPU type on the commandline during runtime. 
 
 All Krylov subspace methods implemented in PETSc function on the GPU and require 
-no copies between the CPU and GPU during a Krylov solve. With the exception that
+no copies between the CPU and GPU during a Krylov solve. With the exception
 of KSPIBCGS (Improved Stabilized version of BiConjugate Gradient Squared) is not
 implemented for the GPU, as this method requires direct access to the underlying 
 data stored in the vectors and would require a complete rewrite.
