@@ -22,8 +22,8 @@ distributed to several machines running in parallel.
 
 \subsection{Solvers}
 
-PETSc implements a large number of parallel numerical solvers, both for linear and 
-nonlinear equations and ordinary differential equation solvers. For linear systems, 
+PETSc implements a large number of parallel numerical solvers, for linear and 
+nonlinear equations, as well as ordinary differential equations. For linear systems, 
 PETSc implements both direct and iterative methods. The iterative methods implemented 
 in PETSc are Krylov subspace methods, discussed in the section for linear solvers.
 A complete list of the linear solvers implemented by PETSc can be found on the 
@@ -34,7 +34,7 @@ PETSc webpage\footnote{\url{http://www.mcs.anl.gov/petsc/documentation/linearsol
 GPGPU stands for general purpose computing on graphics processing units. It was 
 first implemented as a part of PETSc in 2010\cite{minden2010preliminary} by Victor 
 Minden et al. PETSc can utilize CUDA through Thrust\footnote{\url{http://thrust.github.io/}} 
-and Cusp\footnote{http://cusplibrary.github.io/} and OpenCL with ViennaCL
+and Cusp\footnote{\url{http://cusplibrary.github.io/}} and OpenCL with ViennaCL
 \footnote{\url{http://viennacl.sourceforge.net/}}. PETSc's installation instructions 
 points out that OpenCL is less a burden on the build system than CUDA, and makes 
 installation easier as it works with any host compiler. 
