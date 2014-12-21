@@ -9,30 +9,36 @@ In computational fluid dynamics, the Navier-Stokes equations are used to describ
 fluid flow. In the Background chapter this equation was reduced to the 
 incompressible Euler equation by assuming zero viscosity and a density equal to 
 one. Further more it is assumed that the contribution of external forces like 
-gravity are negligible. These assumptions leads to the following equations. 
+gravity are negligible. In three dimensions, these assumptions leads to the 
+following equations. 
 
 \begin{equation} 
 	\tag{momentum equation}
-	\pOne{t}u  = -(u \cdot \nabla)u - \nabla p
+	\pOne{t}u(x, y, z)  = -(u(x, y, z) \cdot \nabla)u(x, y, z) - \nabla p(x, y, z)
 \end{equation}
 
 \begin{equation}
 	\tag{continuity equation}
-	\nabla \cdot u = 0
+	\nabla \cdot u(x, y, z) = 0
 \end{equation}
 
-$u$ is the wind velocity field, a three dimensional field of three dimensional 
-velocity vectors. $p$ is the pressure field, a three dimensional field of scalar 
-values. The momentum equation is an expression for the change in velocity of the
+$u(x, y, z)$ is the wind velocity field, a three dimensional field of three
+dimensional velocity vectors. $p(x, y, z)$ is the pressure field, a three
+dimensional field of scalar values. In the following derivations $u$ is short
+hand notation for $u(x, y, z)$ and $p$ short hand for $p(u, x, y)$. The full
+notation will only be used when writing down the final equations that will be 
+used in the wind simulator.
+
+The momentum equation is an expression for the change in velocity of the
 fluid. Given an initial velocity $u_n$ at time $t_n$, we can compute the velocity 
 $u_{n+1}$ at time $t_{n+1}$ with Euler integration.
 
-$$ u_{n+1} = u_n + \pOne{t}u_n \cdot \delta t $$
+$$ u_{n+1} = u_n + \pOne{t}u_n \delta t $$
 
 Here $n$ is the time step and $\delta t$ is the time difference between time step 
 $n$ and $n+1$. Plugging in the momentum equation leads to the following expression.
 
-$$ u_{n+1} = u_n + \big( -(u_n \cdot \nabla)u_n - \nabla p_n \big) \cdot \delta t $$
+$$ u_{n+1} = u_n + \big( -(u_n \cdot \nabla)u_n - \nabla p_n \big) \delta t $$
 
 $$ u_{n+1} = u_n - (u_n \cdot \nabla)u_n \delta t - \nabla p_n \delta t $$
 
@@ -59,9 +65,7 @@ describes the fluid's ability to transport velocities along it's own velocity
 field. This step calculates a temporary velocity field that is required to solve
 the Poisson equation for the pressure field.
 
-$$ \nabla^2 p_n = \nabla \cdot u^* $$
-
-$$u^* = -(u_n \cdot \nabla)u_n$$
+$$ \nabla^2 p_n = - \nabla \cdot (u_n \cdot \nabla)u_n = \nabla \cdot u^* $$
 
 When written out for each of the three dimensions for the wind simulation, the
 equation becomes
@@ -100,14 +104,15 @@ The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^
 To create the $b$ vector the discrete divergence of $u^*$ must be computed. The 
 $b$ vector has $N$ entries, indexed with $i \in (0, n_x-1)$, $j \in (0, n_y-1)$,
 $k \in (0, n_z-1)$. The step length between each sample point in the x, y and z
-dimension is given as $h_x = \frac{1}{n_x}$, $h_y = \frac{1}{n_y}$, 
-$h_z = \frac{1}{n_z}$.
+dimension is given as 
 
-$$ b_{i,j,k} = \nabla \cdot u^*_{i,j,k} = \nabla \cdot [x, y, z]_{i,j,k} = 
-\Big( \pOneD{x_{i,j,k}}{x} + \pOneD{y_{i,j,k}}{y} + \pOneD{z_{i,j,k}}{z} \Big) $$
+$$ h_x = \frac{1}{n_x}, ~ h_y = \frac{1}{n_y}, ~ h_z = \frac{1}{n_z} $$
 
 The partial derivatives can be approximated using a finite difference approximation. 
 Here the second order central difference approximation is used.
+
+$$ b_{i,j,k} = \nabla \cdot u^*(ih_x, jh_y, kh_z) = \nabla \cdot [x, y, z]_{i,j,k} = 
+\Big( \pOneD{x_{i,j,k}}{x} + \pOneD{y_{i,j,k}}{y} + \pOneD{z_{i,j,k}}{z} \Big) $$
 
 $$ \pOneD{x_{i,j,k}}{x} = \frac{x_{i+1,j,k} - x_{i-1,j,k}}{2h_x} $$
 $$ \pOneD{y_{i,j,k}}{y} = \frac{y_{i,j+1,k} - y_{i,j-1,k}}{2h_y} $$
@@ -121,9 +126,14 @@ TODO: Stuff
 
 Using the pressure field calculated earlier we calculate the final term of the 
 momentum equation, $-\nabla p$. The gradient of the pressure field is discretized 
-using the second order central difference approximation. 
+using the second order central difference approximation to approximate the 
+partial derivatives. $p_{i,j,k}$ is short hand notation for $p(ih_x, jh_y, kh_z)$.
 
-$$ -(\nabla p)_{i,j,k} = - $$
+$$ (-\nabla p)_{i,j,k} = -\Big( \pOneD{p_{i,j,k}}{x}, \pOneD{p_{i,j,k}}{y}, \pOneD{p_{i,j,k}}{z} \Big) $$
+
+$$ \pOneD{p_{i,j,k}}{x} = \frac{p_{i+1,j,k} - p_{i-1,j,k}}{h_x} $$
+$$ \pOneD{p_{i,j,k}}{y} = \frac{p_{i,j+1,k} - p_{i,j-1,k}}{h_y} $$
+$$ \pOneD{p_{i,j,k}}{z} = \frac{p_{i,j,k+1} - p_{i,j,k-1}}{h_z} $$
 
 \subsection{Boundary Conditions}
 
