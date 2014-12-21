@@ -94,7 +94,7 @@ specified by the boundary conditions of the problem. The boundary conditions
 are discussed later. This means that the number of internal points, or degrees of
 freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
 
-\subsubsection{$b$ vector}
+\subsubsection{Create the $b$ Vector}
 
 The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$.
 To create the $b$ vector the discrete divergence of $u^*$ must be computed. The 
@@ -104,10 +104,21 @@ $k \in (0, n_z-1)$.
 $$ b_{i,j,k} = \nabla \cdot u^*_{i,j,k} = \nabla \cdot [x, y, z]_{i,j,k} = 
 \Big( \pOneD{x_{i,j,k}}{x} + \pOneD{y_{i,j,k}}{y} + \pOneD{z_{i,j,k}}{z} \Big) $$
 
-The partial derivatives can be approximated using a second order 
-central difference approximation.
+The partial derivatives can be approximated using a finite difference approximation. 
+Here the second order central difference approximation is used.
 
-$$ b_{i,j,k} =  $$
+$$ \pOneD{x_{i,j,k}}{x} = \frac{x_{i+1,j,k} - x_{i-1,j,k}}{2h_x} $$
+$$ \pOneD{y_{i,j,k}}{y} = \frac{y_{i,j+1,k} - y_{i,j-1,k}}{2h_y} $$
+$$ \pOneD{z_{i,j,k}}{z} = \frac{z_{i,j,k+1} - z_{i,j,k-1}}{2h_z} $$
+
+\subsubsection{Solving the Poisson Equation}
+
+TODO: Stuff
 
 \subsection{Projection}
+
+
+
+\subsection{Boundary Conditions}
+
 
