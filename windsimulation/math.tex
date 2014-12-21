@@ -70,7 +70,7 @@ $$ \nabla^2 p_n = - \nabla \cdot (u_n \cdot \nabla)u_n = \nabla \cdot u^* $$
 When written out for each of the three dimensions for the wind simulation, the
 equation becomes
 
-$$ u^* = (u^*_x, u^*_y, u^*_z) $$
+$$ u^* = [u^*_x, u^*_y, u^*_z] $$
 $$ u^*_x = - \Big( \pOneD{u_x^2}{x} + \pOneD{u_x u_y}{y} + \pOneD{u_x u_z}{z}\Big) $$
 $$ u^*_y = - \Big( \pOneD{u_x u_y}{x} + \pOneD{u_y^2}{y} + \pOneD{u_y u_z}{z}\Big) $$
 $$ u^*_z = - \Big( \pOneD{u_x u_z}{x} + \pOneD{u_y u_z}{y} + \pOneD{u_z^2}{z}\Big) $$
@@ -137,4 +137,17 @@ $$ \pOneD{p_{i,j,k}}{z} = \frac{p_{i,j,k+1} - p_{i,j,k-1}}{h_z} $$
 
 \subsection{Boundary Conditions}
 
+For the purpose of the wind simulation the wind velocity on the boundary of the
+domain is set to some constant values set by the user. This means that the flow
+into and out of the domain defines the velocity field, except for on the border
+of the terrain where the wind velocity normal to the boundary is set to 0.
 
+The boundary conditions were specified the same way as in Saltvik's paper
+\cite{originalSnowThesis}, where the boundary conditions are based 
+on the method from Realistic Modelling of Falling and Accumulating Snow, a master
+thesis by Aagaard et al\cite{danishSnowThesis}. 
+
+For the pressure field Neumann boundary conditions are used. This means that
+the normal pressure gradient along the boundary is 0. This is done by setting
+the pressure on the boundary to be equal to the pressure on the inside of the 
+boundary.
