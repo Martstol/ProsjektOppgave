@@ -47,8 +47,8 @@ $$ \nabla^2 p_n = - \nabla (u_n \cdot \nabla)u_n $$
 
 The equation for pressure is the Poisson equation. 
 
-Calculating the velocity at time step $n+1$ requires three steps. Advection, 
-solving the Poisson equation and projection.
+Calculating the velocity at time step $n+1$ requires three steps, advection, 
+solving the Poisson equation, and projection.
 
 \subsection{Advection}
 
@@ -56,6 +56,8 @@ Advection is the first term of the momentum equation, $-(u \cdot \nabla)u$ which
 describes the fluid's ability to transport velocities along it's own velocity 
 field. This step calculates a temporary velocity field that is required to solve
 the Poisson equation for the pressure field.
+
+$$ \nabla^2 p_n = \nabla u^* $$
 
 $$u^* = -(u_n \cdot \nabla)u_n$$
 
@@ -66,6 +68,8 @@ $$ u^* = (u^*_x, u^*_y, u^*_z) $$
 $$ u^*_x = - \Big( \pOneD{u_x^2}{x} + \pOneD{u_x u_y}{y} + \pOneD{u_x u_z}{z}\Big) $$
 $$ u^*_y = - \Big( \pOneD{u_x u_y}{x} + \pOneD{u_y^2}{y} + \pOneD{u_y u_z}{z}\Big) $$
 $$ u^*_z = - \Big( \pOneD{u_x u_z}{x} + \pOneD{u_y u_z}{y} + \pOneD{u_z^2}{z}\Big) $$
+
+
 
 \subsection{Poisson equation}
 
