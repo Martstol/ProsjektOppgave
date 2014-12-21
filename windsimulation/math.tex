@@ -131,9 +131,9 @@ partial derivatives. $p_{i,j,k}$ is short hand notation for $p(ih_x, jh_y, kh_z)
 
 $$ (-\nabla p)_{i,j,k} = -\Big( \pOneD{p_{i,j,k}}{x}, \pOneD{p_{i,j,k}}{y}, \pOneD{p_{i,j,k}}{z} \Big) $$
 
-$$ \pOneD{p_{i,j,k}}{x} = \frac{p_{i+1,j,k} - p_{i-1,j,k}}{h_x} $$
-$$ \pOneD{p_{i,j,k}}{y} = \frac{p_{i,j+1,k} - p_{i,j-1,k}}{h_y} $$
-$$ \pOneD{p_{i,j,k}}{z} = \frac{p_{i,j,k+1} - p_{i,j,k-1}}{h_z} $$
+$$ \pOneD{p_{i,j,k}}{x} = \frac{p_{i+1,j,k} - p_{i-1,j,k}}{2h_x} $$
+$$ \pOneD{p_{i,j,k}}{y} = \frac{p_{i,j+1,k} - p_{i,j-1,k}}{2h_y} $$
+$$ \pOneD{p_{i,j,k}}{z} = \frac{p_{i,j,k+1} - p_{i,j,k-1}}{2h_z} $$
 
 \subsection{Boundary Conditions}
 
