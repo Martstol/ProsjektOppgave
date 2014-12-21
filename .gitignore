@@ -21,5 +21,6 @@
 *.mtc1
 *.out
 *.synctex.gz
+*.synctex.gz(busy)
 *.pdf
 Thumbs.db
