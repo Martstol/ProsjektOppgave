@@ -99,7 +99,9 @@ freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
 The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$.
 To create the $b$ vector the discrete divergence of $u^*$ must be computed. The 
 $b$ vector has $N$ entries, indexed with $i \in (0, n_x-1)$, $j \in (0, n_y-1)$,
-$k \in (0, n_z-1)$.
+$k \in (0, n_z-1)$. The step length between each sample point in the x, y and z
+dimension is given as $h_x = \frac{1}{n_x}$, $h_y = \frac{1}{n_y}$, 
+$h_z = \frac{1}{n_z}$.
 
 $$ b_{i,j,k} = \nabla \cdot u^*_{i,j,k} = \nabla \cdot [x, y, z]_{i,j,k} = 
 \Big( \pOneD{x_{i,j,k}}{x} + \pOneD{y_{i,j,k}}{y} + \pOneD{z_{i,j,k}}{z} \Big) $$
@@ -117,7 +119,11 @@ TODO: Stuff
 
 \subsection{Projection}
 
+Using the pressure field calculated earlier we calculate the final term of the 
+momentum equation, $-\nabla p$. The gradient of the pressure field is discretized 
+using the second order central difference approximation. 
 
+$$ -(\nabla p)_{i,j,k} = - $$
 
 \subsection{Boundary Conditions}
 
