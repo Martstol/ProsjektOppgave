@@ -1,12 +1,12 @@
 \section{Math}
 
 The math for the wind simulation is based on the computational fluid dynamics
-model described in the background chapter. This model was included in the first 
+model described in the Background chapter. This model was included in the first 
 snow simulator by Saltvik\cite{originalSnowThesis} and later in the GPU 
 implementation by Eidissen\cite{gpuSnowThesis}.
 
 In computational fluid dynamics, the Navier-Stokes equations are used to describe 
-fluid flow. In the background chapter this equation was reduced to the 
+fluid flow. In the Background chapter this equation was reduced to the 
 incompressible Euler equation by assuming zero viscosity and a density equal to 
 one. Further more it is assumed that the contribution of external forces like 
 gravity are negligible. These assumptions leads to the following equations. 
@@ -18,7 +18,7 @@ gravity are negligible. These assumptions leads to the following equations.
 
 \begin{equation}
 	\tag{continuity equation}
-	\nabla u = 0
+	\nabla \cdot u = 0
 \end{equation}
 
 The momentum equation is an expression for the change in velocity of the fluid. 
@@ -37,13 +37,13 @@ $$ u_{n+1} = u_n - (u_n \cdot \nabla)u_n \delta t - \nabla p_n \delta t $$
 By inserting this expression into the momentum equation we can derive the
 expression for the pressure. 
 
-$$ \nabla u_{n+1} = 0 $$
+$$ \nabla \cdot u_{n+1} = 0 $$
 
-$$ \nabla u_n - \nabla (u_n \cdot \nabla)u_n \delta t - \nabla^2 p_n \delta t = 0 $$
+$$ \nabla \cdot u_n - \nabla \cdot (u_n \cdot \nabla)u_n \delta t - \nabla^2 p_n \delta t = 0 $$
 
-$$ \nabla^2 p_n \delta t = - \nabla (u_n \cdot \nabla)u_n \delta t $$
+$$ \nabla^2 p_n \delta t = - \nabla \cdot (u_n \cdot \nabla)u_n \delta t $$
 
-$$ \nabla^2 p_n = - \nabla (u_n \cdot \nabla)u_n $$
+$$ \nabla^2 p_n = - \nabla \cdot (u_n \cdot \nabla)u_n $$
 
 The equation for pressure is the Poisson equation. 
 
@@ -57,7 +57,7 @@ describes the fluid's ability to transport velocities along it's own velocity
 field. This step calculates a temporary velocity field that is required to solve
 the Poisson equation for the pressure field.
 
-$$ \nabla^2 p_n = \nabla u^* $$
+$$ \nabla^2 p_n = \nabla \cdot u^* $$
 
 $$u^* = -(u_n \cdot \nabla)u_n$$
 
@@ -69,9 +69,33 @@ $$ u^*_x = - \Big( \pOneD{u_x^2}{x} + \pOneD{u_x u_y}{y} + \pOneD{u_x u_z}{z}\Bi
 $$ u^*_y = - \Big( \pOneD{u_x u_y}{x} + \pOneD{u_y^2}{y} + \pOneD{u_y u_z}{z}\Big) $$
 $$ u^*_z = - \Big( \pOneD{u_x u_z}{x} + \pOneD{u_y u_z}{y} + \pOneD{u_z^2}{z}\Big) $$
 
-
+TODO: Stuff
 
 \subsection{Poisson equation}
+
+The Poisson equation has to be solved to get the value of the pressure field. 
+
+$$ \nabla^2 p_n = \nabla \cdot u^* $$
+
+This equation is solved numerically using the finite differences approximation
+introduced in the Background chapter. The Poisson equation can be rewritten as 
+a system of linear equations on the following form.
+
+$$ Ap = b $$
+
+Here $A$ is a matrix, $p$ is the pressure field represented as a vector and $b$
+is a vector calculated from $\nabla u^*$. The Poisson equation is discretized 
+by sampling the problem domain in $n_x+1$ points in the $x$ dimension, $n_y+1$
+points in the $y$ dimension and $n_z+1$ points in the $z$ dimension. The sample
+points on the border of the domain are boundary points that have their values
+specified by the boundary conditions of the problem. The boundary conditions
+are discussed later. This means that the number of internal points, or degrees of
+freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
+
+\subsubsection{$b$ vector}
+
+The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$
+
 
 \subsection{Projection}
 
