@@ -1,2 +1,73 @@
 \section{Math}
 
+The math for the wind simulation is based on the computational fluid dynamics
+model described in the background chapter. This model was included in the first 
+snow simulator by Saltvik\cite{originalSnowThesis} and later in the GPU 
+implementation by Eidissen\cite{gpuSnowThesis}.
+
+In computational fluid dynamics, the Navier-Stokes equations are used to describe 
+fluid flow. In the background chapter this equation was reduced to the 
+incompressible Euler equation by assuming zero viscosity and a density equal to 
+one. Further more it is assumed that the contribution of external forces like 
+gravity are negligible. These assumptions leads to the following equations. 
+
+\begin{equation} 
+	\tag{momentum equation}
+	\pOne{t}u  = -(u \cdot \nabla)u - \nabla p
+\end{equation}
+
+\begin{equation}
+	\tag{continuity equation}
+	\nabla u = 0
+\end{equation}
+
+The momentum equation is an expression for the change in velocity of the fluid. 
+Given an initial velocity $u_n$ at time $t_n$, we can compute the velocity 
+$u_{n+1}$ at time $t_{n+1}$ with Euler integration.
+
+$$ u_{n+1} = u_n + \pOne{t}u_n \cdot \delta t $$
+
+Here $n$ is the time step and $\delta t$ is the time difference between time step 
+$n$ and $n+1$. Plugging in the momentum equation leads to the following expression.
+
+$$ u_{n+1} = u_n + \big( -(u_n \cdot \nabla)u_n - \nabla p_n \big) \cdot \delta t $$
+
+$$ u_{n+1} = u_n - (u_n \cdot \nabla)u_n \delta t - \nabla p_n \delta t $$
+
+By inserting this expression into the momentum equation we can derive the
+expression for the pressure. 
+
+$$ \nabla u_{n+1} = 0 $$
+
+$$ \nabla u_n - \nabla (u_n \cdot \nabla)u_n \delta t - \nabla^2 p_n \delta t = 0 $$
+
+$$ \nabla^2 p_n \delta t = - \nabla (u_n \cdot \nabla)u_n \delta t $$
+
+$$ \nabla^2 p_n = - \nabla (u_n \cdot \nabla)u_n $$
+
+The equation for pressure is the Poisson equation. 
+
+Calculating the velocity at time step $n+1$ requires three steps. Advection, 
+solving the Poisson equation and projection.
+
+\subsection{Advection}
+
+Advection is the first term of the momentum equation, $-(u \cdot \nabla)u$ which
+describes the fluid's ability to transport velocities along it's own velocity 
+field. This step calculates a temporary velocity field that is required to solve
+the Poisson equation for the pressure field.
+
+$$u^* = -(u_n \cdot \nabla)u_n$$
+
+When written out for each of the three dimensions for the wind simulation, the
+equation becomes
+
+$$ u^* = (u^*_x, u^*_y, u^*_z) $$
+$$ u^*_x = - \Big( \pOneD{u_x^2}{x} + \pOneD{u_x u_y}{y} + \pOneD{u_x u_z}{z}\Big) $$
+$$ u^*_y = - \Big( \pOneD{u_x u_y}{x} + \pOneD{u_y^2}{y} + \pOneD{u_y u_z}{z}\Big) $$
+$$ u^*_z = - \Big( \pOneD{u_x u_z}{x} + \pOneD{u_y u_z}{y} + \pOneD{u_z^2}{z}\Big) $$
+
+\subsection{Poisson equation}
+
+\subsection{Projection}
+
