@@ -79,7 +79,7 @@ The Poisson equation has to be solved to get the value of the pressure field.
 
 $$ \nabla^2 p_n = \nabla \cdot u^* $$
 
-This equation is solved numerically using the finite differences approximation
+This equation is solved numerically using the finite difference approximation
 introduced in the Background chapter. The Poisson equation can be rewritten as 
 a system of linear equations on the following form.
 
@@ -97,9 +97,17 @@ freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
 \subsubsection{$b$ vector}
 
 The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$.
-To create the $b$ vector the discrete divergence of $u^*$ must be computed. 
+To create the $b$ vector the discrete divergence of $u^*$ must be computed. The 
+$b$ vector has $N$ entries, indexed with $i \in (0, n_x-1)$, $j \in (0, n_y-1)$,
+$k \in (0, n_z-1)$.
 
-$$ \nabla \cdot u^* =  $$
+$$ b_{i,j,k} = \nabla \cdot u^*_{i,j,k} = \nabla \cdot [x, y, z]_{i,j,k} = 
+\Big( \pOneD{x_{i,j,k}}{x} + \pOneD{y_{i,j,k}}{y} + \pOneD{z_{i,j,k}}{z} \Big) $$
+
+The partial derivatives can be approximated using a second order 
+central difference approximation.
+
+$$ b_{i,j,k} =  $$
 
 \subsection{Projection}
 

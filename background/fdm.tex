@@ -22,11 +22,11 @@ the forward difference divided by $h$ approximates the derivative when $h$ is sm
 
 $$u'(x) \approx \frac{u(x+h) - u(x)}{h}$$
 
-The second order derivative can be approximated by applying the finite difference 
+The second derivative can be approximated by applying the finite difference 
 approximation to each term in the already derived expression for the approximation. 
 For the central difference approximation another central difference approximation 
 is applied to $u'(x + \frac{1}{2}h)$ and $u'(x - \frac{1}{2}h)$. This results in 
-the following second order central difference approximation:
+the following central difference approximation:
 
 $$u''(x) \approx \frac{\delta_h^2u(x)}{h^2} = \frac{u(x+h) - 2u(x) + u(x-h)}{h^2}$$
 
