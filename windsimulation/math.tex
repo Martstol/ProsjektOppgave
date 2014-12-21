@@ -21,8 +21,10 @@ gravity are negligible. These assumptions leads to the following equations.
 	\nabla \cdot u = 0
 \end{equation}
 
-The momentum equation is an expression for the change in velocity of the fluid. 
-Given an initial velocity $u_n$ at time $t_n$, we can compute the velocity 
+$u$ is the wind velocity field, a three dimensional field of three dimensional 
+velocity vectors. $p$ is the pressure field, a three dimensional field of scalar 
+values. The momentum equation is an expression for the change in velocity of the
+fluid. Given an initial velocity $u_n$ at time $t_n$, we can compute the velocity 
 $u_{n+1}$ at time $t_{n+1}$ with Euler integration.
 
 $$ u_{n+1} = u_n + \pOne{t}u_n \cdot \delta t $$
@@ -96,6 +98,8 @@ freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
 
 The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$.
 To create the $b$ vector the discrete divergence of $u^*$ must be computed. 
+
+$$ \nabla \cdot u^* =  $$
 
 \subsection{Projection}
 
