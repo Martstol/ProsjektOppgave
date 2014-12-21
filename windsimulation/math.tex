@@ -84,7 +84,7 @@ a system of linear equations on the following form.
 $$ Ap = b $$
 
 Here $A$ is a matrix, $p$ is the pressure field represented as a vector and $b$
-is a vector calculated from $\nabla u^*$. The Poisson equation is discretized 
+is a vector calculated from $\nabla \cdot u^*$. The Poisson equation is discretized 
 by sampling the problem domain in $n_x+1$ points in the $x$ dimension, $n_y+1$
 points in the $y$ dimension and $n_z+1$ points in the $z$ dimension. The sample
 points on the border of the domain are boundary points that have their values
@@ -94,8 +94,8 @@ freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
 
 \subsubsection{$b$ vector}
 
-The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$
-
+The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$.
+To create the $b$ vector the discrete divergence of $u^*$ must be computed. 
 
 \subsection{Projection}
 
