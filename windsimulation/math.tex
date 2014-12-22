@@ -135,14 +135,14 @@ becomes
 $$ \pTwoD{p}{x} + \pTwoD{p}{y} + \pTwoD{p}{z} = \pOneD{u^*_x}{x} + \pOneD{u^*_y}{y} + \pOneD{u^*_z}{z} $$
 
 This equation is then discretized using the finite difference method described
-in the Background chapter. For the left hand side the central difference for 
+in the Background chapter. For the left hand side the approximation derived for 
 the second derivative is used.
 
 $$ \pTwoD{p}{x} = \frac{p_{i+1, j, k} - 2p_{i, j, k} + p_{i-1, j, k}}{h_x^2} $$
 $$ \pTwoD{p}{y} = \frac{p_{i, j+1, k} - 2p_{i, j, k} + p_{i, j-1, k}}{h_y^2} $$
 $$ \pTwoD{p}{z} = \frac{p_{i, j, k+1} - 2p_{i, j, k} + p_{i, j, k+1}}{h_z^2} $$
 
-For the right hand side the second order central difference is used.
+For the right hand side the central difference approximation is used.
 
 $$ \pOneD{u^*_x}{x} = \frac{(u^*_{i+1, j, k})_x - (u^*_{i-1, j, k})_x}{2h_x} $$
 $$ \pOneD{u^*_y}{y} = \frac{(u^*_{i, j+1, k})_y - (u^*_{i, j-1, k})_y}{2h_y} $$
