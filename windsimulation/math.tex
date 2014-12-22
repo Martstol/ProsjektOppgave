@@ -14,7 +14,7 @@ following equations.
 
 \begin{equation} 
 	\tag{momentum equation}
-	\pOne{t}u(x, y, z)  = -(u(x, y, z) \cdot \nabla)u(x, y, z) - \nabla p(x, y, z)
+	\pOne{t}u(x, y, z) = -(u(x, y, z) \cdot \nabla)u(x, y, z) - \nabla p(x, y, z)
 \end{equation}
 
 \begin{equation}
@@ -60,7 +60,7 @@ solving the Poisson equation, and projection.
 
 \subsection{Advection}
 
-Advection is the first term of the momentum equation, $-(u \cdot \nabla)u$ which
+Advection is the first term of the momentum equation, $-(u \cdot \nabla)u$, and
 describes the fluid's ability to transport velocities along it's own velocity 
 field. This step calculates a temporary velocity field that is required to solve
 the Poisson equation for the pressure field.
@@ -75,7 +75,17 @@ $$ u^*_x = - \Big( \pOneD{u_x^2}{x} + \pOneD{u_x u_y}{y} + \pOneD{u_x u_z}{z}\Bi
 $$ u^*_y = - \Big( \pOneD{u_x u_y}{x} + \pOneD{u_y^2}{y} + \pOneD{u_y u_z}{z}\Big) $$
 $$ u^*_z = - \Big( \pOneD{u_x u_z}{x} + \pOneD{u_y u_z}{y} + \pOneD{u_z^2}{z}\Big) $$
 
-TODO: Stuff
+These partial differential equations can be approximated using a finite difference
+approximation. However this method may be numerically unstable. Instead another
+approach described by Saltvik\cite{originalSnowThesis} has been implemented.
+
+The idea behind this approach is to model the fluid as a set of particles and to
+trace the particles path through the velocity field. If $x$ is a point in the
+three dimensional domain, the fluid's velocity at that point for time step $n$
+is given by $u(x)_n$. The velocity of the particle at position $x$ is calculated
+by backtracking through the velocity field as illustrated in figure .
+
+$$ u^*(x) = u(x - u(x)_n \delta t) $$
 
 \subsection{Poisson equation}
 
