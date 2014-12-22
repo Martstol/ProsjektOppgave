@@ -1,49 +1,47 @@
 \section{Finite Difference Method}
 
-TODO: Second order finite differences % http://www.uio.no/studier/emner/matnat/ifi/INF2340/v05/foiler/sim01.pdf
-
 The finite difference method (FDM) is a numerical method used to find an approximate 
 solution to differential equations. It works by creating a discrete approximation 
-of the derivative and using this approximation to write the differential equation 
-as a system of linear equations.
+of the derivative with a finite difference approximation and using this approximation
+to write the differential equation as a system of linear equations.
 
-There are different versions of the finite difference method.
+\subsection{Finite Difference}
+
+There are three different finite difference approximations.
+
 \begin{itemize}
-	\item Forward difference, $\Delta_hu(x) = u(x+h) - u(x)$
-	\item Backward difference, $\nabla_hu(x) = u(x) - u(x - h)$
-	\item Central difference, $\delta_hu(x) = u(x + \frac{1}{2}h) - u(x - \frac{1}{2}h)$
+	\item Forward difference, $u'(x) \approx \frac{u(x+h) - u(x)}{h}$
+	\item Backward difference, $u'(x) \approx \frac{u(x) - u(x - h)}{h}$
+	\item Central difference, $u'(x) \approx \frac{u(x + h) - u(x - h)}{2h}$
 \end{itemize}
 
-It is easy to see the connection of the forward difference and the definition of 
-the derivative.
+The forward and backward difference are first order approximations, since the
+error in the approximation is $O(h)$. The central difference is a second order
+approximation because the error is $O(h^2)$.
 
-$$u'(x) = \lim_{h \to 0} \frac{u(x+h) - u(x)}{h}$$
+The second derivative can be approximated by applying a finite difference
+approximation twice. Applying the central difference approximation to the second
+derivative gives the following expression.
 
-We give $h$ a fixed, non-zero, value instead of having $h$ approach 0. Therefore 
-the forward difference divided by $h$ approximates the derivative when $h$ is small.
+$$ u''(x) \approx \frac{u'(x + \frac{h}{2}) - u'(x - \frac{h}{2})}{h} $$
 
-$$u'(x) \approx \frac{u(x+h) - u(x)}{h}$$
+Another central difference approximation is applied to $u'(x + \frac{h}{2})$ and
+$u'(x - \frac{h}{2})$. This results in the following finite difference
+approximation for the second derivative.
 
-The second derivative can be approximated by applying the finite difference 
-approximation to each term in the already derived expression for the approximation. 
-For the central difference approximation another central difference approximation 
-is applied to $u'(x + \frac{1}{2}h)$ and $u'(x - \frac{1}{2}h)$. This results in 
-the following central difference approximation:
+$$u''(x) \approx \frac{u(x+h) - 2u(x) + u(x-h)}{h^2}$$
 
-$$u''(x) \approx \frac{\delta_h^2u(x)}{h^2} = \frac{u(x+h) - 2u(x) + u(x-h)}{h^2}$$
-
-When applied to higher dimensions, it is necessary to choose a value for h in 
-each dimension. However we can simplify the resulting equation by choosing the same h. 
-In three dimensions the approximation looks like this:
+When applied to equations of higher dimensions it becomes necessary to choose a
+value for h for each dimension.
 
 $$(\pTwo{x} + \pTwo{y} + \pTwo{z}) u(x, y, z) = \frac{\partial^2 u(x, y, z)}{\partial^2 x} 
 + \frac{\partial^2 u(x, y, z)}{\partial^2 y} + \frac{\partial^2 u(x, y, z)}{\partial^2 z}$$
 
-$$\frac{\partial^2 u(x, y, z)}{\partial^2 x} \approx \frac{u(x+h, y, z) - 2u(x, y, z) + u(x-h, y, z)}{h^2}$$
+$$\frac{\partial^2 u(x, y, z)}{\partial^2 x} \approx \frac{u(x+h_x, y, z) - 2u(x, y, z) + u(x-h_x, y, z)}{h_x^2}$$
 
-$$\frac{\partial^2 u(x, y, z)}{\partial^2 y} \approx \frac{u(x, y+h, z) - 2u(x, y, z) + u(x, y-h, z)}{h^2}$$
+$$\frac{\partial^2 u(x, y, z)}{\partial^2 y} \approx \frac{u(x, y+h_y, z) - 2u(x, y, z) + u(x, y-h_y, z)}{h_y^2}$$
 
-$$\frac{\partial^2 u(x, y, z)}{\partial^2 z} \approx \frac{u(x, y, z+h) - 2u(x, y, z) + u(x, y, z-h)}{h^2}$$
+$$\frac{\partial^2 u(x, y, z)}{\partial^2 z} \approx \frac{u(x, y, z+h_z) - 2u(x, y, z) + u(x, y, z-h_z)}{h_z^2}$$
 
 This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}.
 
@@ -80,8 +78,8 @@ $$h = \frac{1}{n}$$
 $$x_i = ih, ~~~~ i = 0, 1, \dots, n$$
 $$y_j = jh, ~~~~ j = 0, 1, \dots, n$$
 
-We then denote the approximation of the value of $u(x_i, y_j)$ by $u_{i,j}$ and 
-$f(x_i, y_j)$ by $f_{i,j}$
+We use $u_{i,j}$ as shorthand notation for the of the value of $u(x_i, y_j)$ and
+$f_{i,j}$ for $f(x_i, y_j)$.
 
 $$ (\nabla^2 u)_{ij} \approx \frac{u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1}}{h^2} = f_{i,j} $$
 $$ u_{i+1,j} + u_{i,j+1} - 4u_{i,j} + u_{i-1,j} + u_{i,j-1} = h^2 f_{i,j} $$
