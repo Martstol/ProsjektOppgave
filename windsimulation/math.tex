@@ -152,8 +152,7 @@ $$ \pOneD{u^*_z}{z} = \frac{(u^*_{i, j, k+1})_z - (u^*_{i, j, k-1})_z}{2h_z} $$
 
 Using the pressure field calculated earlier we calculate the final term of the 
 momentum equation, $-\nabla p$. The gradient of the pressure field is discretized 
-using the second order central difference approximation to approximate the 
-partial derivatives. $p_{i,j,k}$ is short hand notation for $p(ih_x, jh_y, kh_z)$.
+using the central difference approximation to approximate the partial derivatives.
 
 $$ (-\nabla p)_{i,j,k} = -\Big( \pOneD{p_{i,j,k}}{x}, \pOneD{p_{i,j,k}}{y}, \pOneD{p_{i,j,k}}{z} \Big) $$
 
