@@ -65,7 +65,7 @@ describes the fluid's ability to transport velocities along it's own velocity
 field. This step calculates a temporary velocity field that is required to solve
 the Poisson equation for the pressure field.
 
-$$ \nabla^2 p_n = - \nabla \cdot (u_n \cdot \nabla)u_n = \nabla \cdot u^* $$
+$$ \nabla^2 p = - \nabla \cdot (u \cdot \nabla)u = \nabla \cdot u^* $$
 
 When written out for each of the three dimensions for the wind simulation, the
 equation becomes
@@ -81,21 +81,20 @@ approach described by Saltvik\cite{originalSnowThesis} has been implemented.
 
 The idea behind this approach is to model the fluid as a set of particles and to
 trace the particles path through the velocity field. If $x$ is a cell in the
-discrete grid, the velocity of the fluid in that cell at time step $n$ is given 
-by $u_n(x)$. The velocity of the particle in cell $x$ is calculated by tracing
-the particle's path backwards through the velocity field as illustrated in
-figure .
+discrete grid, the velocity of the fluid in that cell is given by $u(x)$. The
+velocity of the particle in cell $x$ is calculated by tracing the particle's path
+backwards through the velocity field as illustrated in figure \ref{fig:backtrace}.
 
 \begin{figure}[ht]
 	\center
 	\includegraphics[width=0.5\textwidth]{images/advect_back_trace}
 	\caption{On grid velocities are traced backwards in time.}
-	\label{fig:7ps}
+	\label{fig:backtrace}
 \end{figure}
 
-$$ u^*(x) = u_n(x - u_n(x) \delta t) $$
+$$ u^*(x) = u(x - u(x) \delta t) $$
 
-The velocity value at $ x - u_n(x) \delta t $ is interpolated from the nearest
+The velocity value at $ x - u(x) \delta t $ is interpolated from the nearest
 grid cells. This method is only stable if the time step is small enough, 
 otherwise several grid cells can be jumped over when tracing the particle's
 path. 
@@ -104,7 +103,7 @@ path.
 
 The Poisson equation has to be solved to get the value of the pressure field. 
 
-$$ \nabla^2 p_n = \nabla \cdot u^* $$
+$$ \nabla^2 p = \nabla \cdot u^* $$
 
 This equation is solved numerically using the finite difference approximation
 introduced in the Background chapter. The Poisson equation can be rewritten as 
@@ -119,31 +118,35 @@ points in the $y$ dimension and $n_z+1$ points in the $z$ dimension. The sample
 points on the border of the domain are boundary points that have their values
 specified by the boundary conditions of the problem. The boundary conditions
 are discussed later. This means that the number of internal points, or degrees of
-freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$.
-
-\subsubsection{Create the $b$ Vector}
-
-The right hand side of the Poisson equation for the pressure is $\nabla \cdot u^*$.
-To create the $b$ vector the discrete divergence of $u^*$ must be computed. The 
-$b$ vector has $N$ entries, indexed with $i \in (0, n_x-1)$, $j \in (0, n_y-1)$,
-$k \in (0, n_z-1)$. The step length between each sample point in the x, y and z
-dimension is given as 
+freedom, is $N = (n_x-1) \cdot (n_y-1) \cdot (n_z-1)$. The step length between 
+each sample point in the x, y and z dimension is given by 
 
 $$ h_x = \frac{1}{n_x}, ~ h_y = \frac{1}{n_y}, ~ h_z = \frac{1}{n_z} $$
 
-The partial derivatives can be approximated using a finite difference approximation. 
-Here the second order central difference approximation is used.
+For brevity's sake, $p_{i, j, k}$ is used as shorthand notation for 
+$p(ih_x, jh_y, kh_z)$. $u^*_{i, j, k}$ is used as shorthand notation for
+$u^*(ih_x, jh_y, kh_z)$.
 
-$$ b_{i,j,k} = \nabla \cdot u^*(ih_x, jh_y, kh_z) = \nabla \cdot [x, y, z]_{i,j,k} = 
-\Big( \pOneD{x_{i,j,k}}{x} + \pOneD{y_{i,j,k}}{y} + \pOneD{z_{i,j,k}}{z} \Big) $$
+\subsubsection{Linear System}
 
-$$ \pOneD{x_{i,j,k}}{x} = \frac{x_{i+1,j,k} - x_{i-1,j,k}}{2h_x} $$
-$$ \pOneD{y_{i,j,k}}{y} = \frac{y_{i,j+1,k} - y_{i,j-1,k}}{2h_y} $$
-$$ \pOneD{z_{i,j,k}}{z} = \frac{z_{i,j,k+1} - z_{i,j,k-1}}{2h_z} $$
+When written out for three dimensions, the expression for the Poisson equation
+becomes
 
-\subsubsection{Solving the Poisson Equation}
+$$ \pTwoD{p}{x} + \pTwoD{p}{y} + \pTwoD{p}{z} = \pOneD{u^*_x}{x} + \pOneD{u^*_y}{y} + \pOneD{u^*_z}{z} $$
 
-TODO: Stuff
+This equation is then discretized using the finite difference method described
+in the Background chapter. For the left hand side the central difference for 
+the second derivative is used.
+
+$$ \pTwoD{p}{x} = \frac{p_{i+1, j, k} - 2p_{i, j, k} + p_{i-1, j, k}}{h_x^2} $$
+$$ \pTwoD{p}{y} = \frac{p_{i, j+1, k} - 2p_{i, j, k} + p_{i, j-1, k}}{h_y^2} $$
+$$ \pTwoD{p}{z} = \frac{p_{i, j, k+1} - 2p_{i, j, k} + p_{i, j, k+1}}{h_z^2} $$
+
+For the right hand side the second order central difference is used.
+
+$$ \pOneD{u^*_x}{x} = \frac{(u^*_{i+1, j, k})_x - (u^*_{i-1, j, k})_x}{2h_x} $$
+$$ \pOneD{u^*_y}{y} = \frac{(u^*_{i, j+1, k})_y - (u^*_{i, j-1, k})_y}{2h_y} $$
+$$ \pOneD{u^*_z}{z} = \frac{(u^*_{i, j, k+1})_z - (u^*_{i, j, k-1})_z}{2h_z} $$
 
 \subsection{Projection}
 
