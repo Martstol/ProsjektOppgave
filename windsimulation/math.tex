@@ -80,12 +80,25 @@ approximation. However this method may be numerically unstable. Instead another
 approach described by Saltvik\cite{originalSnowThesis} has been implemented.
 
 The idea behind this approach is to model the fluid as a set of particles and to
-trace the particles path through the velocity field. If $x$ is a point in the
-three dimensional domain, the fluid's velocity at that point for time step $n$
-is given by $u(x)_n$. The velocity of the particle at position $x$ is calculated
-by backtracking through the velocity field as illustrated in figure .
+trace the particles path through the velocity field. If $x$ is a cell in the
+discrete grid, the velocity of the fluid in that cell at time step $n$ is given 
+by $u_n(x)$. The velocity of the particle in cell $x$ is calculated by tracing
+the particle's path backwards through the velocity field as illustrated in
+figure .
 
-$$ u^*(x) = u(x - u(x)_n \delta t) $$
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.5\textwidth]{images/advect_back_trace}
+	\caption{On grid velocities are traced backwards in time.}
+	\label{fig:7ps}
+\end{figure}
+
+$$ u^*(x) = u_n(x - u_n(x) \delta t) $$
+
+The velocity value at $ x - u_n(x) \delta t $ is interpolated from the nearest
+grid cells. This method is only stable if the time step is small enough, 
+otherwise several grid cells can be jumped over when tracing the particle's
+path. 
 
 \subsection{Poisson equation}
 
