@@ -1,3 +1,49 @@
-\section{C++ Wrapper}
+\section{C++ Wrappers}
+
+PETSc is written in the C programming language and features an object oriented
+design pattern, with all the disadvantages and advantages that entails. In order
+to write maintainable, high level code that follows C++ idioms, C++ wrapper
+classes have been created for the PETSc classes that was used in the
+implementation.
+
+The C++ wrappers serve the primary purpose of simplifying coding with PETSc in
+C++. This is achieved by utilizing namespaces, classes, RAII and exceptions.
+
+\subsection{Namespace}
+
+Namespace is a tool in C++ for avoiding name collisions.
+TODO: Short and general about namespaces
+
+All C++ wrapper functions and classes have been put in a separate namespace
+called $petscpp$, for PETSc plus plus.
+
+\subsection{RAII}
+
+RAII is short for Resource Acquisition Is Initialization and is a programming
+idiom used in C++. In RAII holding resources is tied to an object's lifetime,
+beginning at an object's creation and ending when the object is either manually
+destroyed or goes out of scope.
+
+\subsubsection{Constructor and Destructor}
 
 
+
+\subsubsection{Copy and Move}
+
+
+
+\subsection{Exceptions}
+
+All PETSc functions return and integer error code of the type PetscErrorCode.
+This is a typical method for handling errors in C as C does not have direct
+support for error handling. C++ on the other hand does offer error handling in
+the form of exceptions which has been used to handle errors in the PETSc C++
+wrapper library. If an error code different from 0 is returned, an exception
+is thrown with the 
+
+In practice many functions in PETSc always returns the value 0, which means that
+no error occurred. 
+In these cases the extra code made necessary by error checking is not needed.
+Because error handling is done internally in the C++ class functions, the
+programmer does not have to check if the PETSc function returns an error code
+every time the function is used.
