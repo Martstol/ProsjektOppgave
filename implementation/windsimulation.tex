@@ -74,9 +74,10 @@ the matrix, storage was allocated for the matrix using the PETSc function
 $MatSeqAIJSetPreallocation$. This increases the performance of the matrix
 initialization by several orders of magnitude and is essential for large problem
 sizes. If the storage is not preallocated, the matrix will be reallocated every
-time a new value is inserted.
-
-\subsubsection{Boundary Conditions}
+time a new value is inserted. For inserting values into the matrix, the function
+$MatSetValuesStencil$ was used. This function was used to insert one row of 
+values at a time. The values inserted are the coefficients of the pressure terms
+derived in chapter \ref{chap:windsim}, in the section on the Poisson equation.
 
 \subsubsection{Solver Setup}
 
