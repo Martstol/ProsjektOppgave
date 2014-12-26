@@ -7,7 +7,8 @@ classes have been created for the PETSc classes that was used in the
 implementation.
 
 The C++ wrappers serve the primary purpose of simplifying coding with PETSc in
-C++. This is achieved by utilizing namespaces, classes and exceptions.
+C++. This is achieved by putting all the PETSc wrapper functions and classes in
+a separate namespace and by utilizing classes and exceptions.
 
 The following C++ classes was created for the project:
 \begin{description}
@@ -54,14 +55,17 @@ destructor calls the Destroy function.
 
 \subsubsection{Copy}
 
-A large amount of data is stored in the vectors and matrix used for solving the
+A large amount of data is stored in the Vector and Matrix objects used for solving the
 Poisson equation, therefore we don't want any accidental copy operations.
 The default behavior for the copy constructor and assignment operator has
 therefore been deleted.
 
 \subsubsection{Move}
 
-
+As copying is not allowed, in order for functions to return Vector and Matrix
+objects the move constructor and assignment operator has been implemented.
+Move semantics was added in C++11 and allows the destination object to take
+ownership of the source objects data.
 
 \subsection{Exceptions}
 
