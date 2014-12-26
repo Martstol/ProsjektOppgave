@@ -1,11 +1,58 @@
 \section{Wind Simulation}
 
 This section will describe how the formulas derived in chapter \ref{chap:windsim}
-was implemented and how PETSc was used to solve the system of linear equations.
+for the wind simulation was implemented and how PETSc was used in the
+implementation. The wind simulation consists of three steps, advection, solving
+the Poisson equation and projection. 
+
+The wind simulator uses a number of data structures for storing the data used
+during simulation. Most data structures represent a three dimensional volume.
+The following are important data structures used by the wind simulation.
+\begin{description}
+	\item[A,] a PETSc matrix storing the $A$ matrix for the discretized Poisson
+		equation.
+	\item[b,] a PETSc vector storing the right-hand side of the discretized
+		Poisson equation.
+	\item[p,] a PETSc vector storing the solution to solving the discretized
+		Poisson equation. This vector represents a three dimensional volume
+		storing the pressure field for the wind simulation.
+	\item[velocity fields,] the velocity field represents a three dimensional
+		volume storing the wind velocity. There are three instances of the velocity
+		field. The velocity field from the previous iteration, the intermediate
+		velocity field calculated by the advection step and the new velocity
+		field calculated during this iteration.
+	\item[obstacles,] the obstacles vector represents a three dimensional volume
+		of integers where the bits are set depending on how the terrain is
+		formed. The first bit is set to 1 if the cell is blocked by the terrain,
+		while the next 26 bits stores obstacle information about the 26
+		neighboring cells.
+\end{description}
 
 \subsection{Advection}
 
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.6\textwidth]{images/trilinear_interpolation}
+	\caption{Illustration of trilinear interpolation. The value at the point
+	$C$ is linearly interpolated from the 8 corner points of the cube.}
+	\label{fig:trilinearinterpolation}
+\end{figure}
+
 \subsection{Solve Poisson Equation}
+
+The Poisson equation is solved using the KSP object from PETSc. KSP stands for
+Krylov subspace methods, discussed in the background chapter.
+
+\subsubsection{Creating the Linear System}
+
+The linear system $Ax = b$ consists of the matrix $A$, and the vectors $x$ and
+$b$. The vector $x$ is set to store the initial guess for the linear solver,
+which was chosen to be null vector, $x = 0$. The vector $b$ is the divergence of
+the result of the advected velocity field, $b = \nabla \cdot u^*$. How to
+calculate the values for $b$ is shown in chapter \ref{chap:windsim}, in the
+section on the Poisson equation. 
+
+\subsubsection{Solver Setup}
 
 \subsection{Projection}
 
