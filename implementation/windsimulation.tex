@@ -29,7 +29,7 @@ The following are important data structures used by the wind simulation.
 \end{description}
 The matrix $A$, and the vectors $b$ and $p$ as well as the velocity fields store
 additional elements for the boundary of the domain. If the problem domain has
-the dimensions $\{ n_x, n_y, n_z \}$ then three dimensional volumes have
+the dimensions $\{ n_x, n_y, n_z \}$ then the three dimensional volumes have
 $\{ n_x+2, n_y+2, n_z+2 \}$, where the entries on the border of the volumes are
 set based on the boundary conditions.
 
@@ -67,15 +67,13 @@ $b$. The vector $x$ is set to store the initial guess for the linear solver,
 which was chosen to be null vector, $x = 0$. The vector $b$ is the divergence of
 the result of the advected velocity field from the advection step, $b = \nabla
 \cdot u^*$. How to calculate the values for $b$ is shown in chapter 
-\ref{chap:windsim}, in the section on the Poisson equation. The matrix $A$ is
-...
+\ref{chap:windsim}, in the section on the Poisson equation.
 
 \subsubsection{Boundary Conditions}
 
-For $A$, $x$ and $b$ a halo 
-
-
 \subsubsection{Solver Setup}
+
+
 
 \subsection{Projection}
 
