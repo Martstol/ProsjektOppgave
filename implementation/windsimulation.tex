@@ -69,11 +69,16 @@ the result of the advected velocity field from the advection step, $b = \nabla
 \cdot u^*$. How to calculate the values for $b$ is shown in chapter 
 \ref{chap:windsim}, in the section on the Poisson equation.
 
+The matrix $A$ is a sparse banded symmetric matrix. Before inserting values into
+the matrix, storage was allocated for the matrix using the PETSc function
+$MatSeqAIJSetPreallocation$. This increases the performance of the matrix
+initialization by several orders of magnitude and is essential for large problem
+sizes. If the storage is not preallocated, the matrix will be reallocated every
+time a new value is inserted.
+
 \subsubsection{Boundary Conditions}
 
 \subsubsection{Solver Setup}
-
-
 
 \subsection{Projection}
 
