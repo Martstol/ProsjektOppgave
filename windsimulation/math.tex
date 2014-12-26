@@ -162,10 +162,11 @@ $$ \pOneD{p_{i,j,k}}{z} = \frac{p_{i,j,k+1} - p_{i,j,k-1}}{2h_z} $$
 
 With this the final expression for the next wind velocity becomes
 
-$$ u = u^* - \nabla p $$
+$$ u_{n+1} = u_n - u^* \delta t - \nabla p \delta t $$
 
 where $u^*$ is calculated in the advection step and $p$ is calculated by solving
-the Poisson equation.
+the Poisson equation. $u_{n+1}$ is the updated wind velocity and $u_n$ is the
+wind velocity from the previous time step.
 
 \subsection{Boundary Conditions}
 
