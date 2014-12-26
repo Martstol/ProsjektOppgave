@@ -60,11 +60,15 @@ predetermined values.
 The Poisson equation is solved using the KSP object from PETSc. KSP stands for
 Krylov subspace methods, discussed in the background chapter.
 
+\subsubsection{Solver Setup}
+
 The solver used can be specified on the command line when executing the program
-by setting the flag \emph{-ksp_type} and specifying which solver to use. If the 
+by setting the flag $-ksp_type$ and specifying which solver to use. If the 
 solver type is not specified the default solver will be used. For the
 implementation of PETSc used in this project this is GMRES, the General Minimum
 Residual method.
+
+\subsubsection{Creating the Linear System}
 
 The linear system $Ax = b$ consists of the matrix $A$, and the vectors $x$ and
 $b$. The vector $x$ is set to store the initial guess for the linear solver,
@@ -82,6 +86,13 @@ time a new value is inserted. For inserting values into the matrix, the function
 $MatSetValuesStencil$ was used. This function was used to insert one row of 
 values at a time. The values inserted are the coefficients of the pressure terms
 derived in chapter \ref{chap:windsim}, in the section on the Poisson equation.
+
+The boundary conditions for the Poisson equation when solving for the pressure
+field is described in chapter \ref{chap:windsim}, in the section on Boundary
+Conditions. The boundary conditions used are Neumann boundary conditions, which
+means that the normal pressure gradient along the boundary is 0. This is achieved
+by adjusting the pressure boundary cell values to be equal to the closest
+neighboring internal cell value after solving.
 
 \subsection{Projection}
 
