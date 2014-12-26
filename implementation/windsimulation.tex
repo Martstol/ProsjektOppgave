@@ -27,8 +27,20 @@ The following are important data structures used by the wind simulation.
 		while the next 26 bits stores obstacle information about the 26
 		neighboring cells.
 \end{description}
+The matrix $A$, and the vectors $b$ and $p$ as well as the velocity fields store
+additional elements for the boundary of the domain. If the problem domain has
+the dimensions $\{ n_x, n_y, n_z \}$ then three dimensional volumes have
+$\{ n_x+2, n_y+2, n_z+2 \}$, where the entries on the border of the volumes are
+set based on the boundary conditions.
 
 \subsection{Advection}
+
+The method used for calculating the value of the advection step was presented
+in chapter \ref{chap:windsim}. The method uses the wind velocity in each grid cell
+to trace an imaginary particle backwards in time to a new point. The wind velocity
+at this point is interpolated from the neighboring grid cells as illustrated in
+figure \ref{fig:trilinearinterpolation}. The resulting wind velocity is used as
+the advected velocity value.
 
 \begin{figure}[ht]
 	\center
@@ -37,6 +49,11 @@ The following are important data structures used by the wind simulation.
 	$C$ is linearly interpolated from the 8 corner points of the cube.}
 	\label{fig:trilinearinterpolation}
 \end{figure}
+
+The boundary conditions for the wind velocity is described in \ref{chap:windsim}
+in the Boundary Conditions section, the advected velocities are modified based on
+the obstacles data and on the border of the volume the velocities are set to
+predetermined values.
 
 \subsection{Solve Poisson Equation}
 
@@ -48,9 +65,15 @@ Krylov subspace methods, discussed in the background chapter.
 The linear system $Ax = b$ consists of the matrix $A$, and the vectors $x$ and
 $b$. The vector $x$ is set to store the initial guess for the linear solver,
 which was chosen to be null vector, $x = 0$. The vector $b$ is the divergence of
-the result of the advected velocity field, $b = \nabla \cdot u^*$. How to
-calculate the values for $b$ is shown in chapter \ref{chap:windsim}, in the
-section on the Poisson equation. 
+the result of the advected velocity field from the advection step, $b = \nabla
+\cdot u^*$. How to calculate the values for $b$ is shown in chapter 
+\ref{chap:windsim}, in the section on the Poisson equation. The matrix $A$ is
+...
+
+\subsubsection{Boundary Conditions}
+
+For $A$, $x$ and $b$ a halo 
+
 
 \subsubsection{Solver Setup}
 
