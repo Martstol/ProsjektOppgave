@@ -160,6 +160,13 @@ $$ \pOneD{p_{i,j,k}}{x} = \frac{p_{i+1,j,k} - p_{i-1,j,k}}{2h_x} $$
 $$ \pOneD{p_{i,j,k}}{y} = \frac{p_{i,j+1,k} - p_{i,j-1,k}}{2h_y} $$
 $$ \pOneD{p_{i,j,k}}{z} = \frac{p_{i,j,k+1} - p_{i,j,k-1}}{2h_z} $$
 
+With this the final expression for the next wind velocity becomes
+
+$$ u = u^* - \nabla p $$
+
+where $u^*$ is calculated in the advection step and $p$ is calculated by solving
+the Poisson equation.
+
 \subsection{Boundary Conditions}
 
 For the purpose of the wind simulation the wind velocity on the boundary of the
