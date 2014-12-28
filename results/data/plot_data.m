@@ -40,10 +40,10 @@ data(6) = sum(windToGPU) / num;
 exectime = sum(data);
 normalizedData = data ./ exectime;
 
+hold on;
 if(strcmp(arg_list{2}, 'td'))
-	hold on;
 	pie(normalizedData, labels);
-	hold off;
-	print(strcat(arg_list{2}, '_', arg_list{1}, '.jpg'));
 end
+hold off;
 
+print(strcat(arg_list{2}, '_', arg_list{1}, '.png'));
