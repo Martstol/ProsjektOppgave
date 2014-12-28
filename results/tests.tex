@@ -1,5 +1,7 @@
 \section{Tests}
 
+This section covers the test results from the wind simulation. 
+
 TODO: Write about all the snow simulator configurations when doing these tests
 Also write about what solvers were used by PETSc and which solver is used
 by the default gpu snow simulator
@@ -10,9 +12,29 @@ TODO: Write about the convergence
 
 \subsection{Performance Tests}
 
-TODO: Write about the performance tests.
-Compare average framerate for PETSc without GPU, PETSc with GPU and only GPU.
-Do analysis with 0 snow particles and with 1 000 000 or 100 000 snow particles 
+\subsubsection{Time Distribution}
+
+Configuration:
+
+\begin{figure}[ht]
+	\center
+	
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
+		\caption{Figure 1}
+		\label{fig:1}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
+		\caption{Figure 2}
+		\label{fig:2}
+	\end{subfigure}
+	\caption{Pair of figures}
+	\label{fig:double}
+	
+\end{figure}
 
 \subsection{Visual Results}
 
