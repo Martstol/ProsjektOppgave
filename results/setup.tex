@@ -16,16 +16,16 @@ table \ref{table:test_pc}.
 	\def\arraystretch{1.2}
 	\begin{tabular}{|l|l|}
 		\hline
-		\multicolumn{2}{|l|}{\textbf{Workstation hardware}} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{Workstation hardware}} \\ \hline
 		CPU & i7-2600 @ 3.40 GHz \\ \hline
 		GPU & Nvidia GeForce GTX 970 \\ \hline
 		Memory & 10 GB DDR3 1333 MHz \\ \hline
 		Power supply & MIST AX1000 \\ \hline
-		\multicolumn{2}{|l|}{\textbf{Workstation software}} \\ \hline
+		\multicolumn{2}{|c|}{\textbf{Workstation software}} \\ \hline
 		Operating system & Ubuntu 14.04 64-bit \\ \hline
 		Nvidia driver & 343.36 \\ \hline
 		CUDA toolkit & 6.5 \\ \hline
-		OpenCL & 1.1
+		OpenCL & 1.1 \\ \hline
 		g++ & 4.4.1 \\ \hline
 		gcc & 4.4.1 \\ \hline
 		PETSc & development version \\ \hline
@@ -38,26 +38,17 @@ table \ref{table:test_pc}.
 
 \subsection{PETSc}
 
-PETSc was acquired from the PETSc Web Page\cite{petsc-web-page} as version 3.5.2. 
+PETSc was acquired from the git repository\footnote{\url{https://bitbucket.org/petsc/petsc}}
+, this was recommended on the PETSc web page when utilizing PETSc's GPU solvers.
 The version of the compilers used when configuring PETSc can be found in table 
-\ref{table:dev_pc}.
+\ref{table:test_pc} as well as the OpenCL and CUDA version used.
 
-\subsubsection{Development configuration}
+\subsubsection{Configuration}
 
-For development, PETSc was configured with the following flags:
-\lstset{language=bash}
-\begin{lstlisting}
-./configure --with-cc=gcc --with-cxx=g++ --with-fc=0 
---download-f2cblaslapack --download-mpich
-\end{lstlisting}
-Debugging is by default enabled by the PETSc configuration, therefore the debug 
-flag is not being specified.
+OpenCL with ViennaCL was chosen to test PETSc's GPU solvers. CUDA was not tested
+because of issues with lacking backwards compatability in the CUDA toolkit, this
+is further discussed in chapter \ref{chap:discussion}. 
 
-\subsubsection{Testing configuration}
-
-To use PETSc's GPU features, it is recommended to use the current development 
-version of PETSc. Therefore PETSc was obtained from PETSc's bitbucket repository
-\footnote{https://bitbucket.org/petsc/petsc}. Petsc was then configured as follows:
 \lstset{language=bash}
 \begin{lstlisting}
 ./configure --with-cc=gcc --with-cxx=g++ --with-fc=0
