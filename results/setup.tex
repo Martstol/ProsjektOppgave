@@ -26,6 +26,7 @@ table \ref{table:test_pc}.
 		Nvidia driver & 343.36 \\ \hline
 		CUDA toolkit & 6.5 \\ \hline
 		OpenCL & 1.1 \\ \hline
+		MPI & MPICH 3.1.3 \\ \hline
 		g++ & 4.4.1 \\ \hline
 		gcc & 4.4.1 \\ \hline
 		PETSc & development version \\ \hline
@@ -51,6 +52,9 @@ is further discussed in chapter \ref{chap:discussion}. The following is the
 flags specified when configurating PETSc for testing:
 
 \begin{description}[labelindent=1cm,font=\normalfont\space]
+	\item[--with-cxx=g++]
+	\item[--with-fc=0]
+	\item[--with-mpi-dir=/usr/local/mpich-3.1.3]
 	\item[--download-f2cblaslapack=yes]
 	\item[--with-opencl=1]
 	\item[--with-opencl-dir=/usr/local/cuda-6.5]
@@ -63,13 +67,10 @@ flags specified when configurating PETSc for testing:
 	\item[--COPTFLAGS='O3']
 \end{description}
 
-For this configuration of PETSc debugging was disabled and precision was set to 
-single. This is because single precision is faster and some GPUs may not support 
-double precision. The rest of the snow simulator also uses single precision.
-
-The CUDA installation is located in the folder \emph{/usr/local/cuda-6.5}. The 
-cuda architecture was set to \emph{sm\_50}. PETSc did not accept \emph{sm\_52}, 
-which is the compute capability of the GTX 980. 
+For this configuration of PETSc all forms of debug information and error checking
+was disabled to minimize the overhead. Single precision was also selected as
+the GTX 970 has faster single precision floating point arithmetic and the rest
+of the snow simulator is already written with single precision. 
 
 \subsection{Compilation}
 
