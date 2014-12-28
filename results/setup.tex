@@ -50,8 +50,17 @@ because of issues with lacking backwards compatability in the CUDA toolkit, this
 is further discussed in chapter \ref{chap:discussion}. The following is the
 flags specified when configurating PETSc for testing:
 
-\begin{description}
-	
+\begin{description}[labelindent=1cm,font=\normalfont\space]
+	\item[--download-f2cblaslapack=yes]
+	\item[--with-opencl=1]
+	\item[--with-opencl-dir=/usr/local/cuda-6.5]
+	\item[--with-viennacl=1]
+	\item[--download-viennacl=yes]
+	\item[--with-precision=single]
+	\item[--with-errorchecking=0]
+	\item[--with-debugging=0]
+	\item[--CXXOPTFLAGS='O3']
+	\item[--COPTFLAGS='O3']
 \end{description}
 
 For this configuration of PETSc debugging was disabled and precision was set to 
