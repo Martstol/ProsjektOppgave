@@ -1,12 +1,14 @@
 \section{Setup}
 
-This section will describe the compilation of PETSc and the snow simulator as well 
-as the hardware and software of the workstation used for the tests in the next section. 
+This section will describe the hardware of the workstation used when testing the
+implementation of the wind simulator and the software used for the
+implementation.
 
 \subsection{Workstation}
 
-% Petsc required cuda version 5, cuda version 5 required ubuntu version 11.10, which was
-% installed on a workstation with the following setup:
+The implementation in this project was only tested on one workstation. The
+hardware and software used in this workstation during testing can be found in
+table \ref{table:test_pc}.
 
 \begin{table}[h]
 	\begin{center}
@@ -15,53 +17,23 @@ as the hardware and software of the workstation used for the tests in the next s
 	\begin{tabular}{|l|l|}
 		\hline
 		\multicolumn{2}{|l|}{\textbf{Workstation hardware}} \\ \hline
-		CPU & i7-930 @ 2.8 GHz \\ \hline
-		GPU 1 & Nvidia GeForce GTX 460 \\ \hline
-		GPU 2 & Nvidia Tesla C2050 \\ \hline
+		CPU & i7-2600 @ 3.40 GHz \\ \hline
+		GPU & Nvidia GeForce GTX 970 \\ \hline
 		Memory & 10 GB DDR3 1333 MHz \\ \hline
 		Power supply & MIST AX1000 \\ \hline
 		\multicolumn{2}{|l|}{\textbf{Workstation software}} \\ \hline
-		Operating system & Ubuntu 11.10 64-bit \\ \hline
-		Nvidia driver & 304.54 \\ \hline
-		CUDA toolkit & 5.0 \\ \hline
-		g++ & 4.6.1 \\ \hline
-		gcc & 4.6.1 \\ \hline
+		Operating system & Ubuntu 14.04 64-bit \\ \hline
+		Nvidia driver & 343.36 \\ \hline
+		CUDA toolkit & 6.5 \\ \hline
+		OpenCL & 1.1
+		g++ & 4.4.1 \\ \hline
+		gcc & 4.4.1 \\ \hline
 		PETSc & development version \\ \hline
 	\end{tabular}
 	\egroup
 	\end{center}
-	\caption{Specifications of the workstation used for testing PETSc with CUDA.}
+	\caption{Specifications of the workstation used for testing the implementation.}
 	\label{table:test_pc}
-\end{table}
-
-TODO: Rewrite below, that is the development and testing without petsc+cuda setup
-
-This project was only tested on one workstation. Table \ref{table:dev_pc} contains 
-the specifications for the workstation used.
-
-\begin{table}[h]
-	\begin{center}
-	\bgroup
-	\def\arraystretch{1.2}
-	\begin{tabular}{|l|l|}
-		\hline
-		\multicolumn{2}{|l|}{\textbf{Workstation hardware}} \\ \hline
-		CPU & i7-3770 @ 3.4 GHz \\ \hline
-		GPU & Nvidia GeForce GTX 980 \\ \hline
-		Memory & 16 GB DDR3 1600 MHz \\ \hline
-		Power supply & CORSAIR AX1200 \\ \hline
-		\multicolumn{2}{|l|}{\textbf{Workstation software}} \\ \hline
-		Operating system & Ubuntu 14.04 64-bit \\ \hline
-		Nvidia driver & 343.22 \\ \hline
-		CUDA toolkit & 6.5 \\ \hline
-		g++ & 4.8.2 \\ \hline
-		gcc & 4.8.2 \\ \hline
-		PETSc & 3.5.2 \\ \hline
-	\end{tabular}
-	\egroup
-	\end{center}
-	\caption{Specifications of the workstation used for development and testing PETSc without CUDA.}
-	\label{table:dev_pc}
 \end{table}
 
 \subsection{PETSc}
