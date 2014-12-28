@@ -1,7 +1,5 @@
 \section{Tests}
 
-This section covers the test results from the wind simulation. 
-
 TODO: Write about all the snow simulator configurations when doing these tests
 Also write about what solvers were used by PETSc and which solver is used
 by the default gpu snow simulator
@@ -14,7 +12,30 @@ TODO: Write about the convergence
 
 \subsubsection{Time Distribution}
 
-Configuration:
+This test measures how the execution time of the wind simulation is distributed
+between these key functions in the implementation:
+\begin{description}
+	\item[advect:] Performs the advection step of the wind simulation.
+	\item[setupSolution:] Computes the right-hand side of the linear system.
+	\item[setInitialGuess:] Sets the initial guess for the solver.
+	\item[solve:] Solves the Poisson equation using a PETSc solver.
+	\item[project:] Performs the projection step of the wind simulation.
+	\item[windToGPU:] Moves the wind velocity field to texture memory for the
+	snow particle simulation.
+\end{description}
+
+This test is performed for three different configurations of the wind simulation:
+\begin{description}
+	\item[Configuration 1] $ \{ 32, 16, 32 \} $, results are shown in figure
+		\ref{fig:td_conf1}
+	\item[Configuration 2] $ \{ 64, 32, 64 \} $, results are shown in figure
+		\ref{fig:td_conf2} 
+	\item[Configuration 3] $ \{ 128, 64, 128 \} $, results are shown in figure
+		\ref{fig:td_conf3}
+\end{description}
+
+The results of the time distribution tests is the average execution time of each
+key function after 100 frames of simulation.
 
 \begin{figure}[ht]
 	\center
@@ -22,17 +43,60 @@ Configuration:
 	\begin{subfigure}{0.45\textwidth}
 		\center
 		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
-		\caption{Figure 1}
-		\label{fig:1}
+		\caption{PETSc on the GPU with OpenCL.}
+		\label{fig:td_conf1_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
 		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
-		\caption{Figure 2}
-		\label{fig:2}
+		\caption{PETSc on the CPU.}
+		\label{fig:td_conf1_petsc_cpu}
 	\end{subfigure}
-	\caption{Pair of figures}
-	\label{fig:double}
+	\caption{Time distribution of the execution time of the key functions
+			with configuration 1}
+	\label{fig:td_conf1}
+	
+\end{figure}
+
+\begin{figure}[ht]
+	\center
+	
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
+		\caption{PETSc on the GPU with OpenCL.}
+		\label{fig:td_conf1_petsc_gpu}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
+		\caption{PETSc on the CPU.}
+		\label{fig:td_conf1_petsc_cpu}
+	\end{subfigure}
+	\caption{Time distribution of the execution time of the key functions
+			with configuration 2}
+	\label{fig:td_conf2}
+	
+\end{figure}
+
+\begin{figure}[ht]
+	\center
+	
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
+		\caption{PETSc on the GPU with OpenCL.}
+		\label{fig:td_conf1_petsc_gpu}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{images/2d_poisson_ex}
+		\caption{PETSc on the CPU.}
+		\label{fig:td_conf1_petsc_cpu}
+	\end{subfigure}
+	\caption{Time distribution of the execution time of the key functions
+			with configuration 3}
+	\label{fig:td_conf3}
 	
 \end{figure}
 
