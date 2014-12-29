@@ -8,6 +8,15 @@ TODO: When running the solver on the cpu the following command line arguments
 are given: "\emph{-vec\_type standard -mat\_type aij}" and on the gpu:
 "\emph{-vec\_type viennacl -mat\_type aijviennacl}".
 
+The configuration options for the wind simulator allows for variation in the
+external wind direction, speed and the resolution of the three dimensional wind
+velocity field. For the scope of these tests only the resolution of the wind
+velocity field is changed, while the external wind's speed and direction remains
+unchanged for all tests. The resolution of the wind velocity field is denoted
+as \{ x, y, z \}. The terrain used for the simulation tests is the height map of
+Mount St. Helens with a size of 768x768. The external wind's speed is set to 1
+and the direction is given by the unit vector \{1, 0, 0\}.
+
 \subsection{Convergence Tests}
 
 TODO: Write about the convergence
@@ -30,6 +39,7 @@ between these key functions in the implementation:
 
 The solver chosen for this test is GMRES, this was specified with the command
 line argument "\emph{-ksp\_type gmres}".
+
 This test is performed for four different configurations of the wind simulation:
 \begin{description}
 	\item[Configuration 1] $ \{ 32, 16, 32 \} $, results are shown in figure
