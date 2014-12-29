@@ -13,7 +13,7 @@ external wind direction, speed and the resolution of the three dimensional wind
 velocity field. For the scope of these tests only the resolution of the wind
 velocity field is changed, while the external wind's speed and direction remains
 unchanged for all tests. The resolution of the wind velocity field is denoted
-as \{ x, y, z \}. The terrain used for the simulation tests is the height map of
+as \{x, y, z\}. The terrain used for the simulation tests is the height map of
 Mount St. Helens with a size of 768x768. The external wind's speed is set to 1
 and the direction is given by the unit vector \{1, 0, 0\}.
 
@@ -43,14 +43,14 @@ line argument "\emph{-ksp\_type gmres}".
 This test is performed for four different configurations for the resolution of
 the wind velocity field:
 \begin{description}
-	\item[Configuration 1] $ \{ 32, 16, 32 \} $, the total number of internal
-		points is 16384. Results are shown in figure \ref{fig:td_conf1}.
-	\item[Configuration 2] $ \{ 64, 32, 64 \} $, the total number of internal
-		points is 131072. Results are shown in figure \ref{fig:td_conf2}.
-	\item[Configuration 3] $ \{ 128, 64, 128 \} $, the total number of internal
-		points is 1048576. Results are shown in figure \ref{fig:td_conf3}.
-	\item[Configuration 4] $ \{ 256, 128, 256 \} $, the total number of internal
-		points is 8388608. Results are shown in figure \ref{fig:td_conf4}.
+	\item[Configuration 1] $ \{ 32, 16, 32 \} $, results are shown in figure
+		\ref{fig:td_conf1}.
+	\item[Configuration 2] $ \{ 64, 32, 64 \} $, results are shown in figure
+		\ref{fig:td_conf2}.
+	\item[Configuration 3] $ \{ 128, 64, 128 \} $, results are shown in figure
+		\ref{fig:td_conf3}.
+	\item[Configuration 4] $ \{ 256, 128, 256 \} $, results are shown in figure
+		\ref{fig:td_conf4}.
 \end{description}
 
 The results of the time distribution tests is the average execution time of each
@@ -61,13 +61,13 @@ key function after 100 frames of simulation.
 	
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf1_petsc_gpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf1_petsc_gpu}
 		\caption{PETSc on the GPU with OpenCL.}
 		\label{fig:td_conf1_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf1_petsc_cpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf1_petsc_cpu}
 		\caption{PETSc on the CPU.}
 		\label{fig:td_conf1_petsc_cpu}
 	\end{subfigure}
@@ -82,13 +82,13 @@ key function after 100 frames of simulation.
 	
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf2_petsc_gpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf2_petsc_gpu}
 		\caption{PETSc on the GPU with OpenCL.}
 		\label{fig:td_conf2_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf2_petsc_cpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf2_petsc_cpu}
 		\caption{PETSc on the CPU.}
 		\label{fig:td_conf2_petsc_cpu}
 	\end{subfigure}
@@ -103,13 +103,13 @@ key function after 100 frames of simulation.
 	
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf3_petsc_gpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf3_petsc_gpu}
 		\caption{PETSc on the GPU with OpenCL.}
 		\label{fig:td_conf3_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf3_petsc_cpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf3_petsc_cpu}
 		\caption{PETSc on the CPU.}
 		\label{fig:td_conf3_petsc_cpu}
 	\end{subfigure}
@@ -124,13 +124,13 @@ key function after 100 frames of simulation.
 	
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf4_petsc_gpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf4_petsc_gpu}
 		\caption{PETSc on the GPU with OpenCL.}
 		\label{fig:td_conf4_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
-		\includegraphics[width=1.0\textwidth]{results/data/td_conf4_petsc_cpu}
+		\includegraphics[width=1.0\textwidth]{results/data/td/td_conf4_petsc_cpu}
 		\caption{PETSc on the CPU.}
 		\label{fig:td_conf4_petsc_cpu}
 	\end{subfigure}
@@ -147,6 +147,24 @@ implementation, however when the GPU is utilized for the solver the fraction of
 the simulation time spent solving the Poisson equation is reduced rapidly as
 the computational power of the GPU is better utilized for larger problems because
 of the GPU's parallel nature.
+
+\subsubsection{Wind Simulator Benchmark}
+
+% Execution time | number of internal points
+
+\subsubsection{Solver Benchmark}
+
+% Execution time | number of internal points
+
+% Solvers: GMRES GPU, CG GPU, GMRES CPU, CG CPU, CUDA old
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=0.9\textwidth]{results/data/sb/}
+	\caption{Graph comparing execution time of the different solvers for the
+		wind simulator.}
+	\label{fig:solver_benchmark_exec_time}
+\end{figure}
 
 \subsection{Visual Results}
 
