@@ -50,7 +50,7 @@ the advected velocity value.
 	\label{fig:trilinearinterpolation}
 \end{figure}
 
-The boundary conditions for the wind velocity is described in \ref{chap:windsim}
+The boundary conditions for the wind velocity is described in chapter \ref{chap:windsim}
 in the Boundary Conditions section, the advected velocities are modified based on
 the obstacles data and on the border of the volume the velocities are set to
 predetermined values.
@@ -63,7 +63,7 @@ Krylov subspace methods, discussed in the background chapter.
 \subsubsection{Solver Setup}
 
 The solver used can be specified on the command line when executing the program
-by setting the flag $-ksp_type$ and specifying which solver to use. If the 
+by setting the flag \emph{-ksp\_type} and specifying which solver to use. If the 
 solver type is not specified the default solver will be used. For the
 implementation of PETSc used in this project this is GMRES, the General Minimum
 Residual method.

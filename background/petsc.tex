@@ -3,7 +3,7 @@
 PETSc is short for Portable, Extensible Toolkit for Scientific Computation. 
 It contains various data structures and functions for 
 high performance parallel computations. PETSc supports distributed 
-memory systems with MPI, shared memory systems using Pthreads or OpenMP as well 
+memory systems with MPI, shared memory systems using pthreads or OpenMP as well 
 as GPGPU computing using CUDA\footnote{\url{https://developer.nvidia.com/cuda-toolkit}} 
 or OpenCL\footnote{\url{https://www.khronos.org/opencl/}}. PETSc is open source and distributed 
 under the 2-clause BSD license\cite{petsc-web-page}.
@@ -51,7 +51,7 @@ and $MatSetOptions$ functions and specifying the type by adding $-vec\_type$ and
 $-mat\_type$ along with a GPU type on the command line during runtime. 
 
 All Krylov subspace methods implemented in PETSc function on the GPU and require 
-no data copies between the CPU and GPU while solving a system. With the exception
+no data copies between the CPU and GPU while solving a system, with the exception
 of the KSPIBCGS method (Improved Stabilized version of BiConjugate Gradient Squared),
 which is not implemented for the GPU. This method requires direct access to the 
 underlying data stored in the vectors and would require a complete rewrite to 

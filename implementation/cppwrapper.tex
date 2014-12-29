@@ -69,12 +69,12 @@ ownership of the source objects data.
 
 \subsection{Exceptions}
 
-All PETSc functions return and integer error code of the type PetscErrorCode.
+All PETSc functions return an integer error code of the type PetscErrorCode.
 This is a typical method for handling errors in C as C does not have direct
 support for error handling. C++ on the other hand does offer error handling in
 the form of exceptions which has been used to handle errors in the PETSc C++
 wrapper library. If an error code different from 0 is returned, an exception
-is thrown with the 
+is thrown.
 
 In practice many functions in PETSc always returns the value 0, which means that
 no error occurred. 
