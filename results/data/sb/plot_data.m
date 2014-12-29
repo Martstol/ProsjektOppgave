@@ -3,47 +3,62 @@
 setenv('GNUTERM', 'X11');
 getenv('GNUTERM')
 
-arg_list = argv();
+n = 7;
 
-if(nargin < 2)
-	printf('Need name of file with data to plot and what to plot (td).\n');
-	exit();
+cuda = zeros(2, n);
+petsc_cpu_cg = zeros(2, n);
+petsc_cpu_gmres = zeros(2, n);
+petsc_gpu_cg = zeros(2, n);
+petsc_gpu_gmres = zeros(2, n);
+
+for i = 1:n
+	[p, d] = read_data(strcat("cuda_", int2str(i-1)));
+	cuda(1, i) = p;
+	cuda(2, i) = d;
+	
+	[p, d] = read_data(strcat("petsc_cpu_cg_", int2str(i-1)));
+	petsc_cpu_cg(1, i) = p;
+	petsc_cpu_cg(2, i) = d;
+	
+	[p, d] = read_data(strcat("petsc_cpu_gmres_", int2str(i-1)));
+	petsc_cpu_gmres(1, i) = p;
+	petsc_cpu_gmres(2, i) = d;
+	
+	[p, d] = read_data(strcat("petsc_gpu_cg_", int2str(i-1)));
+	petsc_gpu_cg(1, i) = p;
+	petsc_gpu_cg(2, i) = d;
+	
+	[p, d] = read_data(strcat("petsc_gpu_gmres_", int2str(i-1)));
+	petsc_gpu_gmres(1, i) = p;
+	petsc_gpu_gmres(2, i) = d;
 end
-
-fid = fopen(arg_list{1}, 'r');
-rawdata = fscanf(fid, '%*s %f\n');
-fclose(fid);
-
-num = length(rawdata) / 6;
-
-printf('Number of entries: %d\n', num);
-
-mat = vec2mat(rawdata, 6);
-
-labels = {'advect', 'setupSolution', 'setInitialGuess', 'solve', 'project', 'windToGPU'};
-
-advect = mat(:,1);
-setupSolution = mat(:,2);
-setInitialGuess = mat(:,3);
-solve = mat(:,4);
-project = mat(:,5);
-windToGPU = mat(:,6);
-
-data = zeros(1, 6);
-data(1) = sum(advect) / num;
-data(2) = sum(setupSolution) / num;
-data(3) = sum(setInitialGuess) / num;
-data(4) = sum(solve) / num;
-data(5) = sum(project) / num;
-data(6) = sum(windToGPU) / num;
-
-exectime = sum(data);
-normalizedData = data ./ exectime;
 
 hold on;
-if(strcmp(arg_list{2}, 'td'))
-	pie(normalizedData, labels);
-end
+title("Solver Execution Time", "FontSize", 12, "FontName", "Arial");
+plot(cuda(1, :), cuda(2, :), "Color", "blue");
+plot(petsc_cpu_cg(1, :), petsc_cpu_cg(2, :), "Color", "green");
+plot(petsc_cpu_gmres(1, :), petsc_cpu_gmres(2, :), "Color", "red");
+plot(petsc_gpu_cg(1, :), petsc_gpu_cg(2, :), "Color", "magenta");
+plot(petsc_gpu_gmres(1, :), petsc_gpu_gmres(2, :), "Color", "black");
+xlabel("Grid points", "FontSize", 12, "FontName", "Arial");
+set(gca,'XTickLabel',num2str(get(gca,'XTick').'))
+ylabel("Execution time (seconds)", "FontSize", 12, "FontName", "Arial");
+legend("Cuda (old)", "PETSc CPU CG", "PETSc CPU GMRES", "PETSc GPU CG", "PETSc GPU GMRES",
+	"Location", "SouthOutside");
 hold off;
+print("exec_time_all.png");
 
-print(strcat(arg_list{2}, '_', arg_list{1}, '.png'));
+clf;
+
+hold on;
+title("GPU Solver Execution Time", "FontSize", 12, "FontName", "Arial");
+plot(cuda(1, :), cuda(2, :), "Color", "blue");
+plot(petsc_gpu_cg(1, :), petsc_gpu_cg(2, :), "Color", "magenta");
+plot(petsc_gpu_gmres(1, :), petsc_gpu_gmres(2, :), "Color", "black");
+xlabel("Grid points", "FontSize", 12, "FontName", "Arial");
+set(gca,'XTickLabel',num2str(get(gca,'XTick').'))
+ylabel("Execution time (seconds)", "FontSize", 12, "FontName", "Arial");
+legend("Cuda (old)", "PETSc GPU CG", "PETSc GPU GMRES", "Location", "SouthOutside");
+hold off;
+print("exec_time_gpu.png");
+
