@@ -54,14 +54,14 @@ This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}
 
 \subsection{Discrete Poisson Equation}
 
-To apply the finite difference method to the Poisson equation with Dirichlet 
-boundary conditions, the problem domain is sampled in a finite number of points. 
-The distance between the sample points, $h$, is the same as the fixed $h$ in the finite
+To apply the finite difference method to the Poisson equation with Dirichlet,
+the problem domain is sampled in a finite number of points. The distance
+between the sample points, $h$, is the same as the fixed $h$ in the finite
 difference method. Lets consider the two-dimensional Poisson equation $\nabla^2
 u(x, y) = f(x, y)$. We use the central difference approximation to sample
 $\nabla^2 u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
-direction. We assume the dimensions of the domain goes from $0$ to $1$. The discretized 
-grid is illustrated in figure \ref{fig:discgrid}.
+direction. We assume the dimensions of the domain goes from $0$ to $1$. The
+discretized grid is illustrated in figure \ref{fig:discgrid}.
 
 \begin{figure}[ht]
 	\center
@@ -90,8 +90,8 @@ follows.
 $$Ax = b$$
 
 To create this linear system we have to create a global order for the
-internal nodes to create the $x$ vector of unknowns. We use the natural
-order, which means that we list the nodes along the $x$ direction first.
+internal points to create the $x$ vector. We use the natural order, which means
+that we list the points along the $x$ direction first.
 
 $$x_k = u_{i,j}, ~ k = (i-1) + (n-1) \cdot (j-1), ~ i, j = 1, 2, \dots, n-1$$
 
