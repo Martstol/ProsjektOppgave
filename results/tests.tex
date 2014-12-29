@@ -4,6 +4,10 @@ TODO: Write about all the snow simulator configurations when doing these tests
 Also write about what solvers were used by PETSc and which solver is used
 by the default gpu snow simulator
 
+TODO: When running the solver on the cpu the following command line arguments
+are given: "\emph{-vec\_type standard -mat\_type aij}" and on the gpu:
+"\emph{-vec\_type viennacl -mat\_type aijviennacl}"
+
 \subsection{Convergence Tests}
 
 TODO: Write about the convergence
@@ -24,7 +28,9 @@ between these key functions in the implementation:
 	snow particle simulation.
 \end{description}
 
-This test is performed for three different configurations of the wind simulation:
+The solver chosen for this test is GMRES, this was specified with the command
+line argument "\emph{-ksp\_type gmres}".
+This test is performed for four different configurations of the wind simulation:
 \begin{description}
 	\item[Configuration 1] $ \{ 32, 16, 32 \} $, results are shown in figure
 		\ref{fig:td_conf1}
@@ -32,6 +38,8 @@ This test is performed for three different configurations of the wind simulation
 		\ref{fig:td_conf2} 
 	\item[Configuration 3] $ \{ 128, 64, 128 \} $, results are shown in figure
 		\ref{fig:td_conf3}
+	\item[Configuration 4] $ \{ 256, 128, 256 \} $, results are shown in figure
+		\ref{fig:td_conf4}
 \end{description}
 
 The results of the time distribution tests is the average execution time of each
@@ -65,13 +73,13 @@ key function after 100 frames of simulation.
 		\center
 		\includegraphics[width=1.0\textwidth]{results/data/td_conf2_petsc_gpu}
 		\caption{PETSc on the GPU with OpenCL.}
-		\label{fig:td_conf1_petsc_gpu}
+		\label{fig:td_conf2_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
 		\includegraphics[width=1.0\textwidth]{results/data/td_conf2_petsc_cpu}
 		\caption{PETSc on the CPU.}
-		\label{fig:td_conf1_petsc_cpu}
+		\label{fig:td_conf2_petsc_cpu}
 	\end{subfigure}
 	\caption{Time distribution of the execution time of the key functions
 			with configuration 2}
@@ -86,17 +94,38 @@ key function after 100 frames of simulation.
 		\center
 		\includegraphics[width=1.0\textwidth]{results/data/td_conf3_petsc_gpu}
 		\caption{PETSc on the GPU with OpenCL.}
-		\label{fig:td_conf1_petsc_gpu}
+		\label{fig:td_conf3_petsc_gpu}
 	\end{subfigure}
 	\begin{subfigure}{0.45\textwidth}
 		\center
 		\includegraphics[width=1.0\textwidth]{results/data/td_conf3_petsc_cpu}
 		\caption{PETSc on the CPU.}
-		\label{fig:td_conf1_petsc_cpu}
+		\label{fig:td_conf3_petsc_cpu}
 	\end{subfigure}
 	\caption{Time distribution of the execution time of the key functions
 			with configuration 3}
 	\label{fig:td_conf3}
+	
+\end{figure}
+
+\begin{figure}[ht]
+	\center
+	
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{results/data/td_conf4_petsc_gpu}
+		\caption{PETSc on the GPU with OpenCL.}
+		\label{fig:td_conf4_petsc_gpu}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\center
+		\includegraphics[width=1.0\textwidth]{results/data/td_conf4_petsc_cpu}
+		\caption{PETSc on the CPU.}
+		\label{fig:td_conf4_petsc_cpu}
+	\end{subfigure}
+	\caption{Time distribution of the execution time of the key functions
+			with configuration 4}
+	\label{fig:td_conf4}
 	
 \end{figure}
 
