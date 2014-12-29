@@ -21,13 +21,13 @@ approximation because the error is $O(h^2)$.
 
 The second derivative can be approximated by applying a finite difference
 approximation twice. Applying the central difference approximation to the second
-derivative gives the following expression.
+derivative gives the following expression:
 
 $$ u''(x) \approx \frac{u'(x + \frac{h}{2}) - u'(x - \frac{h}{2})}{h} $$
 
 Another central difference approximation is applied to $u'(x + \frac{h}{2})$ and
 $u'(x - \frac{h}{2})$. This results in the following finite difference
-approximation for the second derivative.
+approximation for the second derivative:
 
 $$u''(x) \approx \frac{u(x+h) - 2u(x) + u(x-h)}{h^2}$$
 
@@ -57,7 +57,7 @@ This is also known as the 7-point stencil as illustrated in figure \ref{fig:7ps}
 To apply the finite difference method to the Poisson equation with Dirichlet 
 boundary conditions, the problem domain is sampled in a finite number of points. 
 The distance between the sample points, $h$, is the same as the fixed $h$ in the finite
-differences method. Lets consider the two-dimensional Poisson equation $\nabla^2
+difference method. Lets consider the two-dimensional Poisson equation $\nabla^2
 u(x, y) = f(x, y)$. We use the central difference approximation to sample
 $\nabla^2 u(x, y)$ at $n+1$ points in the $x$ direction and $n+1$ points in $y$
 direction. We assume the dimensions of the domain goes from $0$ to $1$. The discretized 
