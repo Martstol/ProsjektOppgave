@@ -53,7 +53,7 @@ the wind velocity field:
 		\ref{fig:td_conf4}.
 \end{description}
 
-The results of the time distribution tests is the average execution time of each
+The results for the time distribution test is the average execution time of each
 key function after 100 frames of simulation.
 
 \begin{figure}[ht]
@@ -142,7 +142,7 @@ key function after 100 frames of simulation.
 
 As evident from these charts we can see that as the resolution of the wind
 velocity field increases, the fraction of the wind simulation time spent solving
-the Poisson equation remains roughly unchanged for the PETSc on CPU only
+the Poisson equation remains roughly unchanged for the PETSc on the CPU only
 implementation, however when the GPU is utilized for the solver the fraction of
 the simulation time spent solving the Poisson equation is reduced rapidly as
 the computational power of the GPU is better utilized for larger problems because
@@ -159,6 +159,30 @@ of the GPU's parallel nature.
 % Solvers: GMRES GPU, CG GPU, GMRES CPU, CG CPU, CUDA old
 % Dimensions: {32, 16, 32}, {32, 32, 32}, {64, 32, 64}, {64, 64, 64}
 % {128, 64, 128}, {128, 128, 128}, {256, 128, 256}
+
+Here the execution time of the Poisson solver is benchmarked. The benchmark
+measures the execution time of the solver as a function of the size of the
+wind field. The execution time of the solver used for the benchmark is the
+average execution time after 100 frames of simulation. The following
+configurations for the resolution of the wind field was used for this benchmark:
+\begin{itemize}
+	\item \{32, 16, 32\}
+	\item \{32, 32, 32\}
+	\item \{64, 32, 64\}
+	\item \{64, 64, 64\}
+	\item \{128, 64, 128\}
+	\item \{128, 128, 128\}
+	\item \{256, 128, 256\}
+\end{itemize}
+The total size of the wind field includes the external boundary points.
+The solver methods selected for the benchmark is the conjugate gradient method
+(CG) and general minimum residual method (GMRES). Both the CPU and the GPU
+implementation of these methods are included in the benchmark. In addition the
+SOR solver implemented in the wind simulator has been included in the benchmark.
+The SOR solver have been hand implemented in CUDA during previous work on the
+snow simulator performed by other students, the previous work on the snow
+simulator is discussed in chapter \ref{chap:prevwork}. The purpose of including
+the SOR solver is to compare its performance with the PETSc solvers.
 
 \begin{figure}[ht]
 	\center
