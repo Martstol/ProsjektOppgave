@@ -1,4 +1,4 @@
-\section{Tests}
+\section{Performance Benchmarks}
 
 TODO: Write about all the snow simulator configurations when doing these tests
 Also write about what solvers were used by PETSc and which solver is used
@@ -19,13 +19,7 @@ as \{x, y, z\}. The terrain used for the simulation tests is the height map of
 Mount St. Helens with a size of 768x768. The external wind's speed is set to 1
 and the direction is given by the unit vector \{1, 0, 0\}.
 
-\subsection{Convergence Tests}
-
-TODO: Write about the convergence
-
-\subsection{Performance Tests}
-
-\subsubsection{Time Distribution}
+\subsection{Time Distribution}
 
 This test measures how the execution time of the wind simulation is distributed
 between these key functions in the implementation:
@@ -150,7 +144,7 @@ the simulation time spent solving the Poisson equation is reduced rapidly as
 the computational power of the GPU is better utilized for larger problems because
 of the GPU's parallel nature.
 
-\subsubsection{Solver Benchmark}
+\subsection{Solver Benchmark}
 
 Here the execution time of the Poisson solver is benchmarked. The benchmark
 measures the execution time of the solver as a function of the size of the
@@ -197,7 +191,7 @@ that while the GPU implementations of the PETSc solvers have a much slower growt
 in their execution time in the beginning than the CPU implementations, but after
 passing one million grid points their growth becomes quite similar.
 
-\subsubsection{Solver Speedup}
+\subsection{Solver Speedup}
 
 In this section the speedup of the GPU implementation of the PETSc solvers will
 be benchmarked. The speedup of a solver is defined as $S_p = \frac{T_1}{T_p}$,
