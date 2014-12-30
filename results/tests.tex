@@ -6,9 +6,12 @@ by the default gpu snow simulator
 
 TODO: Write about the tolerances set for the KSP solver
 
-TODO: When running the solver on the cpu the following command line arguments
-are given: "\emph{-vec\_type standard -mat\_type aij}" and on the gpu:
-"\emph{-vec\_type viennacl -mat\_type aijviennacl}".
+When running the PETSc solvers on the CPU the following command line arguments
+are given: "\emph{-vec\_type standard -mat\_type aij}". The matrix type
+\emph{aij} is used for sparse matrices. When benchmarking with the PETSc solvers
+on the GPU these command line arguments are given: "\emph{-vec\_type viennacl
+-mat\_type aijviennacl}". The vector type \emph{viennacl} and matrix type
+\emph{aijviennacl} performs calculations with the ViennaCL library.
 
 The configuration options for the wind simulator allows for variation in the
 external wind direction, speed and the resolution of the three dimensional wind
