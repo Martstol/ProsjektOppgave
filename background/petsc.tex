@@ -46,9 +46,9 @@ of the functions defined for these classes.
 
 To utilize the GPU the application programmer has to specify a GPU vector type 
 for vectors and a GPU matrix type for matrices. This can either be done by using 
-the $VecSetType$ and $MatSetType$ functions or by using the $VecSetFromOptions$ 
-and $MatSetOptions$ functions and specifying the type by adding $-vec\_type$ and 
-$-mat\_type$ along with a GPU type on the command line during runtime. 
+the \emph{VecSetType} and \emph{MatSetType} functions or by using the \emph{VecSetFromOptions}
+and \emph{MatSetOptions} functions and specifying the type by adding \emph{-vec\_type} and 
+\emph{-mat\_type} along with a GPU type on the command line during runtime. 
 
 All Krylov subspace methods implemented in PETSc function on the GPU and require 
 no data copies between the CPU and GPU while solving a system, with the exception
