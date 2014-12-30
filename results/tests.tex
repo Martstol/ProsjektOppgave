@@ -170,17 +170,19 @@ configurations for the resolution of the wind field was used for this benchmark:
 	\item \{128, 128, 128\}
 	\item \{256, 128, 256\}
 \end{itemize}
-The total size of the wind field includes the external boundary points.
-The solver methods selected for the benchmark is the conjugate gradient method
-(CG) and general minimum residual method (GMRES). Both the CPU and the GPU
+
+The total size of the wind field includes the external boundary points. The
+solver methods selected for the benchmark is the conjugate gradient method (CG)
+and general minimum residual method (GMRES). Both the CPU and the GPU
 implementation of these methods are included in the benchmark. The CG method is
 specified with the command line argument "\emph{-ksp\_type cg}" and GMRES is
 specified with the argument "\emph{-ksp\_type gmres}". In addition the
-SOR solver implemented in the wind simulator has been included in the benchmark.
-The SOR solver have been hand implemented in CUDA in previous work on the
-snow simulator performed by other students, the previous work on the snow
-simulator is discussed in chapter \ref{chap:prevwork}. The purpose of including
-the SOR solver is to compare its performance with the PETSc solvers.
+successive overrelaxation (SOR) solver implemented in the wind simulator has
+been included in the benchmark. The SOR solver have been hand implemented in
+CUDA in previous work on the snow simulator performed by other students, the
+previous work on the snow simulator is discussed in chapter \ref{chap:prevwork}.
+The purpose of including the SOR solver is to compare its performance with the
+PETSc solvers.
 
 \begin{figure}[ht]
 	\center
