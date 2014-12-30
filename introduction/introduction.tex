@@ -1,6 +1,33 @@
 \chapter{Introduction}
 
-TODO: Write intro
+This project will continue work on the HPC-lab's snow simulator by writing an
+implementation of the wind simulator with the library PETSc and comparing the
+performance of the PETSc implementation with the previously implemented wind
+simulator. The snow simulator simulates falling snow particles and how they are
+affected by the wind and terrain. Realistic modeling of how the wind is affected
+by terrain is a challenging topic and an important part of simulating natural
+phenomenons like the weather. In the snow simulator computational fluid dynamics
+is used to model the behavior of the wind and how it is affected by the terrain.
+In computational fluid dynamics the behavior of a fluid is modeled by a set of
+partial differential equations which can be solved to get the fluids velocity.
+
+%In this project a library for scientific computation called PETSc will be used
+%to implement the wind simulation.
+
+%General purpose computing on graphics processing units (GPGPU) is a recently
+%developed field of high performance computing that use graphics processing units
+%(GPU) to accelerate the computation of highly parallel problems. While GPUs was
+%originally developed for rasterisation of three dimensional vector graphics, the
+%parallel design of GPUs has lead to research into using them for computationally
+%intensive tasks. This was at first done by writing shading programs that ran on
+%the programmable graphics pipeline and in 2006 NVIDIA introduced CUDA, a platform
+%for parallel computations on NVIDIA GPUs. Later in 2008 Apple released OpenCL as
+%an open standard for writing parallel programs for GPUs, CPUs and other types of
+%processors in collaboration with AMD, NVIDIA, IBM, Intel and Qualcomm. The Khronos
+%Group is responsible for maintaining OpenCL. While CUDA and OpenCL are notable
+%improvements from using the programmable graphics pipeline for GPGPU programming,
+%they are still low level APIs that are challenging to program for and may lead to
+%complex software design. 
 
 \input{introduction/problemdescription.tex}
 
