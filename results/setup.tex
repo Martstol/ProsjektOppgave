@@ -46,9 +46,8 @@ The version of the compilers used when configuring PETSc can be found in table
 \subsubsection{Configuration}
 
 OpenCL with ViennaCL was chosen to test PETSc's GPU solvers. CUDA was not tested
-because of issues with lacking backwards compatability in the CUDA toolkit, this
-is further discussed in chapter \ref{chap:discussion}. The following is the
-flags specified when configurating PETSc for testing:
+because of issues with lacking backwards compatability in the CUDA toolkit.
+The following is the flags specified when configurating PETSc for testing:
 
 \begin{description}[labelindent=1cm,font=\normalfont\space]
 	\item[--with-cxx=g++]
@@ -70,5 +69,4 @@ For this configuration of PETSc all forms of debug information and error checkin
 was disabled to minimize the overhead. Single precision was also selected as
 GPUs today has faster single precision floating point arithmetic, often by several
 orders of magnitude and the rest of the snow simulator is already written with
-single precision. 
-
+single precision.
