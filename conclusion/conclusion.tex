@@ -12,8 +12,9 @@ for the wind simulator.
 
 The results show that using the GPU implementation of PETSc gives large speedups
 for the solver without having to make special adjustments to the code to account
-for the GPU. However it does not achieve the same execution speed as hand tuned
-implementations written in low level APIs like CUDA and OpenCL.
+for the GPU. However it does not achieve the same execution speed and does not
+scale as well as the hand tuned implementations written with low level APIs like
+CUDA and OpenCL.
 
 It is challenging to properly use the computational power of the GPU for
 operations that are not straight forwards to define using functions implemented
