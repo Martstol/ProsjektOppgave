@@ -35,9 +35,7 @@ GPGPU stands for general purpose computing on graphics processing units. It was
 first implemented as a part of PETSc in 2010\cite{minden2010preliminary} by Victor 
 Minden et al. PETSc can utilize CUDA through Thrust\footnote{\url{http://thrust.github.io/}} 
 and Cusp\footnote{\url{http://cusplibrary.github.io/}} and OpenCL with ViennaCL
-\footnote{\url{http://viennacl.sourceforge.net/}}. PETSc's installation instructions 
-points out that OpenCL is less a burden on the build system than CUDA, and makes 
-installation easier as it works with any host compiler. 
+\footnote{\url{http://viennacl.sourceforge.net/}}. 
 
 The changes required to have PETSc utilize the GPU is minimal. For the GPU 
 implementation PETSc adds new subclasses of the vector and matrix classes that 
@@ -56,3 +54,5 @@ of the KSPIBCGS method (Improved Stabilized version of BiConjugate Gradient Squa
 which is not implemented for the GPU. This method requires direct access to the 
 underlying data stored in the vectors and would require a complete rewrite to 
 function on the GPU.
+
+TODO: Preconditioners
