@@ -40,7 +40,9 @@ in chapter \ref{chap:windsim}. The method uses the wind velocity in each grid ce
 to trace an imaginary particle backwards in time to a new point. The wind velocity
 at this point is interpolated from the neighboring grid cells as illustrated in
 figure \ref{fig:trilinearinterpolation}. The resulting wind velocity is used as
-the advected velocity value.
+the advected velocity value. The implementation of the advection step does not
+use functions from PETSc and will therefore not benefit from using the GPU to
+execute the code.
 
 \begin{figure}[ht]
 	\center
@@ -66,7 +68,11 @@ The solver used can be specified on the command line when executing the program
 by setting the flag \emph{-ksp\_type} and specifying which solver to use. If the 
 solver type is not specified the default solver will be used. For the
 implementation of PETSc used in this project this is GMRES, the General Minimum
-Residual method.
+Residual method. To use the GPU for solving linear systems, the vector and matrix
+type has to be specified on the command line. To use the OpenCL implementation of
+the solver give the following flags: \emph{-vec\_type viennacl -mat\_type aijviennacl}.
+To use the CUDA implementation give these flags: \emph{-vec\_type cusp -mat\_type
+aijcusp}.
 
 \subsubsection{Creating the Linear System}
 
@@ -99,3 +105,5 @@ neighboring internal cell value after solving.
 During this step the advected velocity field is modified using the gradient of
 the pressure field to calculate the final velocity field for the wind simulation.
 The method used for this calculation is shown in chapter \ref{chap:windsim}.
+This step was not implemented using functions from PETSc, it will therefore not
+benefit from using the GPU implementation of PETSc Mat and Vec.
