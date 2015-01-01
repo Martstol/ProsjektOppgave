@@ -1,27 +1,28 @@
 \chapter{Conclusion}
 
-In this project PETSc has been used to implement a wind simulator for the HPC-lab's
-snow simulator. This was done to investigate the performance gain obtainable by
-using high level libraries to use the GPU for computationally intensive problems
-instead of hand implementing solvers with low level APIs like CUDA and OpenCL.
-A PETSc implementation also enables easy experimentation with parallelization
-method as PETSc supports shared memory parallelization, distributed memory
-parallelization and GPGPU. In addition PETSc implements a large number of solvers
-making it easy to experiment with the choice of solver for the wind simulator.
+In this project PETSc has been used to implement a wind simulator for the HPC-
+lab's snow simulator. This was done to investigate the performance gain
+obtainable by using high level libraries to use the GPU for computationally
+intensive problems instead of hand implementing solvers with low level APIs like
+CUDA and OpenCL. A PETSc implementation also enables easy experimentation with
+parallelization method as PETSc supports shared memory parallelization,
+distributed memory parallelization and GPGPU. In addition PETSc implements a
+large number of solvers making it easy to experiment with the choice of solver
+for the wind simulator.
 
 The results show that using the GPU implementation of PETSc gives large speedups
 for the solver without having to make special adjustments to the code to account
 for the GPU. However it does not achieve the same execution speed as hand tuned
 implementations written in low level APIs like CUDA and OpenCL.
 
-It is also challenging to properly use the computational power of the GPU
-for operations that are not straight forwards to define using functions implemented
+It is challenging to properly use the computational power of the GPU for
+operations that are not straight forwards to define using functions implemented
 in PETSc, for example trilinear interpolation required for the advection step of
 the wind simulation. Because of this only the implementation of the Poisson
 solver can use the GPU for computation. This severely limits the resolution of
 the wind velocity field for the wind simulation.
 
 Further more, configuring PETSc to use CUDA can be very challenging because of
-issues with backwards compatibility. Using PETSc with CUDA could require
-running the application on old GPU hardware, or updating PETSc itself to resolve
-the backwards compatibility issues.
+issues with backwards compatibility. Using PETSc with CUDA could require running
+the application on old GPU hardware, or updating PETSc itself to resolve the
+backwards compatibility issues.
