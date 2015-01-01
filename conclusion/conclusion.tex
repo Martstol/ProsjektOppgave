@@ -1,2 +1,10 @@
 \chapter{Conclusion}
 
+In this project PETSc has been used to implement a wind simulator for the HPC-lab's
+snow simulator. This was done to investigate the performance gain obtainable by
+using high level libraries to use the GPU for computationally intensive problems
+instead of hand implementing solvers with low level APIs like CUDA and OpenCL.
+A PETSc implementation also enables easy experimentation with parallelization
+method as PETSc supports shared memory parallelization, distributed memory
+parallelization and GPGPU. In addition PETSc implements a large number of solvers
+making it easy to experiment with the choice of solver for the wind simulator.
