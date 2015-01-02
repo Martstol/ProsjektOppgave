@@ -17,6 +17,42 @@ Mount St. Helens with a size of 768x768 that has been added by previous students
 working on the snow simulator. The external wind's speed is set to 1 and the
 direction is given by the unit vector \{1, 0, 0\}.
 
+\subsection{Wind Simulation Benchmark}
+
+In this benchmark the execution time of the wind simulation is measured as a
+function of the resolution of the wind velocity field. The execution time of
+the wind simulation is set to the average execution time of 100 frames of
+simulation. This is done to account for noise in the execution time measurements.
+The solver selected for this benchmark is GMRES, this was specified with the
+command line argument "\emph{-ksp\_type gmres}".
+
+For this benchmark the execution time of the wind simulation with PETSc with and
+without GPU is measured. The execution time of the wind simulation previously
+implemented in the snow simulator by other students is also measured to compare
+with the PETSc implementation. The following configurations for the resolution of
+the wind velocity field was used for this benchmark:
+
+\begin{itemize}
+	\item \{32, 16, 32\}
+	\item \{32, 32, 32\}
+	\item \{64, 32, 64\}
+	\item \{64, 64, 64\}
+	\item \{128, 64, 128\}
+	\item \{128, 128, 128\}
+	\item \{256, 128, 256\}
+\end{itemize}
+
+The total size of the wind field includes the external boundary points.
+
+\begin{figure}[ht]
+	\center
+	\includegraphics[width=1.0\textwidth]{results/data/wb/wind_sim_time}
+	\caption{Graph comparing wind simulator's execution time.}
+	\label{fig:wind_sim_time}
+\end{figure}
+
+TODO: 
+
 \subsection{Compute Time Benchmark}
 
 This benchmark measures how the execution time of the wind simulation is distributed
@@ -31,8 +67,8 @@ between these key functions in the implementation:
 	snow particle simulation.
 \end{description}
 
-The solver chosen for this benchmark is GMRES, this was specified with the command
-line argument "\emph{-ksp\_type gmres}".
+The solver chosen for this benchmark is GMRES, specified with "\emph{-ksp\_type
+gmres}".
 
 This benchmark is performed for four different configurations for the resolution of
 the wind velocity field:
