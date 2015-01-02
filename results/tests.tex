@@ -5,7 +5,7 @@ are given: "\emph{-vec\_type standard -mat\_type aij}". The matrix type
 \emph{aij} is used for sparse matrices. When benchmarking with the PETSc solvers
 on the GPU these command line arguments are given: "\emph{-vec\_type viennacl
 -mat\_type aijviennacl}". The vector type \emph{viennacl} and matrix type
-\emph{aijviennacl} performs calculations with the ViennaCL library.
+\emph{aijviennacl} use the ViennaCL library to perform calculations.
 
 The configuration options for the wind simulator allows for variation in the
 external wind direction, speed and the resolution of the three dimensional wind
@@ -134,13 +134,14 @@ key function after 100 frames of simulation.
 	
 \end{figure}
 
-As evident from these charts we can see that as the resolution of the wind
-velocity field increases, the fraction of the wind simulation time spent solving
-the Poisson equation remains roughly unchanged for the PETSc on the CPU only
-implementation, however when the GPU is utilized for the solver the fraction of
-the simulation time spent solving the Poisson equation is reduced rapidly as
-the computational power of the GPU is better utilized for larger problems because
-of the GPU's parallel nature.
+In the wind simulation benchmarks using PETSc on the CPU only, we see that the
+fraction of the wind simulation time spent solving the discretized Poisson
+equation is roughly independent of the problem size. As the resolution of the
+wind velocity field increases, the fraction of the simulation time spent solving
+the Poisson equation remains roughly unchanged. When benchmarking PETSc with the
+GPU, the fraction of the execution time spent solving the Poisson equation is
+reduced quickly when the problem size increases as the computational power of the
+GPU is better utilized for larger problems.
 
 \subsection{Solver Benchmark}
 

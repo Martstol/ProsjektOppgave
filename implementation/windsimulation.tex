@@ -1,7 +1,7 @@
 \section{Wind Simulation}
 
 This section will describe how the formulas derived in chapter \ref{chap:windsim}
-for the wind simulation was implemented and how PETSc was used in the
+for the wind simulation were implemented and how PETSc was used in the
 implementation. The wind simulation consists of three steps, advection, solving
 the Poisson equation and projection. 
 
@@ -13,7 +13,7 @@ The following are important data structures used by the wind simulation.
 		equation.
 	\item[b,] a PETSc vector storing the right-hand side of the discretized
 		Poisson equation.
-	\item[p,] a PETSc vector storing the solution to solving the discretized
+	\item[p,] a PETSc vector storing the solution after solving the discretized
 		Poisson equation. This vector represents a three dimensional volume
 		storing the pressure field for the wind simulation.
 	\item[velocity fields,] the velocity field represents a three dimensional
