@@ -55,7 +55,9 @@ The total size of the wind field includes the external boundary points.
 The performance of both the wind simulators implemented with PETSc are a lot slower
 than the hand implemented CUDA simulator. The execution time of both the PETSc
 CPU and PETSc GPU implementations are very similar. This is because only the
-Poisson solver is implemented using PETSc operations.
+Poisson solver is implemented using PETSc operations, therefore using PETSc's 
+GPU implementation will not give large performance increases to the wind
+simulator.
 
 \subsection{Compute Time Benchmark}
 
@@ -228,7 +230,7 @@ PETSc solvers.
 	\label{fig:sb_exec_time_all}
 \end{figure}
 
-The results of the solver benchmark is shown in figure\ref{fig:sb_exec_time_all}.
+The results of the solver benchmark is shown in figure \ref{fig:sb_exec_time_all}.
 The graph shows comparable results for the execution time of PETSc's GPU
 implementations of CG and GMRES to the execution time of the hand implemented
 SOR solver. For smaller problem sizes the PETSc GPU solvers are the fastest
