@@ -52,7 +52,10 @@ The total size of the wind field includes the external boundary points.
 	\label{fig:wind_sim_time}
 \end{figure}
 
-TODO: 
+The performance of both the wind simulators implemented with PETSc are a lot slower
+than the hand implemented CUDA simulator. The execution time of both the PETSc
+CPU and PETSc GPU implementations are very similar. This is because only the
+Poisson solver is implemented using PETSc operations.
 
 \subsection{Compute Time Benchmark}
 
