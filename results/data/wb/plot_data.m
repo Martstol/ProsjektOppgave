@@ -36,7 +36,7 @@ set(gca,'XTickLabel',num2str(get(gca,'XTick').'));
 ylabel("Execution time (seconds)", "FontSize", 12, "FontName", "Arial");
 set(gca,'YTickLabel',num2str(get(gca,'YTick').'));
 
-legend("SOR (CUDA)", "PETSc CPU", "PETSc GPU", "Location", "SouthOutside");
+legend("CUDA (old)", "PETSc CPU", "PETSc GPU", "Location", "SouthOutside");
 
 hold off;
 print("exec_time_all.png");
