@@ -35,11 +35,11 @@ end
 
 hold on;
 title("Solver Execution Time", "FontSize", 12, "FontName", "Arial");
-loglog(cuda(1, :), cuda(2, :), "Color", "black", "LineWidth", 1);
-loglog(petsc_cpu_cg(1, :), petsc_cpu_cg(2, :), "Color", "green", "LineWidth", 1);
-loglog(petsc_cpu_gmres(1, :), petsc_cpu_gmres(2, :), "Color", "magenta", "LineWidth", 1);
-loglog(petsc_gpu_cg(1, :), petsc_gpu_cg(2, :), "Color", "red", "LineWidth", 1);
-loglog(petsc_gpu_gmres(1, :), petsc_gpu_gmres(2, :), "Color", "blue", "LineWidth", 1);
+loglog(cuda(1, :), cuda(2, :), "Color", "black", "LineWidth", 1, "-.");
+loglog(petsc_cpu_cg(1, :), petsc_cpu_cg(2, :), "Color", "green", "LineWidth", 1, "-+");
+loglog(petsc_cpu_gmres(1, :), petsc_cpu_gmres(2, :), "Color", "magenta", "LineWidth", 1, "-*");
+loglog(petsc_gpu_cg(1, :), petsc_gpu_cg(2, :), "Color", "red", "LineWidth", 1, "-o");
+loglog(petsc_gpu_gmres(1, :), petsc_gpu_gmres(2, :), "Color", "blue", "LineWidth", 1, "-x");
 xlabel("Grid points", "FontSize", 12, "FontName", "Arial");
 set(gca,'XTickLabel',num2str(get(gca,'XTick').'));
 ylabel("Execution time (seconds)", "FontSize", 12, "FontName", "Arial");
@@ -63,8 +63,8 @@ end
 
 hold on;
 title("Solver Speedup", "FontSize", 12, "FontName", "Arial");
-loglog(speedup_cg(1, :), speedup_cg(2, :), "Color", "blue");
-loglog(speedup_gmres(1, :), speedup_gmres(2, :), "Color", "red");
+loglog(speedup_cg(1, :), speedup_cg(2, :), "Color", "blue", "LineWidth", 1);
+loglog(speedup_gmres(1, :), speedup_gmres(2, :), "Color", "red", "LineWidth", 1);
 xlabel("Grid points", "FontSize", 12, "FontName", "Arial");
 set(gca,'XTickLabel',num2str(get(gca,'XTick').'));
 ylabel("Speedup", "FontSize", 12, "FontName", "Arial");
