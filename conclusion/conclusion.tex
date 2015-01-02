@@ -12,16 +12,16 @@ for the wind simulator.
 
 The results show that using the GPU implementation of PETSc gives large speedups
 for the solver without having to make special adjustments to the code to account
-for the GPU. However it does not achieve the same execution speed and does not
-scale as well as the hand tuned implementations written with low level APIs like
-CUDA and OpenCL.
+for the GPU. PETSc's GPU implemented solvers can achieve performance comparable
+to that of hand tuned implementations written in low level APIs like CUDA and
+OpenCL.
 
-It is challenging to properly use the computational power of the GPU for
+A drawback with PETSc is that it is challenging to use for
 operations that are not straight forward to define using functions implemented
 in PETSc. For example trilinear interpolation required for the advection step of
 the wind simulation. Because of this only the implementation of the Poisson
-solver uses the GPU for computation. This severely limits the resolution of
-the wind velocity field for the wind simulation.
+solver uses the GPU for computation in this project. This severely limits the
+size of the wind velocity field for the wind simulation.
 
 Further more, configuring PETSc to use CUDA can be very challenging because of
 issues with backwards compatibility. Using PETSc with CUDA could require running

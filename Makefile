@@ -8,4 +8,4 @@ pdf:
 	pdflatex main
 
 clean:
-	rm *.aux *.log *.bbl *.blg *.lof *.lot *.toc *.synctex.gz
+	rm *.aux *.log *.bbl *.blg *.lof *.lot *.toc
