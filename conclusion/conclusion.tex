@@ -19,8 +19,8 @@ OpenCL.
 
 A drawback with PETSc is that it is challenging to use for
 operations that are not straight forward to define using functions implemented
-in PETSc. For example trilinear interpolation required for the advection step of
-the wind simulation. Because of this only the implementation of the Poisson
+in PETSc. An example is the trilinear interpolation required for the advection step of
+the wind simulation. As a result only the implementation of the Poisson
 solver uses the GPU for computation in this project. This severely limits the
 size of the wind velocity field for the wind simulation.
 
