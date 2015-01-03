@@ -27,22 +27,22 @@ nonlinear equations, as well as ordinary differential equations. For linear syst
 PETSc implements both direct and iterative methods. The iterative methods implemented 
 in PETSc are Krylov subspace methods, discussed in the section for linear solvers.
 A complete list of the linear solvers implemented by PETSc can be found on the 
-PETSc webpage\footnote{\url{http://www.mcs.anl.gov/petsc/documentation/linearsolvertable.html}}.
+PETSc webpage.
 
 \subsection{GPGPU}
 
 GPGPU stands for general purpose computing on graphics processing units. It was 
 first implemented as a part of PETSc in 2010\cite{minden2010preliminary} by Victor 
-Minden et al. PETSc can utilize CUDA through Thrust\footnote{\url{http://thrust.github.io/}} 
+Minden et al. PETSc can use CUDA with the libraries Thrust\footnote{\url{http://thrust.github.io/}} 
 and Cusp\footnote{\url{http://cusplibrary.github.io/}} and OpenCL with ViennaCL
 \footnote{\url{http://viennacl.sourceforge.net/}}. 
 
-The changes required to have PETSc utilize the GPU is minimal. For the GPU 
+The changes required to have PETSc use the GPU is minimal. For the GPU 
 implementation PETSc adds new subclasses of the vector and matrix classes that 
-store the data on both the GPU and the CPU. Krylov solvers utilize GPU implementations 
+store the data on both the GPU and the CPU. Krylov solvers use GPU implementations 
 of the functions defined for these classes.
 
-To utilize the GPU the application programmer has to specify a GPU vector type 
+To use the GPU the application programmer has to specify a GPU vector type 
 for vectors and a GPU matrix type for matrices. This can either be done by using 
 the \emph{VecSetType} and \emph{MatSetType} functions or by using the \emph{VecSetFromOptions}
 and \emph{MatSetOptions} functions and specifying the type by adding \emph{-vec\_type} and 

@@ -114,8 +114,8 @@ As we see from the first sum, the new value of $x_i$ depends on the new value of
 all previous elements in the $x$ vector.
 
 It is possible to create a parallel implementation of Gauss-Seidel by changing
-the order new values of $x$ is calculated. This is known as Red-Black
-ordering. The new ordering depends on the linear system.
+the order in which new values of $x$ is calculated. This is known as Red-Black
+ordering. The new order depends on the linear system.
 
 The Gauss-Seidel method converges if $||C|| < 1$, where $C = -\inv{(I+L)}U$ and 
 $||C||$ is some matrix norm of $C$\cite{Kreyszig}.
@@ -198,9 +198,9 @@ $$ q_{n-1}(A) = 1 + (I-A) + (I-A)^2 + ... + (I-A)^{n-1} $$
 The subspaces that appear in the equation for $r^{(n)}$ and $x^{(n)}$ is called the 
 Krylov subspace. The idea behind Krylov subspace solvers is to calculate a sequence 
 of approximate solutions of $Ax = b$, so that the residual vectors converge to the 
-null vector. If the residuals are linearly independent then 
-after a finite number of steps the approximate solution $x_n$ will be equal to the 
-exact solution and the residual vector will be zero. This only holds true with exact 
+null vector. If the residuals are linearly independent then the approximate solution
+$x_n$ will be equal to the exact solution after a finite number of steps. The residual
+vector will be zero. This only holds true with exact 
 arithmetics, therefore a computer implementation is not guaranteed to reach an exact 
 solution\cite{krylovSolvers}.
 
@@ -226,3 +226,5 @@ $$ \nabla \Psi(x) = Ax - b = -r $$
 
 Here $r$ is the residual vector. Minimizing $\Psi(x)$ is the same as finding 
 $\nabla \Psi(x) = 0$, which is the same as solving $Ax = b$.
+
+TODO:

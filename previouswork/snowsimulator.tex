@@ -4,14 +4,9 @@ The snow simulator has been developed over several years by different students i
 the HPC-lab at NTNU as a part of their specialization project or master thesis. 
 It simulates a finite number of snow particles and how they are affected by the 
 wind and terrain. Here a short summary of the previous master theses and 
-specialization projects that have worked on the snow simulator is given. This 
-section also gives a short overview of the snow simulator and then goes into 
-further details about the wind simulator.
+specialization projects on the snow simulator is given.
 
 \subsection{History}
-
-% - Jarle Erdal Steinsland, 2010 ?
-% - Jan Magne Rovde, 2012 ?
 
 The snow simulator was originally developed by Ingar Saltvik for his master
 thesis \emph{"Parallel Methods for Real-Time Visualization of Snow"}
@@ -48,7 +43,7 @@ Babington\cite{snowTerrainThesis} improved the terrain rendering and updated the
 collision detection between the snow particles and the terrain. Andreas
 Nordahl\cite{realisticSnowTerrainThesis} has improved the rendering of the snow
 simulator by implementing several new visualization features. Magnus Alvestad
-Mikalsen\cite{openAccThesis} ported the snow simulator to OpenACC and compared
+Mikalsen\cite{openAccThesis} ported the snow simulator to OpenACC\footnote{\url{http://www.openacc-standard.org/}} and compared
 the performance with the CUDA version. Øivind Laupstad Boge\cite{avalanche2}
 implemented an avalanche simulator using fracture mechanics to calculate where
 avalanches could occur.
@@ -84,7 +79,7 @@ The wind simulator solves the incompressible Euler equations to calculate the
 wind velocity field. The wind simulator uses the terrain to create obstacles for
 the wind. The snow simulator models the behavior of individual snowflakes as
 particles with position, velocity and rotation. The snow simulator uses the
-wind velocity field from the wind simulator to update the properties each
+wind velocity field from the wind simulator to update the properties of each
 individual snow particle. When a snow particle lands on the ground it is added
 to the terrain's height map.
 

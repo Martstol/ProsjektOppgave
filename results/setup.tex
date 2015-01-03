@@ -23,7 +23,7 @@ table \ref{table:test_pc}.
 		\multicolumn{2}{|c|}{\textbf{Workstation software}} \\ \hline
 		Operating system & Ubuntu 14.04 64-bit \\ \hline
 		Nvidia driver & 343.36 \\ \hline
-		CUDA toolkit & 6.5 \\ \hline
+		CUDA toolkit & 6.5 and 5 \\ \hline
 		OpenCL & 1.1 \\ \hline
 		MPI & MPICH 3.1.3 \\ \hline
 		g++ & 4.4.1 \\ \hline
@@ -38,16 +38,21 @@ table \ref{table:test_pc}.
 
 \subsection{PETSc}
 
-PETSc was acquired from the git repository\footnote{\url{https://bitbucket.org/petsc/petsc}}
-, this was recommended on the PETSc web page when utilizing PETSc's GPU solvers.
+PETSc was acquired from the development repository\footnote{\url{https://bitbucket.org/petsc/petsc}}
+, this was recommended on the PETSc web page when using PETSc's GPU solvers.
 The version of the compilers used when configuring PETSc can be found in table 
-\ref{table:test_pc} as well as the OpenCL and CUDA version used.
+\ref{table:test_pc} as well as the OpenCL and CUDA version used. Older versions
+of gcc and g++ was used because during this project PETSc only supported CUDA
+version 5 which required an older version of gcc. An older version of g++ was
+used for compatibility reasons when configuring PETSc.
 
 \subsubsection{Configuration}
 
 OpenCL with ViennaCL was chosen to test PETSc's GPU solvers. CUDA was not tested
-because of issues with lacking backwards compatability in the CUDA toolkit.
-The following is the flags specified when configurating PETSc for testing:
+because of issues with lacking backwards compatibility in the CUDA toolkit. While
+PETSc only supports CUDA version 5, the OpenCL implementation in CUDA version 6.5
+worked with PETSc. The following is the flags specified when configuring PETSc for
+testing:
 
 \begin{description}[labelindent=1cm,font=\normalfont\space]
 	\item[--with-cxx=g++]
